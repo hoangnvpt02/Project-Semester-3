@@ -1,0 +1,2 @@
+C:\Users\hoang\source\repos\Project\Vue-Fontend\obj\Debug\vue-fontend.esproj.SuggestedBindingRedirects.cache
+C:\Users\hoang\source\repos\Project\Vue-Fontend\obj\Debug\vue-fontend.esproj.CoreCompileInputs.cache
