@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetCore_Backend.Data;
 
@@ -11,9 +12,11 @@ using NetCore_Backend.Data;
 namespace NetCoreBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221219155200_database")]
+    partial class database
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,43 +24,6 @@ namespace NetCoreBackend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("NetCore_Backend.Data.Bid", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime>("DidTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("GalaryId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("IsActive")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<long?>("ProductId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GalaryId");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Bid");
-                });
 
             modelBuilder.Entity("NetCore_Backend.Data.Category", b =>
                 {
@@ -559,21 +525,6 @@ namespace NetCoreBackend.Migrations
                     b.ToTable("WatchListProduct");
                 });
 
-            modelBuilder.Entity("NetCore_Backend.Data.Bid", b =>
-                {
-                    b.HasOne("NetCore_Backend.Data.Galary", null)
-                        .WithMany("Bids")
-                        .HasForeignKey("GalaryId");
-
-                    b.HasOne("NetCore_Backend.Data.Product", null)
-                        .WithMany("Bids")
-                        .HasForeignKey("ProductId");
-
-                    b.HasOne("NetCore_Backend.Data.User", null)
-                        .WithMany("Bids")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("NetCore_Backend.Data.Comment", b =>
                 {
                     b.HasOne("NetCore_Backend.Data.Product", null)
@@ -706,8 +657,6 @@ namespace NetCoreBackend.Migrations
 
             modelBuilder.Entity("NetCore_Backend.Data.Galary", b =>
                 {
-                    b.Navigation("Bids");
-
                     b.Navigation("Dossiers");
 
                     b.Navigation("Products");
@@ -715,8 +664,6 @@ namespace NetCoreBackend.Migrations
 
             modelBuilder.Entity("NetCore_Backend.Data.Product", b =>
                 {
-                    b.Navigation("Bids");
-
                     b.Navigation("Cate");
 
                     b.Navigation("Comments");
@@ -735,8 +682,6 @@ namespace NetCoreBackend.Migrations
 
             modelBuilder.Entity("NetCore_Backend.Data.User", b =>
                 {
-                    b.Navigation("Bids");
-
                     b.Navigation("Comments");
 
                     b.Navigation("Dossiers");

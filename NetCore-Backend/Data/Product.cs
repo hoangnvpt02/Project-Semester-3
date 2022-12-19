@@ -20,6 +20,11 @@ namespace NetCore_Backend.Data
         public DateTime ? Created { get; set; }
         public DateTime ? Updated { get; set; }
         public virtual ICollection<ProductCate> Cate { get; set; }
-
+        public virtual ICollection<WatchListProduct> WatchLists { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+      
+        public virtual ICollection<Bid> Bids { get; set; }
+        public virtual ICollection<ProductGalary> Galary { get; set; }
     }
 }

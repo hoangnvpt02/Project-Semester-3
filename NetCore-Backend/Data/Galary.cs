@@ -9,8 +9,7 @@ namespace NetCore_Backend.Data
         [Key]
         public long Id { get; set; }
         public long UserId { get; set; }
-        [ForeignKey("UserId")]
-        public User User { get; set; }
+       
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
         public string Authen { get; set; }
@@ -20,5 +19,8 @@ namespace NetCore_Backend.Data
         public DateTime CreeateDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public virtual ICollection<Dossier> Dossiers { get; set; }
+     
+        public virtual ICollection<ProductGalary> Products { get; set; }
+        public virtual ICollection<Bid> Bids { get; set; }
     }
 }
