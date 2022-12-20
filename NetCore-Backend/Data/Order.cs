@@ -14,7 +14,6 @@ namespace NetCore_Backend.Data
        
         public decimal Price { get; set; }
         public string Discription { get; set; }
-        public int Status { get; set; }
         public int IsActive { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }

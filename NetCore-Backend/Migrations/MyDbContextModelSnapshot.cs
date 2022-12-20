@@ -255,9 +255,6 @@ namespace NetCoreBackend.Migrations
                     b.Property<long>("ProductId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
 
@@ -312,9 +309,6 @@ namespace NetCoreBackend.Migrations
                     b.Property<string>("Quanlity")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime2");
