@@ -32,6 +32,7 @@ D:\project3\NetCore-Backend\bin\Debug\net6.0\NetCore-Backend.deps.json
 D:\project3\NetCore-Backend\bin\Debug\net6.0\NetCore-Backend.runtimeconfig.json
 D:\project3\NetCore-Backend\bin\Debug\net6.0\NetCore-Backend.dll
 D:\project3\NetCore-Backend\bin\Debug\net6.0\NetCore-Backend.pdb
+<<<<<<< HEAD
 D:\project3\NetCore-Backend\bin\Debug\net6.0\Azure.Core.dll
 D:\project3\NetCore-Backend\bin\Debug\net6.0\Azure.Identity.dll
 D:\project3\NetCore-Backend\bin\Debug\net6.0\Humanizer.dll
@@ -91,6 +92,12 @@ D:\project3\NetCore-Backend\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\Sys
 D:\project3\NetCore-Backend\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\project3\NetCore-Backend\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 D:\project3\NetCore-Backend\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+=======
+D:\project3\NetCore-Backend\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\project3\NetCore-Backend\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\project3\NetCore-Backend\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\project3\NetCore-Backend\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+>>>>>>> master
 D:\project3\NetCore-Backend\obj\Debug\net6.0\NetCore-Backend.csproj.AssemblyReference.cache
 D:\project3\NetCore-Backend\obj\Debug\net6.0\NetCore-Backend.GeneratedMSBuildEditorConfig.editorconfig
 D:\project3\NetCore-Backend\obj\Debug\net6.0\NetCore-Backend.AssemblyInfoInputs.cache
