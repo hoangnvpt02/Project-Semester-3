@@ -1,3 +1,8 @@
 .vs
+<<<<<<< HEAD
 NetCore-Backend/obj
 NetCore-Backend/bin
+=======
+
+NetCore-Backend/obj
+>>>>>>> 3744833b3956c26efd67f9887e29513c5e0a563a
