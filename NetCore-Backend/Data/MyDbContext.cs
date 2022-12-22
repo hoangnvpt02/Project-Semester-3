@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NetCore_Backend.Data;
 
 namespace NetCore_Backend.Data
 {
@@ -21,5 +22,8 @@ namespace NetCore_Backend.Data
        
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<NetCore_Backend.Data.Bid> Bid { get; set; }
+
+
     }
 }
