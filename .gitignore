@@ -1,3 +1,6 @@
 .vs
 NetCore-Backend/obj
 NetCore-Backend/bin
+NetCore-Backend/Migrations
+NetCore-Backend/appsettings.json
+
