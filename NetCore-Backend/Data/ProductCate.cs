@@ -9,9 +9,9 @@ namespace NetCore_Backend.Data
         [Key]
         public long Id { get; set; }
       
-        public Product Product { get; set; }
+        public long ProductId { get; set; }
        
-        public Category Category { get; set; }
+        public long CategoryId { get; set; }
         public int IsActive { get; set; }
         public DateTime ? Created { get; set; }
         public DateTime ? Updated { get; set; }

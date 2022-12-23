@@ -28,6 +28,15 @@ namespace NetCore_Backend
             services.AddScoped<IGalaryRepository, GalaryRepositoryImpl>();
             services.AddScoped<IUserRoleRepository, UserRoleRepositoryImpl>();
             services.AddScoped<IDossierRepository, DossierRepositoryImpl>();
+            services.AddScoped<ICategoryRepository, CategoryRepositoryImpl>();
+            services.AddScoped<IProductRepository, ProductRepositoryImpl>();
+            services.AddScoped<IProductCateRepository, ProductCateRepositoryImpl>();
+            services.AddScoped<IProductGalaryRepository, ProductGalaryRepositoryImpl>();
+            services.AddScoped<IWatchListRepository, WatchListRepositoryImpl>();
+            services.AddScoped<IWatchListProductRepository, WatchListProductRepositoryImpl>();
+            services.AddScoped<ICommentRepository, CommentRepositoryImpl>();
+            services.AddScoped<IOrderRepository, OrderRepositoryImpl>();
+            services.AddScoped<IBidRepository, BidRepositoryImpl>();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment env)
