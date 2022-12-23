@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetCore_Backend.Data;
+using NetCore_Backend.Services;
+using NetCore_Backend.Services.Impl;
 
 namespace NetCore_Backend
 {
@@ -20,6 +22,12 @@ namespace NetCore_Backend
             {
                 option.UseSqlServer(Configuration.GetConnectionString("MyDb"));
             });
+            services.AddScoped<ICountryRepository, CountryRepositoryImpl>();
+            services.AddScoped<IUserRepository, UserRepositoryImpl>();
+            services.AddScoped<IRoleRepository, RoleRepositoryImpl>();
+            services.AddScoped<IGalaryRepository, GalaryRepositoryImpl>();
+            services.AddScoped<IUserRoleRepository, UserRoleRepositoryImpl>();
+            services.AddScoped<IDossierRepository, DossierRepositoryImpl>();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment env)
