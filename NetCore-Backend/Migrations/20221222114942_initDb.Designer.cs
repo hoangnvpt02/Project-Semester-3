@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetCore_Backend.Data;
 
@@ -11,9 +12,11 @@ using NetCore_Backend.Data;
 namespace NetCoreBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221222114942_initDb")]
+    partial class initDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -242,6 +245,10 @@ namespace NetCoreBackend.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Discription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("IsActive")
                         .HasColumnType("int");
 
@@ -250,9 +257,6 @@ namespace NetCoreBackend.Migrations
 
                     b.Property<long>("ProductId")
                         .HasColumnType("bigint");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
@@ -627,17 +631,21 @@ namespace NetCoreBackend.Migrations
 
             modelBuilder.Entity("NetCore_Backend.Data.ProductCate", b =>
                 {
-                    b.HasOne("NetCore_Backend.Data.Category", null)
+                    b.HasOne("NetCore_Backend.Data.Category", "Category")
                         .WithMany("Cate")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NetCore_Backend.Data.Product", null)
+                    b.HasOne("NetCore_Backend.Data.Product", "Product")
                         .WithMany("Cate")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.ProductGalary", b =>
