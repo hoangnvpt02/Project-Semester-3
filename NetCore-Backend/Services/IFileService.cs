@@ -9,5 +9,7 @@ namespace NetCore_Backend.Services
         public Task PostMultiFileAsync(List<FileUploadModel> fileData);
 
         public Task DownloadFileById(int fileName);
+
+       
     }
 }
