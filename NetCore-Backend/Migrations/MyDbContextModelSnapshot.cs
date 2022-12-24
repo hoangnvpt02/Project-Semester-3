@@ -186,6 +186,30 @@ namespace NetCoreBackend.Migrations
                     b.ToTable("Dossier");
                 });
 
+            modelBuilder.Entity("NetCore_Backend.Data.FileDetails", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<byte[]>("FileData")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FileType")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("FileDetails");
+                });
+
             modelBuilder.Entity("NetCore_Backend.Data.Galary", b =>
                 {
                     b.Property<long>("Id")
@@ -291,14 +315,21 @@ namespace NetCoreBackend.Migrations
                     b.Property<DateTime?>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Discription")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("FileDetailsId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("IsActive")
                         .HasColumnType("int");
 
                     b.Property<string>("ManufactureYear")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
