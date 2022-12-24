@@ -10,18 +10,40 @@ namespace NetCore_Backend.Services.Impl
             _context = context;
         }
 
-        public ProductModel Add(ProductModel productModel)
+        public ProductModel Add(ProductModel productModel, IFormFile fileData, FileType fileType)
         {
+            var fileDetails = new FileDetails()
+            {
+                ID = 0,
+                FileName = fileData.FileName,
+                FileType = fileType,
+            };
+
+            if (fileData != null)
+            {
+               
+                using (var stream = new MemoryStream())
+                {
+                    fileData.CopyTo(stream);
+                    fileDetails.FileData = stream.ToArray();
+                }
+
+                var result = _context.FileDetails.Add(fileDetails);
+                _context.SaveChanges();
+            }
+          
+          
             var product = new Product();
             product.Address = productModel.Address;
+            product.FileDetailsId = fileDetails.ID;
             product.Author = productModel.Author;
             product.Discription = productModel.Discription;
             product.UserId = productModel.UserId;
             product.CountryId = productModel.CountryId;
             product.ManufactureYear = productModel.ManufactureYear;
             product.Quanlity = productModel.Quanlity;
-            product.Updated = productModel.Updated;
-            product.Created = productModel.Created;
+            product.Updated = DateTime.Now;
+            product.Created =DateTime.Now;
             product.IsActive = productModel.IsActive;
             product.Price = productModel.Price;
             _context.Products.Add(product);
@@ -39,6 +61,7 @@ namespace NetCore_Backend.Services.Impl
                 Created = product.Created,
                 IsActive = product.IsActive,
                 Price = product.Price,
+
             };
 
         }

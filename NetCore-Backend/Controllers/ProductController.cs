@@ -80,11 +80,11 @@ namespace NetCore_Backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(ProductModel productModel)
+        public IActionResult Add([FromForm]ProductModel productModel,  IFormFile fileDetails,FileType fileType)
         {
             try
             {
-                return Ok(_productRepository.Add(productModel));
+                return Ok(_productRepository.Add(productModel, fileDetails,fileType));
             }
             catch (Exception e)
             {

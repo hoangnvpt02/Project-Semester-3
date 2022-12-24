@@ -19,6 +19,7 @@ namespace NetCore_Backend.Services.Impl
             productCate.IsActive = productCateModel.IsActive;
             productCate.Created = productCateModel.Created;
             productCate.Updated = productCateModel.Updated;
+            productCate.ProductId = productCateModel.ProductId;
             _context.Add(productCate);
             _context.SaveChanges();
             return new ProductCateModel()
