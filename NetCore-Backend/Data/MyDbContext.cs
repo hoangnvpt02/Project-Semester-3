@@ -5,7 +5,13 @@ namespace NetCore_Backend.Data
 {
     public class MyDbContext : DbContext
     {
-        public MyDbContext(DbContextOptions options): base(options) {}
+        protected readonly IConfiguration Configuration;
+
+        public MyDbContext(DbContextOptions options) : base(options)
+        {
+           
+        }
+       
 
         public DbSet<Country> Countries { get; set; }
         public DbSet<User> Users { get; set; }
@@ -23,6 +29,9 @@ namespace NetCore_Backend.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<NetCore_Backend.Data.Bid> Bid { get; set; }
+
+        public DbSet<FileDetails> FileDetails { get; set; }
+
 
 
     }

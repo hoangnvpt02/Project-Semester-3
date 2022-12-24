@@ -16,6 +16,8 @@ namespace NetCore_Backend.Data
         public string Quanlity { get; set; }
         public string Discription { get; set; }
         public string Address { get; set; }
+        [ForeignKey("FileDetailsId")]
+        public long ? FileDetailsId { get; set; }
         public int IsActive { get; set; }
         public DateTime ? Created { get; set; }
         public DateTime ? Updated { get; set; }
