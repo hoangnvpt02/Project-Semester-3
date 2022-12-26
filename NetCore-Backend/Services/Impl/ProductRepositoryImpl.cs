@@ -145,5 +145,28 @@ namespace NetCore_Backend.Services.Impl
                 _context.SaveChanges();
             }
         }
+
+        public List<ProductModel> GetAllProductByCate()
+        {
+            var categorizedProducts = _context.Products
+                                    .Join(_context.ProductCates, p => p.Id, pc => pc.ProductId, (p, pc) => new { p, pc })
+                                    .Join(_context.Categories, ppc => ppc.pc.CategoryId, c => c.Id, (ppc, c) => new { ppc, c })
+                                    .Select(m => new ProductModel
+                                    {
+                                        Id = m.ppc.p.Id,
+                                        Name = m.ppc.p.Name,
+                                        CountryId = m.ppc.p.CountryId,
+                                        UserId = m.ppc.p.UserId,
+                                        Address = m.ppc.p.Address,
+                                        Author = m.ppc.p.Author,
+                                        Price = m.ppc.p.Price,
+                                        ManufactureYear = m.ppc.p.ManufactureYear,
+                                        Quanlity = m.ppc.p.Quanlity,
+                                        Description = m.ppc.p.Description,
+                                        IsActive = m.ppc.p.IsActive,
+                                        Updated = m.ppc.p.Updated
+        });
+            return (List<ProductModel>)categorizedProducts;
+        }
     }
 }
