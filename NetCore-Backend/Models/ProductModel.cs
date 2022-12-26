@@ -10,6 +10,8 @@
         public string ManufactureYear { get; set; }
         public string Quanlity { get; set; }
         public string Discription { get; set; }
+
+        public long? FileDetailsId { get; set; }
         public string Address { get; set; }
         public int IsActive { get; set; }
         public DateTime? Created { get; set; }
