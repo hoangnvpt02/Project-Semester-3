@@ -7,6 +7,8 @@
         public long UserId { get; set; }
         public Decimal Price { get; set; }
         public string Author { get; set; }
+        public string Name { get; set; }
+
         public string ManufactureYear { get; set; }
         public string Quanlity { get; set; }
         public string Discription { get; set; }

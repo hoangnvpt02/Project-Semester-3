@@ -1,3 +1,32 @@
 .vs
 NetCore-Backend/obj
 NetCore-Backend/bin
+NetCore-Backend/Migrations
+NetCore-Backend/appsettings.json
+
+Vue-Fontend/obj
+Vue-Fontend/.DS_Store
+Vue-Fontend/node_modules
+Vue-Fontend/dist
+
+# package-lock
+Vue-Fontend/package-lock.json
+
+# local env files
+Vue-Fontend/.env.local
+Vue-Fontend/.env.*.local
+
+# Log files
+Vue-Fontend/npm-debug.log*
+Vue-Fontend/yarn-debug.log*
+Vue-Fontend/yarn-error.log*
+Vue-Fontend/pnpm-debug.log*
+
+# Editor directories and files
+Vue-Fontend/.idea
+Vue-Fontend/.vscode
+Vue-Fontend/*.suo
+Vue-Fontend/*.ntvs*
+Vue-Fontend/*.njsproj
+Vue-Fontend/*.sln
+Vue-Fontend/*.sw?
