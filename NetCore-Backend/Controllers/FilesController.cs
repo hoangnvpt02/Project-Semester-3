@@ -73,8 +73,8 @@ namespace NetCore_Backend.Controllers
 
             try
             {
-                await _fileService.DownloadFileById(id);
-                return Ok();
+                
+                return Ok(_fileService.DownloadFileById(id));
             }
             catch (Exception)
             {

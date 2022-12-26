@@ -67,7 +67,7 @@ namespace NetCore_Backend.Services.Impl
             }
         }
 
-        public async Task DownloadFileById(int Id)
+        public string DownloadFileById(int Id)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace NetCore_Backend.Services.Impl
                    Directory.GetCurrentDirectory(), "FileDownloaded",
                    file.Result.FileName);
 
-                await CopyStream(content, path);
+                return path;
             }
             catch (Exception)
             {
@@ -88,12 +88,6 @@ namespace NetCore_Backend.Services.Impl
 
        
 
-        public async Task CopyStream(Stream stream, string downloadPath)
-        {
-            using (var fileStream = new FileStream(downloadPath, FileMode.Create, FileAccess.Write))
-            {
-                await stream.CopyToAsync(fileStream);
-            }
-        }
+       
     }
 }
