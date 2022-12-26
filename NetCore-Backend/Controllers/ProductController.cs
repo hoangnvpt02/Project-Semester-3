@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetCore_Backend.Models;
 using NetCore_Backend.Services;
@@ -14,6 +15,7 @@ namespace NetCore_Backend.Controllers
         {
             _productRepository = productRepository;
         }
+
         [HttpGet]
         public IActionResult GetAll()
         {

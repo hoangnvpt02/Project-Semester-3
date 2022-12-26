@@ -37,7 +37,8 @@ namespace NetCore_Backend.Services.Impl
             product.Address = productModel.Address;
             product.FileDetailsId = fileDetails.ID;
             product.Author = productModel.Author;
-            product.Discription = productModel.Discription;
+            product.Name = productModel.Name;
+            product.Description = productModel.Description;
             product.UserId = productModel.UserId;
             product.CountryId = productModel.CountryId;
             product.ManufactureYear = productModel.ManufactureYear;
@@ -52,7 +53,8 @@ namespace NetCore_Backend.Services.Impl
             {
                 Address = product.Address,
                 Author = product.Author,
-                Discription = product.Discription,
+                Name = product.Name,
+                Description = product.Description,
                 UserId = product.UserId,
                 CountryId = product.CountryId,
                 ManufactureYear = product.ManufactureYear,
@@ -85,10 +87,11 @@ namespace NetCore_Backend.Services.Impl
                 UserId = p.UserId,
                 Address = p.Address,
                 Author = p.Author,
+                Name = p.Name,
                 Price = p.Price,
                 ManufactureYear = p.ManufactureYear,
                 Quanlity = p.Quanlity,
-                Discription = p.Discription,
+                Description = p.Description,
                 IsActive = p.IsActive,
                 Created = p.Created,
                 Updated = p.Updated,
@@ -108,10 +111,11 @@ namespace NetCore_Backend.Services.Impl
                     UserId = product.UserId,
                     Address = product.Address,
                     Author = product.Author,
+                    Name = product.Name,
                     Price = product.Price,
                     ManufactureYear = product.ManufactureYear,
                     Quanlity = product.Quanlity,
-                    Discription = product.Discription,
+                    Description = product.Description,
                     IsActive = product.IsActive,
                     Created = product.Created,
                     Updated = product.Updated,
@@ -129,10 +133,11 @@ namespace NetCore_Backend.Services.Impl
                 product.UserId = productModel.UserId;
                 product.Address = productModel.Address;
                 product.Author = productModel.Author;
+                product.Name = productModel.Name;
                 product.Price = productModel.Price;
                 product.ManufactureYear = productModel.ManufactureYear;
                 product.Quanlity = productModel.Quanlity;
-                product.Discription = productModel.Discription;
+                product.Description = productModel.Description;
                 product.IsActive = productModel.IsActive;
                 product.Updated = productModel.Updated;
                 _context.Update(product);

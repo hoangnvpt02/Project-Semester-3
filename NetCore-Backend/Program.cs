@@ -9,11 +9,24 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("corspolicy",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:5002") // note the port is included 
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
+
 var startup = new Startup(builder.Configuration);
 startup.ConfigureServices(builder.Services);
 
 
 var app = builder.Build();
+app.UseCors("corspolicy");
 startup.Configure(app, builder.Environment);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
