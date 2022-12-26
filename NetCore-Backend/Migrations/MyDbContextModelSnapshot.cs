@@ -359,16 +359,16 @@ namespace NetCoreBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("CategoryId")
+                    b.Property<long?>("CategoryId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IsActive")
+                    b.Property<int?>("IsActive")
                         .HasColumnType("int");
 
-                    b.Property<long>("ProductId")
+                    b.Property<long?>("ProductId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("Updated")
@@ -660,15 +660,11 @@ namespace NetCoreBackend.Migrations
                 {
                     b.HasOne("NetCore_Backend.Data.Category", null)
                         .WithMany("Cate")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("NetCore_Backend.Data.Product", null)
                         .WithMany("Cate")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.ProductGalary", b =>

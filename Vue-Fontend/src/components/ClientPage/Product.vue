@@ -21,11 +21,27 @@
 		<div class="container">
 			<div class="row animate-box">
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<span>Cool Stuff</span>
-					<h2>Products.</h2>
-					<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+					<h2>All of our products are available here</h2>
+					<p>Let's have a look at the products in our store and enjoy the works of art</p>
 				</div>
 			</div>
+		<div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-sm-3 text-center"  v-for="cate in categories">
+						<div class="feature-center animate-box" data-animate-effect="fadeIn">
+							<span class="icon">
+								<i class="icon-credit-card"></i>
+							</span>
+							<h3>{{cate.name}}</h3>
+							<p>{{cate.description}}</p>
+							<p><a href="#" class="btn btn-primary btn-outline">View More</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+
 			<div class="row">
 				<div class="col-md-4 text-center animate-box" v-for="pd in products">
 					<div class="product">
@@ -78,27 +94,40 @@
 <script>
 import Header from './Header.vue'
 import Footer from './Footer.vue'
-import productService from '@/services/ProductService';
+import ProductService from '@/services/ProductService';
+import CategoryService from '@/services/CategoryService';
 export default {
 	data() {
 	const products=[]
+	const categories=[]
 	return {
 		products,
+		categories
 	}
 	},
 	methods: {
 		retrieveProduct() {
-			productService.getAll()
+			ProductService.getAll()
 			.then((response) => {
           this.products = response.data;
+        })
+        // .catch((e) => {
+        //   console.log(e);
+        // });
+		},
+		retrieveCategories() {
+			CategoryService.getAll()
+			.then((response) => {
+          this.categories = response.data;
         })
         .catch((e) => {
           console.log(e);
         });
-		}
+		},
 	},
 	created() {
 		this.retrieveProduct()
+		this.retrieveCategories()
 	},
   components: {
     Header,

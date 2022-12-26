@@ -27,7 +27,9 @@ const routes = [
   {
     path: "/detail",
     component: ProductDetail,
-  }
+  },
+  { path: "/:pathMatch(.*)*", redirect: "/home" },
+
 ];
 
 const router = createRouter({
