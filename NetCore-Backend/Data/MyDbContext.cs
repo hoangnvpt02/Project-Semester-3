@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using NetCore_Backend.Data;
 
 namespace NetCore_Backend.Data
 {
-    public class MyDbContext : DbContext
+    public class MyDbContext : IdentityDbContext<IdentityUser>
     {
         protected readonly IConfiguration Configuration;
 
@@ -14,9 +16,6 @@ namespace NetCore_Backend.Data
        
 
         public DbSet<Country> Countries { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Galary> Galarys { get; set; }
         public DbSet<Dossier> Dossiers { get; set; }
         public DbSet<Product> Products { get; set; }
