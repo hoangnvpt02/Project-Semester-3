@@ -19,15 +19,15 @@ const keyFilePath = path.join(baseFolder, `${certificateName}.key`);
 
 module.exports = {
     devServer: {
-        https: {
-            key: fs.readFileSync(keyFilePath),
-            cert: fs.readFileSync(certFilePath),
-        },
-        proxy: {
-            '^/weatherforecast': {
-                target: 'https://localhost:5001/'
-            }
-        },
-        port: 5002
+        // https: {
+        //     key: fs.readFileSync(keyFilePath),
+        //     cert: fs.readFileSync(certFilePath),
+        // },
+        // proxy: {
+        //     '^/weatherforecast': {
+        //         target: 'https://localhost:5001/'
+        //     }
+        // },
+        port: 4001
     }
 }
