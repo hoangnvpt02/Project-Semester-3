@@ -1,15 +1,15 @@
 <template>
   <div>
     <Header></Header>
-    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" :style="{ backgroundImage: `url(${bannerproduct})` }">
+    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" :style="{ backgroundImage: `url(${BannerAuction})` }">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center">
 					<div class="display-t">
 						<div class="display-tc animate-box" data-animate-effect="fadeIn">
-							<h1>Artworks</h1>
-							<h2>Enjoy artworks at here</h2>
+							<h1>Auction</h1>
+							<h2>Join auction with us at here</h2>
 						</div>
 					</div>
 				</div>
@@ -21,8 +21,8 @@
 		<div class="container">
 			<div class="row animate-box">
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>All of our artwork are available here</h2>
-					<p>Let's have a look at the products in our store and enjoy the works of art</p>
+					<h2>Artworks being auctioned</h2>
+					<p>Please submit your bid and we'll let you place the artwork if you bid the best</p>
 				</div>
 			</div>
 		<div>
@@ -96,7 +96,7 @@ import Header from './Header.vue'
 import Footer from './Footer.vue'
 import ProductService from '@/services/ProductService';
 import CategoryService from '@/services/CategoryService';
-import bannerproduct from '../../assets/images/bannerproduct.png'
+import BannerAuction from '../../assets/images/BannerAuction.jpg'
 
 export default {
 	data() {
@@ -105,7 +105,7 @@ export default {
 	return {
 		products,
 		categories,
-		bannerproduct
+    BannerAuction
 	}
 	},
 	methods: {
