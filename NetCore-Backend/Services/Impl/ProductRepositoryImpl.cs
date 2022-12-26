@@ -91,7 +91,7 @@ namespace NetCore_Backend.Services.Impl
                 Price = p.Price,
                 ManufactureYear = p.ManufactureYear,
                 Quanlity = p.Quanlity,
-                Discription = p.Discription,
+                Description = p.Description,
                 FileDetailsId = p.FileDetailsId,
                 IsActive = p.IsActive,
                 Created = p.Created,
@@ -116,7 +116,7 @@ namespace NetCore_Backend.Services.Impl
                     Price = product.Price,
                     ManufactureYear = product.ManufactureYear,
                     Quanlity = product.Quanlity,
-                    Discription = product.Discription,
+                    Description = product.Description,
                     IsActive = product.IsActive,
                     Created = product.Created,
                     Updated = product.Updated,
@@ -162,7 +162,6 @@ namespace NetCore_Backend.Services.Impl
                                         Price = m.ppc.p.Price,
                                         ManufactureYear = m.ppc.p.ManufactureYear,
                                         Quanlity = m.ppc.p.Quanlity,
-                                        Description = m.ppc.p.Description,
                                         IsActive = m.ppc.p.IsActive,
                                         Updated = m.ppc.p.Updated
         });

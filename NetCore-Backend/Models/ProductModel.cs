@@ -11,7 +11,7 @@
 
         public string ManufactureYear { get; set; }
         public string Quanlity { get; set; }
-        public string Discription { get; set; }
+        public string Description { get; set; }
 
         public long? FileDetailsId { get; set; }
         public string Address { get; set; }
