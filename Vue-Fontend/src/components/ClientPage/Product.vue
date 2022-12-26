@@ -35,21 +35,20 @@
 							</span>
 							<h3>{{cate.name}}</h3>
 							<p>{{cate.description}}</p>
-							<p><a href="" class="btn btn-primary btn-outline">View More</a></p>
+							<p><a class="btn btn-primary btn-outline">View More</a></p>
 						</div>
 					</div>
 				</div>
 			</div>
 	</div>
-
 			<div class="row">
 				<div class="col-md-4 text-center animate-box" v-for="pd in products">
 					<div class="product">
 						<div class="product-grid" style="background-image:url(images/product-1.jpg);">
 							<div class="inner">
 								<p>
-									<a href="/detail" class="icon"><i class="icon-shopping-cart"></i></a>
-									<a href="/detail" class="icon"><i class="icon-eye"></i></a>
+									<router-link :to="{ name: 'detail', params: { id: pd.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link>
+									<router-link :to="{ name: 'detail', params: { id: pd.id } }" class="icon"><i class="icon-eye"></i></router-link>
 								</p>
 							</div>
 						</div>

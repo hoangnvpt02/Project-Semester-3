@@ -48,8 +48,8 @@
 						<div class="product-grid" style="background-image:url(images/product-1.jpg);">
 							<div class="inner">
 								<p>
-									<a href="/detail" class="icon"><i class="icon-shopping-cart"></i></a>
-									<a href="/detail" class="icon"><i class="icon-eye"></i></a>
+									<router-link :to="{ name: 'detail', params: { id: pd.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link>
+									<router-link :to="{ name: 'detail', params: { id: pd.id } }" class="icon"><i class="icon-eye"></i></router-link>
 								</p>
 							</div>
 						</div>

@@ -198,6 +198,9 @@ import Footer from './Footer.vue'
 import img_bg_2 from '../../assets/images/bg2.jpg'
 
 export default {
+	props: {
+    id: Number
+  },
   data() {
     return {
       img_bg_2,

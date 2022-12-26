@@ -26,8 +26,9 @@ const routes = [
     component: Contact,
   },
   {
-    path: "/detail",
+    path: "/detail/:id",
     component: ProductDetail,
+    name: "detail"
   },
   {
     path: "/auction",
