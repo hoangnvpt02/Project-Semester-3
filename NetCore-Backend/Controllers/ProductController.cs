@@ -16,19 +16,6 @@ namespace NetCore_Backend.Controllers
             _productRepository = productRepository;
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            try
-            {
-                return Ok(_productRepository.GetAll());
-            }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
-        }
-
         [HttpGet("{id}")]
         public IActionResult GetById(long id)
         {
@@ -50,6 +37,42 @@ namespace NetCore_Backend.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet("/cate")]
+        public IActionResult GetAllProductByCate(long id)
+        {
+            try
+            {
+                var product = _productRepository.GetAllProductByCate();
+                if (product != null)
+                {
+                    return Ok(product);
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            try
+            {
+                return Ok(_productRepository.GetAll());
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+        
         [HttpPut]
         public IActionResult Update(ProductModel productModel)
         {
