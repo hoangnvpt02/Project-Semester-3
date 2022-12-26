@@ -73,13 +73,29 @@ namespace NetCore_Backend.Controllers
 
             try
             {
-                
-                return Ok(_fileService.DownloadFileById(id));
+                await _fileService.DownloadFileById(id);
+                return Ok();
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> ViewFile(long id)
+        {
+            try
+            {
+                
+                return Ok(await _fileService.viewFile(id));
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
     }
 }
