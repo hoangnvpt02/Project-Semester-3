@@ -4,6 +4,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import Index from "@/components/ClientPage/Index.vue";
 import About from "@/components/ClientPage/About.vue";
 import Product from "@/components/ClientPage/Product.vue";
+import ProductAsCate from "@/components/ClientPage/ProductAsCate.vue";
 import Contact from "@/components/ClientPage/Contact.vue";
 import ProductDetail from "@/components/ClientPage/ProductDetail.vue";
 import Auction from "@/components/ClientPage/Auction.vue";
@@ -20,6 +21,12 @@ const routes = [
   {
     path: "/product",
     component: Product,
+  },
+  {
+    path: "/product/category/:id",
+    component: ProductAsCate,
+    name: "productAsCate"
+
   },
   {
     path: "/contact",

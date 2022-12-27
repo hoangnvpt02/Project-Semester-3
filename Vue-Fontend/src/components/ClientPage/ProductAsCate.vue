@@ -18,29 +18,30 @@
 		</header>
 	
 	<div id="fh5co-product">
+		
 		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>All of our artwork are available here</h2>
-					<p>Let's have a look at the products in our store and enjoy the works of art</p>
-				</div>
-			</div>
-		<div>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-3 col-sm-3 text-center"  v-for="cate in categories">
-						<div class="feature-center animate-box" data-animate-effect="fadeIn">
-							<span class="icon">
-								<i class="icon-shop"></i>
-							</span>
-							<h3>{{cate.name}}</h3>
-							<p>{{cate.description}}</p>
-							<router-link :to="{ name: 'productAsCate', params: { id: cate.id } }" class="btn btn-primary btn-outline">View More</router-link>
-							<!-- <p><a class="btn btn-primary btn-outline">View More</a></p> -->
-						</div>
+			<div class="row">
+				<div class="col-md-3 col-sm-3 text-center"  v-for="cate in categories">
+					<div class="feature-center animate-box" data-animate-effect="fadeIn">
+						<span class="icon">
+							<i class="icon-shop"></i>
+						</span>
+						<h3>{{cate.name}}</h3>
+						<p>{{cate.description}}</p>
+						<p><a :href="'/product/category/' + cate.id" class="btn btn-primary btn-outline">View More</a></p>
+						<!-- <router-link :to="{ name: 'productAsCate', params: { id: cate.id } }" class="btn btn-primary btn-outline">View More</router-link> -->
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<h2>{{category.name}}</h2>
+					<p>{{category.description}}</p>
+				</div>
+			</div>
+		<div>
 	</div>
 			<div class="row">
 				<div class="col-md-4 text-center animate-box" v-for="pd in products">
@@ -96,33 +97,27 @@
 import Header from './Header.vue'
 import Footer from './Footer.vue'
 import ProductService from '@/services/ProductService';
-import CategoryService from '@/services/CategoryService';
 import bannerproduct from '../../assets/images/bannerproduct.png'
 import base from "@/../base.json"
+import CategoryService from '@/services/CategoryService';
 
 export default {
 	data() {
 	let products
 	let categories
+	let category
 	let baseUrl=''
 	return {
 		products,
-		categories,
 		bannerproduct,
 		baseUrl,
-		base
+		base,
+		categories,
+	  category
+
 	}
 	},
 	methods: {
-		retrieveProduct() {
-			ProductService.getAll()
-			.then((response) => {
-          this.products = response.data;
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-		},
 		retrieveCategories() {
 			CategoryService.getAll()
 			.then((response) => {
@@ -132,11 +127,32 @@ export default {
           console.log(e);
         });
 		},
+		getCateById(id) {
+			CategoryService.getById(id)
+			.then((response) => {
+          this.category = response.data;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+		},
+
+		getAllProductByCate(id) {
+			ProductService.getAllProductByCate(id)
+			.then((response) => {
+          this.products = response.data;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+		},
 	},
 	created() {
 		this.baseUrl = this.base.baseUrl+ 'api/files/'
-		this.retrieveProduct()
+    this.getAllProductByCate(this.$route.params.id);
+    this.getCateById(this.$route.params.id);
 		this.retrieveCategories()
+
 	},
   components: {
     Header,
