@@ -63,11 +63,11 @@ namespace NetCore_Backend.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAll(int start,int end,String ? sortBy)
         {
             try
             {
-                return Ok(_productRepository.GetAll());
+                return Ok(_productRepository.GetAll(start,end,sortBy));
             }
             catch (Exception e)
             {

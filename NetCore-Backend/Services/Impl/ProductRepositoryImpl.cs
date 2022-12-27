@@ -78,8 +78,9 @@ namespace NetCore_Backend.Services.Impl
             }
         }
 
-        public List<ProductModel> GetAll()
+        public List<ProductModel> GetAll(int start,int end,String sortBy)
         {
+
             var products = _context.Products.Select(p => new ProductModel()
             {
                 Id = p.Id,
@@ -97,6 +98,24 @@ namespace NetCore_Backend.Services.Impl
                 Created = p.Created,
                 Updated = p.Updated,
             });
+            
+            products.OrderByDescending(p => p.Created).ToList();
+            if(sortBy != null)
+            {
+                switch (sortBy)
+                {
+                    case "price":
+                        products = products.OrderByDescending(p => p.Price);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if(start != 0 || end != 0)
+            {
+                products = products.Skip(start).Take(end);
+            }
+           
             return products.ToList();
         }
 
