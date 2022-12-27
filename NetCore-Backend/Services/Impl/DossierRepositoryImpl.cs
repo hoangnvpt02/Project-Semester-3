@@ -16,7 +16,7 @@ namespace NetCore_Backend.Services.Impl
             var dossiers = _context.Dossiers.Select(d => new DossierModel()
             {
                 Id = d.Id,
-                GalaryId = d.GalaryId,
+                GalaryId = (long)d.GalaryId,
                 UserId = d.UserId,
                 NumberId = d.NumberId,
                 IsActive = d.IsActive,
@@ -34,7 +34,7 @@ namespace NetCore_Backend.Services.Impl
                 return new DossierModel()
                 {
                     Id = d.Id,
-                    GalaryId = d.GalaryId,
+                    GalaryId = (long)d.GalaryId,
                     UserId = d.UserId,
                     NumberId = d.NumberId,
                     IsActive = d.IsActive,
@@ -61,7 +61,7 @@ namespace NetCore_Backend.Services.Impl
             return new DossierModel()
             {
                
-                GalaryId = _dossier.GalaryId,
+                GalaryId = (long)_dossier.GalaryId,
                 UserId = _dossier.UserId,
                 NumberId = _dossier.NumberId,
                 IsActive = _dossier.IsActive,

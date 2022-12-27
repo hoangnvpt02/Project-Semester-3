@@ -8,7 +8,7 @@ namespace NetCore_Backend.Data
     {
         [Key]
         public long Id { get; set; }
-        public long UserId { get; set; }
+        public long ? UserId { get; set; }
        
         public string Name { get; set; }
         public string Description { get; set; }

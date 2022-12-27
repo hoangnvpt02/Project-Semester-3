@@ -38,7 +38,7 @@ namespace NetCore_Backend.Services.Impl
             product.FileDetailsId = fileDetails.ID;
             product.Author = productModel.Author;
             product.Name = productModel.Name;
-            product.Description = productModel.Description;
+            product.Discription = productModel.Discription;
             product.UserId = productModel.UserId;
             product.CountryId = productModel.CountryId;
             product.ManufactureYear = productModel.ManufactureYear;
@@ -54,7 +54,7 @@ namespace NetCore_Backend.Services.Impl
                 Address = product.Address,
                 Author = product.Author,
                 Name = product.Name,
-                Description = product.Description,
+                Discription = product.Discription,
                 UserId = product.UserId,
                 CountryId = product.CountryId,
                 ManufactureYear = product.ManufactureYear,
@@ -91,7 +91,7 @@ namespace NetCore_Backend.Services.Impl
                 Price = p.Price,
                 ManufactureYear = p.ManufactureYear,
                 Quanlity = p.Quanlity,
-                Description = p.Description,
+                Discription = p.Discription,
                 FileDetailsId = p.FileDetailsId,
                 IsActive = p.IsActive,
                 Created = p.Created,
@@ -116,7 +116,7 @@ namespace NetCore_Backend.Services.Impl
                     Price = product.Price,
                     ManufactureYear = product.ManufactureYear,
                     Quanlity = product.Quanlity,
-                    Description = product.Description,
+                    Discription = product.Discription,
                     IsActive = product.IsActive,
                     Created = product.Created,
                     Updated = product.Updated,
@@ -138,12 +138,13 @@ namespace NetCore_Backend.Services.Impl
                 product.Price = productModel.Price;
                 product.ManufactureYear = productModel.ManufactureYear;
                 product.Quanlity = productModel.Quanlity;
-                product.Description = productModel.Description;
+                product.Discription = productModel.Discription;
                 product.IsActive = productModel.IsActive;
                 product.Updated = productModel.Updated;
                 _context.Update(product);
                 _context.SaveChanges();
             }
+           
         }
 
         public List<ProductModel> GetAllProductByCate()
@@ -166,6 +167,38 @@ namespace NetCore_Backend.Services.Impl
                                         Updated = m.ppc.p.Updated
         });
             return (List<ProductModel>)categorizedProducts;
+        }
+
+        public List<ProductModel> GetCateById(long id)
+        {
+            List<ProductCate> productCates = _context.ProductCates.Where(c => c.CategoryId == id).ToList();
+            if(productCates.Count > 0)
+            {
+                List<ProductModel> products = new List<ProductModel>();
+                foreach (ProductCate productCate in productCates)
+                {
+                    Product product = _context.Products.FirstOrDefault(c => c.Id == productCate.Id);
+                    ProductModel model = new ProductModel() { 
+                        Id = product.Id,
+                        UserId=product.UserId,
+                        CountryId = product.CountryId,
+                        Price = product.Price,
+                        Author = product.Author,
+                        Name = product.Name,
+                        ManufactureYear=product.ManufactureYear,
+                        Discription = product.Discription,
+                        FileDetailsId = product.FileDetailsId,
+                        Quanlity = product.Quanlity,
+                        IsActive = product.IsActive,
+                        Address = product.Address,
+                        Created = product.Created,
+                        Updated = product.Updated,
+                    };
+                    products.Add(model);
+                }
+                return products;
+            }
+            return null;
         }
     }
 }

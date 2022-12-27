@@ -10,5 +10,7 @@ namespace NetCore_Backend.Services
         ProductModel Add(ProductModel productModel, IFormFile fileData, FileType fileType);
         void Update(ProductModel productModel);
         void Delete(long id);
+
+        List<ProductModel> GetCateById(long id);
     }
 }
