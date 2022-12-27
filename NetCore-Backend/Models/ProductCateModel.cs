@@ -4,7 +4,7 @@ namespace NetCore_Backend.Models
 {
     public class ProductCateModel
     {
-        public long Id { get; set; }
+        public long ? Id { get; set; }
 
         public long ? ProductId { get; set; }
 

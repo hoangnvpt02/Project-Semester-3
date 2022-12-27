@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic.FileIO;
+using NetCore_Backend.Data;
 using NetCore_Backend.Models;
 using NetCore_Backend.Services;
 
@@ -110,6 +112,20 @@ namespace NetCore_Backend.Controllers
             try
             {
                 return Ok(_productRepository.Add(productModel, fileDetails,fileType));
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet("CategoryId")]
+        
+        public IActionResult ListByCategory(long CategoryId)
+        {
+
+            try
+            {
+                return Ok(_productRepository.GetCateById(CategoryId));
             }
             catch (Exception e)
             {

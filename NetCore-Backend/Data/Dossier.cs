@@ -10,8 +10,8 @@ namespace NetCore_Backend.Data
         public long Id { get; set; }
         public long ? UserId { get; set; }
        
-        public string? NumberId { get; set; }
-        public long GalaryId { get; set; }
+        public string ? NumberId { get; set; }
+        public long ? GalaryId { get; set; }
        
         public int IsActive { get; set; }
         public DateTime ? Created { get; set; }
