@@ -28,7 +28,7 @@ namespace NetCore_Backend.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(long id)
+        public IActionResult GetById(string id)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace NetCore_Backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(string id)
         {
             try
             {

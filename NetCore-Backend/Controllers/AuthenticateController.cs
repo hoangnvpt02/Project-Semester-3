@@ -135,7 +135,7 @@ namespace NetCore_Backend.Controllers
 
         [HttpPost]
         [Route("UpdateRoleSeller")]
-        public async Task<IActionResult> UpdateRoleSeller([FromBody] string email)
+        public async Task<IActionResult> UpdateRoleSeller([FromBody] string email = "test@gmail.com")
         {
             if (!await _roleManager.RoleExistsAsync(UserRoles.Seller))
                 await _roleManager.CreateAsync(new IdentityRole(UserRoles.Seller));
