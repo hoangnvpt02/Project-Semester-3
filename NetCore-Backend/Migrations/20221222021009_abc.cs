@@ -5,7 +5,7 @@
 namespace NetCoreBackend.Migrations
 {
     /// <inheritdoc />
-    public partial class xyz : Migration
+    public partial class abc : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -8,8 +8,8 @@ namespace NetCore_Backend.Services
 
         public Task PostMultiFileAsync(List<FileUploadModel> fileData);
 
-        public String DownloadFileById(int fileName);
+        public Task DownloadFileById(int fileName);
 
-       
+        public Task<MemoryStream> viewFile(long fileId);
     }
 }

@@ -12,8 +12,8 @@ using NetCore_Backend.Data;
 namespace NetCoreBackend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20221224133318_xyz")]
-    partial class xyz
+    [Migration("20221222114942_initDb")]
+    partial class initDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -189,30 +189,6 @@ namespace NetCoreBackend.Migrations
                     b.ToTable("Dossier");
                 });
 
-            modelBuilder.Entity("NetCore_Backend.Data.FileDetails", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<byte[]>("FileData")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FileType")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("FileDetails");
-                });
-
             modelBuilder.Entity("NetCore_Backend.Data.Galary", b =>
                 {
                     b.Property<long>("Id")
@@ -269,6 +245,10 @@ namespace NetCoreBackend.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Discription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("IsActive")
                         .HasColumnType("int");
 
@@ -277,9 +257,6 @@ namespace NetCoreBackend.Migrations
 
                     b.Property<long>("ProductId")
                         .HasColumnType("bigint");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
@@ -322,9 +299,6 @@ namespace NetCoreBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("FileDetailsId")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("IsActive")
                         .HasColumnType("int");
 
@@ -358,16 +332,16 @@ namespace NetCoreBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<long?>("CategoryId")
+                    b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("IsActive")
+                    b.Property<int>("IsActive")
                         .HasColumnType("int");
 
-                    b.Property<long?>("ProductId")
+                    b.Property<long>("ProductId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("Updated")
@@ -657,13 +631,21 @@ namespace NetCoreBackend.Migrations
 
             modelBuilder.Entity("NetCore_Backend.Data.ProductCate", b =>
                 {
-                    b.HasOne("NetCore_Backend.Data.Category", null)
+                    b.HasOne("NetCore_Backend.Data.Category", "Category")
                         .WithMany("Cate")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("NetCore_Backend.Data.Product", null)
+                    b.HasOne("NetCore_Backend.Data.Product", "Product")
                         .WithMany("Cate")
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.ProductGalary", b =>
