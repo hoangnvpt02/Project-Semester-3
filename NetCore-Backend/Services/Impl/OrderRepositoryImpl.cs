@@ -97,5 +97,11 @@ namespace NetCore_Backend.Services.Impl
                 _context.SaveChanges();
             }
         }
+
+        public int GetQuantityOrder()
+        {
+            var total = _context.Orders.ToList().Count;
+            return total;
+        }
     }
 }

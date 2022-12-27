@@ -6,6 +6,7 @@ import About from "@/components/ClientPage/About.vue";
 import Product from "@/components/ClientPage/Product.vue";
 import Contact from "@/components/ClientPage/Contact.vue";
 import ProductDetail from "@/components/ClientPage/ProductDetail.vue";
+import Cart from "@/components/ClientPage/Cart.vue";
 
 const routes = [
   {
@@ -19,6 +20,10 @@ const routes = [
   {
     path: "/product",
     component: Product,
+  },
+  {
+    path: "/cart",
+    component: Cart,
   },
   {
     path: "/contact",

@@ -91,5 +91,18 @@ namespace NetCore_Backend.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet("GetQuantityOrder")]
+        public IActionResult GetQuantityOrder()
+        {
+            try
+            {
+                return Ok(_orderRepository.GetQuantityOrder());
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
     }
 }
