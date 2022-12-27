@@ -20,7 +20,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("corspolicy",
         policy =>
         {
-            policy.WithOrigins("https://localhost:5002") // note the port is included 
+            policy.WithOrigins("*") // note the port is included 
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });

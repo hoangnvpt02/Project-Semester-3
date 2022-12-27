@@ -27,6 +27,7 @@ namespace NetCore_Backend.Services.Impl
                 {
                     fileData.CopyTo(stream);
                     fileDetails.FileData = stream.ToArray();
+                    
                 }
 
                 var result = _context.FileDetails.Add(fileDetails);
@@ -75,10 +76,11 @@ namespace NetCore_Backend.Services.Impl
 
                 var content = new System.IO.MemoryStream(file.Result.FileData);
                 var path = Path.Combine(
-                   Directory.GetCurrentDirectory(), "FileDownloaded",
-                   file.Result.FileName);
+                    Directory.GetCurrentDirectory(), "FileDownloaded",
+                    file.Result.FileName);
 
                 await CopyStream(content, path);
+               
             }
             catch (Exception)
             {
@@ -86,7 +88,14 @@ namespace NetCore_Backend.Services.Impl
             }
         }
 
-       
+        public async Task<MemoryStream> viewFile(long fileId)
+        {
+            var file = _context.FileDetails.Where(x => x.ID == fileId).FirstOrDefault();
+
+            var content = new System.IO.MemoryStream(file.FileData);
+            
+            return content;
+        }
 
         public async Task CopyStream(Stream stream, string downloadPath)
         {
@@ -95,5 +104,9 @@ namespace NetCore_Backend.Services.Impl
                 await stream.CopyToAsync(fileStream);
             }
         }
+
+
+
+
     }
 }

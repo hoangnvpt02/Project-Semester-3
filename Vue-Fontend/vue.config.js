@@ -20,6 +20,7 @@
 module.exports = {
     lintOnSave: false,
     devServer: {
+
         // https: {
         //     key: fs.readFileSync(keyFilePath),
         //     cert: fs.readFileSync(certFilePath),
@@ -29,6 +30,6 @@ module.exports = {
         //         target: 'https://localhost:5001/'
         //     }
         // },
-        port: 5002
+        port: 4001
     }
 }

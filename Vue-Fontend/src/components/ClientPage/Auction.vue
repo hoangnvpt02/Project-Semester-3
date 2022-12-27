@@ -1,15 +1,15 @@
 <template>
   <div>
     <Header></Header>
-    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" :style="{ backgroundImage: `url(${bannerproduct})` }">
+    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" :style="{ backgroundImage: `url(${BannerAuction})` }">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center">
 					<div class="display-t">
 						<div class="display-tc animate-box" data-animate-effect="fadeIn">
-							<h1>Artworks</h1>
-							<h2>Enjoy artworks at here</h2>
+							<h1>Auction</h1>
+							<h2>Join auction with us at here</h2>
 						</div>
 					</div>
 				</div>
@@ -21,8 +21,8 @@
 		<div class="container">
 			<div class="row animate-box">
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>All of our artwork are available here</h2>
-					<p>Let's have a look at the products in our store and enjoy the works of art</p>
+					<h2>Artworks being auctioned</h2>
+					<p>Please submit your bid and we'll let you place the artwork if you bid the best</p>
 				</div>
 			</div>
 		<div>
@@ -35,17 +35,17 @@
 							</span>
 							<h3>{{cate.name}}</h3>
 							<p>{{cate.description}}</p>
-							<p><a class="btn btn-primary btn-outline">View More</a></p>
+							<p><a href="" class="btn btn-primary btn-outline">View More</a></p>
 						</div>
 					</div>
 				</div>
 			</div>
 	</div>
+
 			<div class="row">
 				<div class="col-md-4 text-center animate-box" v-for="pd in products">
 					<div class="product">
 						<div class="product-grid" style="background-image:url(images/product-1.jpg);">
-							<img :src="image" />
 							<div class="inner">
 								<p>
 									<router-link :to="{ name: 'detail', params: { id: pd.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link>
@@ -96,32 +96,19 @@ import Header from './Header.vue'
 import Footer from './Footer.vue'
 import ProductService from '@/services/ProductService';
 import CategoryService from '@/services/CategoryService';
-import FileService from '@/services/FileService';
-import bannerproduct from '../../assets/images/bannerproduct.png'
+import BannerAuction from '../../assets/images/BannerAuction.jpg'
 
 export default {
 	data() {
 	const products=[]
 	const categories=[]
-	let image
 	return {
 		products,
 		categories,
-		bannerproduct,
-		image
+    BannerAuction
 	}
 	},
 	methods: {
-		retrieveFile() {
-			FileService.getFile(1)
-			.then((response) => {
-          this.image = response;
-					console.log(response)
-        })
-        // .catch((e) => {
-        //   console.log(e);
-        // });
-		},
 		retrieveProduct() {
 			ProductService.getAll()
 			.then((response) => {
@@ -142,7 +129,6 @@ export default {
 		},
 	},
 	created() {
-		this.retrieveFile()
 		this.retrieveProduct()
 		this.retrieveCategories()
 	},

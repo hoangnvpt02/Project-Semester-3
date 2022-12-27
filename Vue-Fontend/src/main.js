@@ -6,6 +6,7 @@ import About from "@/components/ClientPage/About.vue";
 import Product from "@/components/ClientPage/Product.vue";
 import Contact from "@/components/ClientPage/Contact.vue";
 import ProductDetail from "@/components/ClientPage/ProductDetail.vue";
+import Auction from "@/components/ClientPage/Auction.vue";
 
 const routes = [
   {
@@ -25,9 +26,16 @@ const routes = [
     component: Contact,
   },
   {
-    path: "/detail",
+    path: "/detail/:id",
     component: ProductDetail,
-  }
+    name: "detail"
+  },
+  {
+    path: "/auction",
+    component: Auction,
+  },
+  { path: "/:pathMatch(.*)*", redirect: "/home" },
+
 ];
 
 const router = createRouter({
@@ -36,4 +44,3 @@ const router = createRouter({
 });
 // createApp(App).mount('#app')
 createApp(App).use(router).mount("#app");
-

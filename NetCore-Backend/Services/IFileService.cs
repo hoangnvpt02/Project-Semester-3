@@ -10,6 +10,6 @@ namespace NetCore_Backend.Services
 
         public Task DownloadFileById(int fileName);
 
-       
+        public Task<MemoryStream> viewFile(long fileId);
     }
 }

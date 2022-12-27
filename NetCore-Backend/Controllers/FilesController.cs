@@ -81,5 +81,21 @@ namespace NetCore_Backend.Controllers
                 throw;
             }
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> ViewFile(long id)
+        {
+            try
+            {
+                
+                return Ok(await _fileService.viewFile(id));
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
     }
 }
