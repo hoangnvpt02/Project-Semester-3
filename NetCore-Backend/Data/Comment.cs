@@ -8,9 +8,9 @@ namespace NetCore_Backend.Data
     {
         [Key]
         public long Id { get; set; }
-        public long UserId { get; set; }
+        public long ? UserId { get; set; }
        
-        public long ProductId { get; set; }
+        public long ? ProductId { get; set; }
         
         public string Content { get; set; }
         public int IsActive { get; set; }

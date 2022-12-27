@@ -45,6 +45,7 @@
 				<div class="col-md-4 text-center animate-box" v-for="pd in products">
 					<div class="product">
 						<div class="product-grid" style="background-image:url(images/product-1.jpg);">
+							<img :src="image" />
 							<div class="inner">
 								<p>
 									<router-link :to="{ name: 'detail', params: { id: pd.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link>
@@ -95,19 +96,32 @@ import Header from './Header.vue'
 import Footer from './Footer.vue'
 import ProductService from '@/services/ProductService';
 import CategoryService from '@/services/CategoryService';
+import FileService from '@/services/FileService';
 import bannerproduct from '../../assets/images/bannerproduct.png'
 
 export default {
 	data() {
 	const products=[]
 	const categories=[]
+	let image
 	return {
 		products,
 		categories,
-		bannerproduct
+		bannerproduct,
+		image
 	}
 	},
 	methods: {
+		retrieveFile() {
+			FileService.getFile(1)
+			.then((response) => {
+          this.image = response;
+					console.log(response)
+        })
+        // .catch((e) => {
+        //   console.log(e);
+        // });
+		},
 		retrieveProduct() {
 			ProductService.getAll()
 			.then((response) => {
@@ -128,6 +142,7 @@ export default {
 		},
 	},
 	created() {
+		this.retrieveFile()
 		this.retrieveProduct()
 		this.retrieveCategories()
 	},

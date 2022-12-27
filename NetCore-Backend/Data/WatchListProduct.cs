@@ -8,10 +8,10 @@ namespace NetCore_Backend.Data
     {
         [Key]
         public long Id { get; set; }
-        public long ProductId { get; set; }
+        public long ? ProductId { get; set; }
         [ForeignKey("ProductId")]
         public Product Product { get; set; }
-        public long WatchListId { get; set; }
+        public long ? WatchListId { get; set; }
         [ForeignKey("WatchListId")]
         public WatchList WatchList { get; set; }
         public int IsActive { get; set; }

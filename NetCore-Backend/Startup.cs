@@ -23,10 +23,7 @@ namespace NetCore_Backend
                 option.UseSqlServer(Configuration.GetConnectionString("MyDb"));
             });
             services.AddScoped<ICountryRepository, CountryRepositoryImpl>();
-            services.AddScoped<IUserRepository, UserRepositoryImpl>();
-            services.AddScoped<IRoleRepository, RoleRepositoryImpl>();
             services.AddScoped<IGalaryRepository, GalaryRepositoryImpl>();
-            services.AddScoped<IUserRoleRepository, UserRoleRepositoryImpl>();
             services.AddScoped<IDossierRepository, DossierRepositoryImpl>();
             services.AddScoped<ICategoryRepository, CategoryRepositoryImpl>();
             services.AddScoped<IProductRepository, ProductRepositoryImpl>();
