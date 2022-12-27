@@ -1,4 +1,10 @@
 using NetCore_Backend;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using NetCore_Backend.Configurations;
+using NetCore_Backend.Data;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +26,34 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(jwt =>
+    {
+        var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtConfig:Secret").Value);
+
+        jwt.SaveToken = true;
+        jwt.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false, // for dev
+            ValidateAudience = false, // for dev
+            RequireExpirationTime = false, // for dev
+            ValidateLifetime = true
+
+        };
+    });
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<MyDbContext>()
+    .AddDefaultTokenProviders();
+
 
 var startup = new Startup(builder.Configuration);
 startup.ConfigureServices(builder.Services);
@@ -37,6 +71,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Authentication & Authorization
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
