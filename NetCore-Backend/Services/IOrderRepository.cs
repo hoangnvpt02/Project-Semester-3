@@ -4,7 +4,7 @@ namespace NetCore_Backend.Services
 {
     public interface IOrderRepository
     {
-        List<OrderModel> GetAll();
+        Array GetAll();
         OrderModel GetById(long id);
         OrderModel Add(OrderModel orderModel);
         void Update(OrderModel orderModel);

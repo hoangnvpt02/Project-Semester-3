@@ -1,5 +1,7 @@
 ﻿using NetCore_Backend.Models;
 using NetCore_Backend.Data;
+using Microsoft.CodeAnalysis;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace NetCore_Backend.Services.Impl
 {
@@ -46,20 +48,24 @@ namespace NetCore_Backend.Services.Impl
             }
         }
 
-        public List<OrderModel> GetAll()
+        public Array GetAll()
         {
-            var orders = _context.Orders.Select(o => new OrderModel()
-            {
-                Id = o.Id,
-                ProductId = o.ProductId,
-                UserId = o.UserId,
-                Price = o.Price,
-                Status = o.Status,
-                IsActive = o.IsActive,
-                Created = o.Created,
-                Updated = o.Updated,
-            });
-            return orders.ToList();
+
+            var orders = _context.Orders
+            .Join(_context.Products, order => order.ProductId, product => product.Id, (order, product) => new { order,product })
+            .Select(o => new
+             {
+                Id = o.order.Id,
+                Price = o.order.Price,
+                Status = o.order.Status,
+                IsActive = o.order.IsActive,
+                Name = o.product.Name,
+                FileDetailsId = o.product.FileDetailsId,
+            }) 
+            .ToList()
+            .ToArray();
+
+            return orders;
         }
 
         public OrderModel GetById(long id)
