@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic.FileIO;
+using NetCore_Backend.Data;
 using NetCore_Backend.Models;
 using NetCore_Backend.Services;
 
@@ -14,19 +16,6 @@ namespace NetCore_Backend.Controllers
         public ProductController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
-        }
-
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            try
-            {
-                return Ok(_productRepository.GetAll());
-            }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
         }
 
         [HttpGet("{id}")]
@@ -50,6 +39,42 @@ namespace NetCore_Backend.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet("/cate")]
+        public IActionResult GetAllProductByCate(long id)
+        {
+            try
+            {
+                var product = _productRepository.GetAllProductByCate();
+                if (product != null)
+                {
+                    return Ok(product);
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult GetAll(int start,int end,String ? sortBy)
+        {
+            try
+            {
+                return Ok(_productRepository.GetAll(start,end,sortBy));
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+        
         [HttpPut]
         public IActionResult Update(ProductModel productModel)
         {
@@ -87,6 +112,20 @@ namespace NetCore_Backend.Controllers
             try
             {
                 return Ok(_productRepository.Add(productModel, fileDetails,fileType));
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet("CategoryId")]
+        
+        public IActionResult ListByCategory(long CategoryId)
+        {
+
+            try
+            {
+                return Ok(_productRepository.GetCateById(CategoryId));
             }
             catch (Exception e)
             {

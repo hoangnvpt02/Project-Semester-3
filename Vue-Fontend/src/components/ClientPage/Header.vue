@@ -15,6 +15,7 @@
 								<li><a href="single.html">Single Shop</a></li>
 							</ul>
 						</li>
+						<li><a href="/auction">Auction</a></li>
 						<li><a href="/about">About</a></li>
 						<li class="has-dropdown">
 							<a href="/about">Services</a>

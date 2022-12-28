@@ -8,8 +8,8 @@ namespace NetCore_Backend.Data
     {
         [Key]
         public long Id { get; set; }
-        public long CountryId { get; set; }
-        public long UserId { get; set; }
+        public long ? CountryId { get; set; }
+        public long ? UserId { get; set; }
         public Decimal Price { get; set; }
         public string Name { get; set; }
         public string Author { get; set; }
@@ -17,8 +17,8 @@ namespace NetCore_Backend.Data
         public string Quanlity { get; set; }
         public string Description { get; set; }
         public string Address { get; set; }
-       
         public long ? FileDetailsId { get; set; }
+        [ForeignKey("FileDetailsId")]
         public int IsActive { get; set; }
         public DateTime ? Created { get; set; }
         public DateTime ? Updated { get; set; }

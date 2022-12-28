@@ -1,8 +1,7 @@
 <template>
   <div>
     <Header></Header>
-
-    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(images/img_bg_2.jpg);">
+    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" :style="{ backgroundImage: `url(${bannerproduct})` }">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
@@ -10,7 +9,7 @@
 					<div class="display-t">
 						<div class="display-tc animate-box" data-animate-effect="fadeIn">
 							<h1>Product Details</h1>
-							<h2>Free html5 templates by <a href="https://themewagon.com/theme_tag/free/" target="_blank">Themewagon</a></h2>
+							<!-- <h2>Free html5 templates by <a href="https://themewagon.com/theme_tag/free/" target="_blank">Themewagon</a></h2> -->
 						</div>
 					</div>
 				</div>
@@ -23,45 +22,25 @@
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1 animate-box">
 					<div class="owl-carousel owl-carousel-fullwidth product-carousel">
+					<!-- <div class="owl-carousel owl-carousel-fullwidth product-carousel"> -->
 						<div class="item">
 							<div class="active text-center">
 								<figure>
-									<img src="images/product-single-1.jpg" alt="user">
+									<img src="https://localhost:5001/api/Files/4" alt="user">
 								</figure>
 							</div>
 						</div>
 						<div class="item">
 							<div class="active text-center">
 								<figure>
-									<img src="images/product-single-2.jpg" alt="user">
-								</figure>
-							</div>
-						</div>
-						<div class="item">
-							<div class="active text-center">
-								<figure>
-									<img src="images/product-single-3.jpg" alt="user">
-								</figure>
-							</div>
-						</div>
-						<div class="item">
-							<div class="active text-center">
-								<figure>
-									<img src="images/product-single-4.jpg" alt="user">
-								</figure>
-							</div>
-						</div>
-						<div class="item">
-							<div class="active text-center">
-								<figure>
-									<img src="images/product-single-5.jpg" alt="user">
+									<img src="https://localhost:5001/api/Files/4" alt="user">
 								</figure>
 							</div>
 						</div>
 					</div>
 					<div class="row animate-box">
 						<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-							<h2>Hauteville Rocking Chair</h2>
+							<h2>{{ product.name }}</h2>
 							<p>
 								<a href="#" class="btn btn-primary btn-outline btn-lg">Add to Cart</a>
 								<a href="#" class="btn btn-primary btn-outline btn-lg">Compare</a>
@@ -84,13 +63,11 @@
 
 							<div class="fh5co-tab-content tab-content active" data-tab-content="1">
 								<div class="col-md-10 col-md-offset-1">
-									<span class="price">SRP: $350</span>
-									<h2>Hauteville Rocking Chair</h2>
-									<p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam officiis est.</p>
+									<span class="price">Price: ${{ product.price }}</span>
+									<h2>{{ product.name }}</h2>
+									<p>{{ product.description }}</p>
 
-									<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis molestias totam fugiat soluta accusantium omnis quod similique placeat at. Dolorum ducimus libero fuga molestiae asperiores obcaecati corporis sint illo facilis.</p>
-
-									<div class="row">
+									<!-- <div class="row">
 										<div class="col-md-6">
 											<h2 class="uppercase">Keep it simple</h2>
 											<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>
@@ -99,7 +76,7 @@
 											<h2 class="uppercase">Less is more</h2>
 											<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>
 										</div>
-									</div>
+									</div> -->
 
 								</div>
 							</div>
@@ -187,22 +164,42 @@
 			</div>
 		</div>
 	</div>
-
     <Footer></Footer>
-    
   </div>
 </template>
 <script>
 import Header from './Header.vue'
 import Footer from './Footer.vue'
 import img_bg_2 from '../../assets/images/bg2.jpg'
-
+import ProductService from '@/services/ProductService'
+import bannerproduct from '../../assets/images/bannerproduct.png'
 export default {
+	props: {
+    id: Number
+  },
   data() {
-    return {
+		let product
+		return {
       img_bg_2,
+			product,
+			bannerproduct
     }
   },
+	methods: {
+		getProductById(id) {
+			ProductService.getById(id)
+			.then((response) => {
+          this.product = response.data;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+		},
+
+	},
+	created() {
+    this.getProductById(this.$route.params.id);
+	},
   components: {
     Header,
     Footer

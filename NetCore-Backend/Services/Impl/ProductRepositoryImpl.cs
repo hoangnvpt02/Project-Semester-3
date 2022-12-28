@@ -63,7 +63,7 @@ namespace NetCore_Backend.Services.Impl
                 Created = product.Created,
                 IsActive = product.IsActive,
                 Price = product.Price,
-
+                FileDetailsId = product.FileDetailsId,
             };
 
         }
@@ -78,8 +78,9 @@ namespace NetCore_Backend.Services.Impl
             }
         }
 
-        public List<ProductModel> GetAll()
+        public List<ProductModel> GetAll(int start,int end,String sortBy)
         {
+
             var products = _context.Products.Select(p => new ProductModel()
             {
                 Id = p.Id,
@@ -92,10 +93,29 @@ namespace NetCore_Backend.Services.Impl
                 ManufactureYear = p.ManufactureYear,
                 Quanlity = p.Quanlity,
                 Description = p.Description,
+                FileDetailsId = p.FileDetailsId,
                 IsActive = p.IsActive,
                 Created = p.Created,
                 Updated = p.Updated,
             });
+            
+            products.OrderByDescending(p => p.Created).ToList();
+            if(sortBy != null)
+            {
+                switch (sortBy)
+                {
+                    case "price":
+                        products = products.OrderByDescending(p => p.Price);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if(start != 0 || end != 0)
+            {
+                products = products.Skip(start).Take(end);
+            }
+           
             return products.ToList();
         }
 
@@ -143,6 +163,61 @@ namespace NetCore_Backend.Services.Impl
                 _context.Update(product);
                 _context.SaveChanges();
             }
+           
+        }
+
+        public List<ProductModel> GetAllProductByCate()
+        {
+            var categorizedProducts = _context.Products
+                                    .Join(_context.ProductCates, p => p.Id, pc => pc.ProductId, (p, pc) => new { p, pc })
+                                    .Join(_context.Categories, ppc => ppc.pc.CategoryId, c => c.Id, (ppc, c) => new { ppc, c })
+                                    .Select(m => new ProductModel
+                                    {
+                                        Id = m.ppc.p.Id,
+                                        Name = m.ppc.p.Name,
+                                        CountryId = m.ppc.p.CountryId,
+                                        UserId = m.ppc.p.UserId,
+                                        Address = m.ppc.p.Address,
+                                        Author = m.ppc.p.Author,
+                                        Price = m.ppc.p.Price,
+                                        ManufactureYear = m.ppc.p.ManufactureYear,
+                                        Quanlity = m.ppc.p.Quanlity,
+                                        IsActive = m.ppc.p.IsActive,
+                                        Updated = m.ppc.p.Updated
+        });
+            return (List<ProductModel>)categorizedProducts;
+        }
+
+        public List<ProductModel> GetCateById(long id)
+        {
+            List<ProductCate> productCates = _context.ProductCates.Where(c => c.CategoryId == id).ToList();
+            if(productCates.Count > 0)
+            {
+                List<ProductModel> products = new List<ProductModel>();
+                foreach (ProductCate productCate in productCates)
+                {
+                    Product product = _context.Products.FirstOrDefault(c => c.Id == productCate.Id);
+                    ProductModel model = new ProductModel() { 
+                        Id = product.Id,
+                        UserId=product.UserId,
+                        CountryId = product.CountryId,
+                        Price = product.Price,
+                        Author = product.Author,
+                        Name = product.Name,
+                        ManufactureYear=product.ManufactureYear,
+                        Description = product.Description,
+                        FileDetailsId = product.FileDetailsId,
+                        Quanlity = product.Quanlity,
+                        IsActive = product.IsActive,
+                        Address = product.Address,
+                        Created = product.Created,
+                        Updated = product.Updated,
+                    };
+                    products.Add(model);
+                }
+                return products;
+            }
+            return null;
         }
     }
 }

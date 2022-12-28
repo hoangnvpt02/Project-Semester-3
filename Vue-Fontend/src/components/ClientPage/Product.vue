@@ -1,15 +1,15 @@
 <template>
   <div>
     <Header></Header>
-    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(images/img_bg_2.jpg);">
+    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" :style="{ backgroundImage: `url(${bannerproduct})` }">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center">
 					<div class="display-t">
 						<div class="display-tc animate-box" data-animate-effect="fadeIn">
-							<h1>Product</h1>
-							<h2>Free html5 templates by <a href="https://themewagon.com/theme_tag/free/" target="_blank">Themewagon</a></h2>
+							<h1>Artworks</h1>
+							<h2>Enjoy artworks at here</h2>
 						</div>
 					</div>
 				</div>
@@ -21,7 +21,7 @@
 		<div class="container">
 			<div class="row animate-box">
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>All of our products are available here</h2>
+					<h2>All of our artwork are available here</h2>
 					<p>Let's have a look at the products in our store and enjoy the works of art</p>
 				</div>
 			</div>
@@ -31,25 +31,26 @@
 					<div class="col-md-3 col-sm-3 text-center"  v-for="cate in categories">
 						<div class="feature-center animate-box" data-animate-effect="fadeIn">
 							<span class="icon">
-								<i class="icon-credit-card"></i>
+								<i class="icon-shop"></i>
 							</span>
 							<h3>{{cate.name}}</h3>
 							<p>{{cate.description}}</p>
-							<p><a href="#" class="btn btn-primary btn-outline">View More</a></p>
+							<router-link :to="{ name: 'productAsCate', params: { id: cate.id } }" class="btn btn-primary btn-outline">View More</router-link>
+							<!-- <p><a class="btn btn-primary btn-outline">View More</a></p> -->
 						</div>
 					</div>
 				</div>
 			</div>
 	</div>
-
 			<div class="row">
 				<div class="col-md-4 text-center animate-box" v-for="pd in products">
 					<div class="product">
-						<div class="product-grid" style="background-image:url(images/product-1.jpg);">
+						<div class="product-grid" :style="{ 'background-image' : 'url('+baseUrl+ +pd.fileDetailsId+')'  }">
+							<!-- <img class="product-grid" :src="image"/> -->
 							<div class="inner">
 								<p>
-									<a href="/detail" class="icon"><i class="icon-shopping-cart"></i></a>
-									<a href="/detail" class="icon"><i class="icon-eye"></i></a>
+									<router-link :to="{ name: 'detail', params: { id: pd.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link>
+									<router-link :to="{ name: 'detail', params: { id: pd.id } }" class="icon"><i class="icon-eye"></i></router-link>
 								</p>
 							</div>
 						</div>
@@ -96,13 +97,20 @@ import Header from './Header.vue'
 import Footer from './Footer.vue'
 import ProductService from '@/services/ProductService';
 import CategoryService from '@/services/CategoryService';
+import bannerproduct from '../../assets/images/bannerproduct.png'
+import base from "@/../base.json"
+
 export default {
 	data() {
-	const products=[]
-	const categories=[]
+	let products
+	let categories
+	let baseUrl=''
 	return {
 		products,
-		categories
+		categories,
+		bannerproduct,
+		baseUrl,
+		base
 	}
 	},
 	methods: {
@@ -111,9 +119,9 @@ export default {
 			.then((response) => {
           this.products = response.data;
         })
-        // .catch((e) => {
-        //   console.log(e);
-        // });
+        .catch((e) => {
+          console.log(e);
+        });
 		},
 		retrieveCategories() {
 			CategoryService.getAll()
@@ -126,6 +134,7 @@ export default {
 		},
 	},
 	created() {
+		this.baseUrl = this.base.baseUrl+ 'api/files/'
 		this.retrieveProduct()
 		this.retrieveCategories()
 	},

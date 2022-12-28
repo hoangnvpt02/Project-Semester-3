@@ -20,6 +20,7 @@
 module.exports = {
     lintOnSave: false,
     devServer: {
+
         // https: {
         //     key: fs.readFileSync(keyFilePath),
         //     cert: fs.readFileSync(certFilePath),
