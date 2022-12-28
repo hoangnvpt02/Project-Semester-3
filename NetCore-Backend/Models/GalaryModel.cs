@@ -3,7 +3,7 @@
     public class GalaryModel
     {
         public long Id { get; set; }
-        public long ? UserId { get; set; }
+        public string ? AspNetUsersId { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
         public string Authen { get; set; }

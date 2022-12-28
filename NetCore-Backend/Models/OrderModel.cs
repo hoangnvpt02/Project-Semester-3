@@ -5,7 +5,7 @@
         public long ? Id { get; set; }
         public long ? ProductId { get; set; }
 
-        public long ? UserId { get; set; }
+        public string ? AspNetUsersId { get; set; }
 
         public decimal Price { get; set; }
         public int Status { get; set; }

@@ -3,7 +3,7 @@
     public class DossierModel
     {
         public long ? Id { get; set; }
-        public long? UserId { get; set; }
+        public string ? AspNetUsersId { get; set; }
 
         public string? NumberId { get; set; }
         public long GalaryId { get; set; }
