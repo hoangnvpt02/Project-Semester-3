@@ -14,7 +14,7 @@ namespace NetCore_Backend.Services.Impl
         public OrderModel Add(OrderModel orderModel)
         {
             var order = new Order();
-            order.UserId = orderModel.UserId;
+            order.AspNetUsersId = orderModel.AspNetUsersId;
             order.ProductId = orderModel.ProductId;
             order.Status = orderModel.Status;
             order.Price = orderModel.Price;
@@ -27,7 +27,7 @@ namespace NetCore_Backend.Services.Impl
             {
                 Id = order.Id,
                 ProductId = order.ProductId,
-                UserId = order.UserId,
+                AspNetUsersId = order.AspNetUsersId,
                 Price = order.Price,
                 Status = order.Status,
                 IsActive = order.IsActive,
@@ -52,7 +52,7 @@ namespace NetCore_Backend.Services.Impl
             {
                 Id = o.Id,
                 ProductId = o.ProductId,
-                UserId = o.UserId,
+                AspNetUsersId = o.AspNetUsersId,
                 Price = o.Price,
                 Status = o.Status,
                 IsActive = o.IsActive,
@@ -71,7 +71,7 @@ namespace NetCore_Backend.Services.Impl
                 {
                     Id = order.Id,
                     ProductId = order.ProductId,
-                    UserId = order.UserId,
+                    AspNetUsersId = order.AspNetUsersId,
                     Price = order.Price,
                     Status = order.Status,
                     IsActive = order.IsActive,
@@ -90,7 +90,7 @@ namespace NetCore_Backend.Services.Impl
                 order.Status = orderModel.Status;
                 order.IsActive = orderModel.IsActive;
                 order.Updated = orderModel.Updated;
-                order.UserId = orderModel.UserId;
+                order.AspNetUsersId = orderModel.AspNetUsersId;
                 order.Price = orderModel.Price;
                 order.ProductId = orderModel.ProductId;
                 _context.Update(order);

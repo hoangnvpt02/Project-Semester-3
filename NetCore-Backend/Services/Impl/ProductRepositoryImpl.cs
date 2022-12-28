@@ -38,8 +38,10 @@ namespace NetCore_Backend.Services.Impl
             product.FileDetailsId = fileDetails.ID;
             product.Author = productModel.Author;
             product.Name = productModel.Name;
-            product.Description = productModel.Description;
-            product.UserId = productModel.UserId;
+
+            product.Discription = productModel.Discription;
+            product.AspNetUsersId = productModel.AspNetUsersId;
+
             product.CountryId = productModel.CountryId;
             product.ManufactureYear = productModel.ManufactureYear;
             product.Quanlity = productModel.Quanlity;
@@ -54,9 +56,10 @@ namespace NetCore_Backend.Services.Impl
             {
                 Address = product.Address,
                 Author = product.Author,
-                Name = product.Name,
-                Description = product.Description,
-                UserId = product.UserId,
+
+                Discription = product.Discription,
+                AspNetUsersId = product.AspNetUsersId,
+
                 CountryId = product.CountryId,
                 ManufactureYear = product.ManufactureYear,
                 Quanlity = product.Quanlity,
@@ -87,7 +90,7 @@ namespace NetCore_Backend.Services.Impl
             {
                 Id = p.Id,
                 CountryId = p.CountryId,
-                UserId = p.UserId,
+                AspNetUsersId = p.AspNetUsersId,
                 Address = p.Address,
                 Author = p.Author,
                 Name = p.Name,
@@ -133,7 +136,7 @@ namespace NetCore_Backend.Services.Impl
                 {
                     Id = product.Id,
                     CountryId = product.CountryId,
-                    UserId = product.UserId,
+                    AspNetUsersId = product.AspNetUsersId,
                     Address = product.Address,
                     Author = product.Author,
                     Name = product.Name,
@@ -159,7 +162,7 @@ namespace NetCore_Backend.Services.Impl
             if(product != null)
             {
                 product.CountryId = productModel.CountryId;
-                product.UserId = productModel.UserId;
+                product.AspNetUsersId = productModel.AspNetUsersId;
                 product.Address = productModel.Address;
                 product.Author = productModel.Author;
                 product.Name = productModel.Name;
@@ -191,7 +194,7 @@ namespace NetCore_Backend.Services.Impl
                                         Id = m.ppc.p.Id,
                                         Name = m.ppc.p.Name,
                                         CountryId = m.ppc.p.CountryId,
-                                        UserId = m.ppc.p.UserId,
+                                        AspNetUsersId = m.ppc.p.AspNetUsersId,
                                         Address = m.ppc.p.Address,
                                         Author = m.ppc.p.Author,
                                         Price = m.ppc.p.Price,
@@ -217,7 +220,7 @@ namespace NetCore_Backend.Services.Impl
                     Product product = _context.Products.FirstOrDefault(c => c.Id == productCate.Id);
                     ProductModel model = new ProductModel() { 
                         Id = product.Id,
-                        UserId=product.UserId,
+                        AspNetUsersId =product.AspNetUsersId,
                         CountryId = product.CountryId,
                         Price = product.Price,
                         Author = product.Author,

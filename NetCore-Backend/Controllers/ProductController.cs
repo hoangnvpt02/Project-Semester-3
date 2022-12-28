@@ -8,6 +8,7 @@ using NetCore_Backend.Services;
 
 namespace NetCore_Backend.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase

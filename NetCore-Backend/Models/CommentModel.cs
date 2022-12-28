@@ -3,7 +3,7 @@
     public class CommentModel
     {
         public long ? Id { get; set; }
-        public long ? UserId { get; set; }
+        public string ? AspNetUsersId { get; set; }
 
         public long ? ProductId { get; set; }
 
