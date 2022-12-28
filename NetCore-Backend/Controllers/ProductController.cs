@@ -8,6 +8,7 @@ using NetCore_Backend.Services;
 
 namespace NetCore_Backend.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -126,6 +127,36 @@ namespace NetCore_Backend.Controllers
             try
             {
                 return Ok(_productRepository.GetCateById(CategoryId));
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("feature")]
+
+        public IActionResult GetAllProductByFeature ()
+        {
+
+            try
+            {
+                return Ok(_productRepository.GetAllProductByFeature());
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("sale")]
+
+        public IActionResult GetAllProductBySale()
+        {
+
+            try
+            {
+                return Ok(_productRepository.GetAllProductBySale());
             }
             catch (Exception e)
             {

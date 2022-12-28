@@ -38,14 +38,17 @@ namespace NetCore_Backend.Services.Impl
             product.FileDetailsId = fileDetails.ID;
             product.Author = productModel.Author;
             product.Name = productModel.Name;
-            product.Description = productModel.Description;
-            product.UserId = productModel.UserId;
+
+            product.Discription = productModel.Discription;
+            product.AspNetUsersId = productModel.AspNetUsersId;
+
             product.CountryId = productModel.CountryId;
             product.ManufactureYear = productModel.ManufactureYear;
             product.Quanlity = productModel.Quanlity;
             product.Updated = DateTime.Now;
             product.Created =DateTime.Now;
             product.IsActive = productModel.IsActive;
+            product.IsFeature = productModel.IsFeature;
             product.Price = productModel.Price;
             _context.Products.Add(product);
             _context.SaveChanges();
@@ -53,15 +56,17 @@ namespace NetCore_Backend.Services.Impl
             {
                 Address = product.Address,
                 Author = product.Author,
-                Name = product.Name,
-                Description = product.Description,
-                UserId = product.UserId,
+
+                Discription = product.Discription,
+                AspNetUsersId = product.AspNetUsersId,
+
                 CountryId = product.CountryId,
                 ManufactureYear = product.ManufactureYear,
                 Quanlity = product.Quanlity,
                 Updated = product.Updated,
                 Created = product.Created,
                 IsActive = product.IsActive,
+                IsFeature = product.IsFeature,
                 Price = product.Price,
                 FileDetailsId = product.FileDetailsId,
             };
@@ -85,7 +90,7 @@ namespace NetCore_Backend.Services.Impl
             {
                 Id = p.Id,
                 CountryId = p.CountryId,
-                UserId = p.UserId,
+                AspNetUsersId = p.AspNetUsersId,
                 Address = p.Address,
                 Author = p.Author,
                 Name = p.Name,
@@ -95,6 +100,9 @@ namespace NetCore_Backend.Services.Impl
                 Description = p.Description,
                 FileDetailsId = p.FileDetailsId,
                 IsActive = p.IsActive,
+                IsFeature = p.IsFeature,
+                SalePercent = p.SalePercent,
+                PriceSale = p.PriceSale,
                 Created = p.Created,
                 Updated = p.Updated,
             });
@@ -128,7 +136,7 @@ namespace NetCore_Backend.Services.Impl
                 {
                     Id = product.Id,
                     CountryId = product.CountryId,
-                    UserId = product.UserId,
+                    AspNetUsersId = product.AspNetUsersId,
                     Address = product.Address,
                     Author = product.Author,
                     Name = product.Name,
@@ -136,7 +144,11 @@ namespace NetCore_Backend.Services.Impl
                     ManufactureYear = product.ManufactureYear,
                     Quanlity = product.Quanlity,
                     Description = product.Description,
+                    FileDetailsId = product.FileDetailsId,
                     IsActive = product.IsActive,
+                    IsFeature = product.IsFeature,
+                    SalePercent = product.SalePercent,
+                    PriceSale = product.PriceSale,
                     Created = product.Created,
                     Updated = product.Updated,
                 };
@@ -150,7 +162,7 @@ namespace NetCore_Backend.Services.Impl
             if(product != null)
             {
                 product.CountryId = productModel.CountryId;
-                product.UserId = productModel.UserId;
+                product.AspNetUsersId = productModel.AspNetUsersId;
                 product.Address = productModel.Address;
                 product.Author = productModel.Author;
                 product.Name = productModel.Name;
@@ -159,7 +171,13 @@ namespace NetCore_Backend.Services.Impl
                 product.Quanlity = productModel.Quanlity;
                 product.Description = productModel.Description;
                 product.IsActive = productModel.IsActive;
+                product.IsFeature = productModel.IsFeature;
+                product.SalePercent = productModel.SalePercent;
                 product.Updated = productModel.Updated;
+                if (productModel.SalePercent > 0)
+                {
+                    product.PriceSale = product.Price - (product.Price * (decimal)productModel.SalePercent /100);
+                }
                 _context.Update(product);
                 _context.SaveChanges();
             }
@@ -176,13 +194,16 @@ namespace NetCore_Backend.Services.Impl
                                         Id = m.ppc.p.Id,
                                         Name = m.ppc.p.Name,
                                         CountryId = m.ppc.p.CountryId,
-                                        UserId = m.ppc.p.UserId,
+                                        AspNetUsersId = m.ppc.p.AspNetUsersId,
                                         Address = m.ppc.p.Address,
                                         Author = m.ppc.p.Author,
                                         Price = m.ppc.p.Price,
                                         ManufactureYear = m.ppc.p.ManufactureYear,
                                         Quanlity = m.ppc.p.Quanlity,
                                         IsActive = m.ppc.p.IsActive,
+                                        IsFeature = m.ppc.p.IsFeature,
+                                        SalePercent = m.ppc.p.SalePercent,
+                                        PriceSale = m.ppc.p.PriceSale,
                                         Updated = m.ppc.p.Updated
         });
             return (List<ProductModel>)categorizedProducts;
@@ -199,7 +220,7 @@ namespace NetCore_Backend.Services.Impl
                     Product product = _context.Products.FirstOrDefault(c => c.Id == productCate.Id);
                     ProductModel model = new ProductModel() { 
                         Id = product.Id,
-                        UserId=product.UserId,
+                        AspNetUsersId =product.AspNetUsersId,
                         CountryId = product.CountryId,
                         Price = product.Price,
                         Author = product.Author,
@@ -209,6 +230,9 @@ namespace NetCore_Backend.Services.Impl
                         FileDetailsId = product.FileDetailsId,
                         Quanlity = product.Quanlity,
                         IsActive = product.IsActive,
+                        IsFeature = product.IsFeature,
+                        SalePercent = product.SalePercent,
+                        PriceSale = product.PriceSale,
                         Address = product.Address,
                         Created = product.Created,
                         Updated = product.Updated,
@@ -218,6 +242,59 @@ namespace NetCore_Backend.Services.Impl
                 return products;
             }
             return null;
+        }
+
+        public List<ProductModel> GetAllProductByFeature()
+        {
+           var products = _context.Products.Where(p => p.IsFeature == 0).Select(p => new ProductModel()
+            {
+                Id = p.Id,
+                UserId = p.UserId,
+                CountryId = p.CountryId,
+                Price = p.Price,
+                Author = p.Author,
+                Name = p.Name,
+                ManufactureYear = p.ManufactureYear,
+                Description = p.Description,
+                FileDetailsId = p.FileDetailsId,
+                Quanlity = p.Quanlity,
+                IsActive = p.IsActive,
+                IsFeature = p.IsFeature,
+                SalePercent = p.SalePercent,
+                PriceSale = p.PriceSale,
+                Address = p.Address,
+                Created = p.Created,
+                Updated = p.Updated,
+            });
+
+          
+            return products.ToList();
+        }
+
+        public List<ProductModel> GetAllProductBySale()
+        {
+            var products = _context.Products.Where(p => p.SalePercent > 0).Select(p => new ProductModel()
+            {
+                Id = p.Id,
+                UserId = p.UserId,
+                CountryId = p.CountryId,
+                Price = p.Price,
+                Author = p.Author,
+                Name = p.Name,
+                ManufactureYear = p.ManufactureYear,
+                Description = p.Description,
+                FileDetailsId = p.FileDetailsId,
+                Quanlity = p.Quanlity,
+                IsActive = p.IsActive,
+                IsFeature = p.IsFeature,
+                SalePercent = p.SalePercent,
+                PriceSale = p.PriceSale,
+                Address = p.Address,
+                Created = p.Created,
+                Updated = p.Updated,
+            });
+
+            return products.ToList();
         }
     }
 }

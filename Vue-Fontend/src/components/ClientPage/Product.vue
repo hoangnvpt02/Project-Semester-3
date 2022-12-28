@@ -26,27 +26,34 @@
 				</div>
 			</div>
 		<div>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-3 col-sm-3 text-center"  v-for="cate in categories">
-						<div class="feature-center animate-box" data-animate-effect="fadeIn">
-							<span class="icon">
-								<i class="icon-shop"></i>
-							</span>
-							<h3>{{cate.name}}</h3>
-							<p>{{cate.description}}</p>
-							<router-link :to="{ name: 'productAsCate', params: { id: cate.id } }" class="btn btn-primary btn-outline">View More</router-link>
-							<!-- <p><a class="btn btn-primary btn-outline">View More</a></p> -->
-						</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-sm-3 text-center"  v-for="cate in categories">
+					<div class="feature-center animate-box" data-animate-effect="fadeIn">
+						<span class="icon">
+							<i class="icon-shop"></i>
+						</span>
+						<h3>{{cate.name}}</h3>
+						<p>{{cate.description}}</p>
+						<router-link :to="{ name: 'productAsCate', params: { id: cate.id } }" class="btn btn-primary btn-outline">View More</router-link>
+						<!-- <p><a class="btn btn-primary btn-outline">View More</a></p> -->
 					</div>
 				</div>
 			</div>
+		</div>
+		
 	</div>
 			<div class="row">
+					<div class="row animate-box" style="padding-top:50px">
+						<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+							<h2>Latest Artworks</h2>
+							<p>Let's have a look at the products in our store and enjoy the works of art</p>
+						</div>
+					</div>
 				<div class="col-md-4 text-center animate-box" v-for="pd in products">
 					<div class="product">
-						<div class="product-grid" :style="{ 'background-image' : 'url('+baseUrl+ +pd.fileDetailsId+')'  }">
-							<!-- <img class="product-grid" :src="image"/> -->
+						<div class="product-grid" style="border-radius: 5px;" :style="{ 'background-image' : 'url('+baseUrl+ +pd.fileDetailsId+')'  }">
+							<span class="sale" v-if="pd.salePercent >0">Sale {{ pd.salePercent}}%</span>
 							<div class="inner">
 								<p>
 									<router-link :to="{ name: 'detail', params: { id: pd.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link>
@@ -55,8 +62,9 @@
 							</div>
 						</div>
 						<div class="desc">
-							<h3><a href="/detail">{{ pd.name }}</a></h3>
-							<span class="price">{{ pd.price }}</span>
+							<h3><a :href="'/detail/' + pd.id">{{ pd.name }}</a></h3>
+							<span class="price" v-if="pd.salePercent >0">Sale: ${{ pd.priceSale }}</span>
+							<span class="price" v-else>Price: ${{ pd.price }}</span>
 						</div>
 					</div>
 				</div>

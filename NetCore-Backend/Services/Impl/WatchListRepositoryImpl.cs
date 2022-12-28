@@ -14,7 +14,7 @@ namespace NetCore_Backend.Services.Impl
         public WatchListModel Add(WatchListModel watchListModel)
         {
             var watchList = new WatchList();
-            watchList.UserId = watchListModel.UserId;
+            watchList.AspNetUsersId = watchListModel.AspNetUsersId;
             watchList.Name = watchListModel.Name;
             watchList.Description = watchListModel.Description;
             watchList.Created = watchListModel.Created;
@@ -25,7 +25,7 @@ namespace NetCore_Backend.Services.Impl
             return new WatchListModel()
             {
                 Id = watchList.Id,
-                UserId = watchList.UserId,
+                AspNetUsersId = watchList.AspNetUsersId,
                 Name = watchList.Name,
                 Description = watchList.Description,
                 IsActive = watchList.IsActive,
@@ -49,7 +49,7 @@ namespace NetCore_Backend.Services.Impl
             var watchLists = _context.WatchLists.Select(w => new WatchListModel()
             {
                 Id = w.Id,
-                UserId = w.UserId,
+                AspNetUsersId = w.AspNetUsersId,
                 Name = w.Name,
                 Description = w.Description,
                 IsActive = w.IsActive,
@@ -67,7 +67,7 @@ namespace NetCore_Backend.Services.Impl
                 return new WatchListModel()
                 {
                     Id = watchList.Id,
-                    UserId = watchList.UserId,
+                    AspNetUsersId = watchList.AspNetUsersId,
                     Name = watchList.Name,
                     Description = watchList.Description,
                     IsActive = watchList.IsActive,
@@ -84,7 +84,7 @@ namespace NetCore_Backend.Services.Impl
             var watchList = _context.WatchLists.FirstOrDefault(w => w.Id == watchListModel.Id);
             if( watchList != null)
             {
-                watchList.UserId = watchListModel.UserId;
+                watchList.AspNetUsersId = watchListModel.AspNetUsersId;
                 watchList.Name = watchListModel.Name;
                 watchList.Description = watchListModel.Description;
                 watchList.IsActive = watchListModel.IsActive;

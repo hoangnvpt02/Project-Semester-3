@@ -16,7 +16,7 @@ namespace NetCore_Backend.Services.Impl
             var galaryList = _context.Galarys.Select(g => new GalaryModel()
             {
                 Id = g.Id,
-                UserId = g.UserId,
+                AspNetUsersId = g.AspNetUsersId,
                 FromDate = g.FromDate,
                 ToDate = g.ToDate,
                 Authen = g.Authen,
@@ -35,7 +35,7 @@ namespace NetCore_Backend.Services.Impl
             return new GalaryModel()
             {
                 Id = g.Id,
-                UserId = g.UserId,
+                AspNetUsersId = g.AspNetUsersId,
                 FromDate = g.FromDate,
                 ToDate = g.ToDate,
                 Authen = g.Authen,
@@ -52,7 +52,7 @@ namespace NetCore_Backend.Services.Impl
             var _galary = new Galary()
             {
                 Id = galary.Id,
-                UserId = galary.UserId,
+                AspNetUsersId = galary.AspNetUsersId,
                 FromDate = galary.FromDate,
                 ToDate = galary.ToDate,
                 Authen = galary.Authen,
@@ -67,7 +67,7 @@ namespace NetCore_Backend.Services.Impl
             return new GalaryModel()
             {
                 Id = _galary.Id,
-                UserId = _galary.UserId,
+                AspNetUsersId = _galary.AspNetUsersId,
                 FromDate = _galary.FromDate,
                 ToDate = _galary.ToDate,
                 Authen = _galary.Authen,

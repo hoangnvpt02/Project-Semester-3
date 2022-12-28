@@ -1,216 +1,117 @@
 <template>
   <div>
     <Header></Header>
-    <aside id="fh5co-hero" class="js-fullheight">
-		<div class="flexslider js-fullheight">
-			<ul class="slides">
-		   	<li :style="{ backgroundImage: `url(${img_bg_1})` }">
-		   		<div class="overlay-gradient"></div>
-		   		<div class="container">
-		   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text">
-		   				<div class="slider-text-inner">
-		   					<div class="desc">
-		   						<span class="price">$800</span>
-		   						<h2>Alato Cabinet</h2>
-		   						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-			   					<p><a href="/detail" class="btn btn-primary btn-outline btn-lg">Purchase Now</a></p>
-		   					</div>
-		   				</div>
-		   			</div>
-		   		</div>
-		   	</li>
-		   	<li :style="{ backgroundImage: `url(${img_bg_2})` }">
-		   		<div class="container">
-		   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text">
-		   				<div class="slider-text-inner">
-		   					<div class="desc">
-		   						<span class="price">$530</span>
-		   						<h2>The Haluz Rocking Chair</h2>
-		   						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-			   					<p><a href="/detail" class="btn btn-primary btn-outline btn-lg">Purchase Now</a></p>
-		   					</div>
-		   				</div>
-		   			</div>
-		   		</div>
-		   	</li>
-		   	<li :style="{ backgroundImage: `url(${img_bg_3})` }">
-		   		<div class="container">
-		   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text">
-		   				<div class="slider-text-inner">
-		   					<div class="desc">
-		   						<span class="price">$750</span>
-		   						<h2>Alato Cabinet</h2>
-		   						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-			   					<p><a href="/detail" class="btn btn-primary btn-outline btn-lg">Purchase Now</a></p>
-		   					</div>
-		   				</div>
-		   			</div>
-		   		</div>
-		   	</li>
-		   	<li :style="{ backgroundImage: `url(${img_bg_4})` }">
-		   		<div class="container">
-		   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text">
-		   				<div class="slider-text-inner">
-		   					<div class="desc">
-		   						<span class="price">$540</span>
-		   						<h2>The WW Chair</h2>
-		   						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-			   					<p><a href="/detail" class="btn btn-primary btn-outline btn-lg">Purchase Now</a></p>
-		   					</div>
-		   				</div>
-		   			</div>
-		   		</div>
-		   	</li>
-		  	</ul>
-	  	</div>
-	</aside>
-
-  <div id="fh5co-services" class="fh5co-bg-section">
+		<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" :style="{ backgroundImage: `url(${BannerAuction})` }">
+		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4 col-sm-4 text-center">
-					<div class="feature-center animate-box" data-animate-effect="fadeIn">
-						<span class="icon">
-							<i class="icon-credit-card"></i>
-						</span>
-						<h3>Credit Card</h3>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove</p>
-						<p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-4 text-center">
-					<div class="feature-center animate-box" data-animate-effect="fadeIn">
-						<span class="icon">
-							<i class="icon-wallet"></i>
-						</span>
-						<h3>Save Money</h3>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove</p>
-						<p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-4 text-center">
-					<div class="feature-center animate-box" data-animate-effect="fadeIn">
-						<span class="icon">
-							<i class="icon-paper-plane"></i>
-						</span>
-						<h3>Free Delivery</h3>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove</p>
-						<p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+							<h1>Artworks</h1>
+							<h2>Enjoy artworks at here</h2>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+		</header>
+		<div id="fh5co-services" class="fh5co-bg-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-sm-4 text-center">
+						<div class="feature-center animate-box" data-animate-effect="fadeIn">
+							<span class="icon">
+								<i class="icon-credit-card"></i>
+							</span>
+							<h3>Payment</h3>
+							<p>Support many forms of payment to bring convenience to customers</p>
+							<!-- <p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p> -->
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4 text-center">
+						<div class="feature-center animate-box" data-animate-effect="fadeIn">
+							<span class="icon">
+								<i class="icon-wallet"></i>
+							</span>
+							<h3>Save on travel costs</h3>
+							<p>Customers can buy works directly here, no need to travel</p>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4 text-center">
+						<div class="feature-center animate-box" data-animate-effect="fadeIn">
+							<span class="icon">
+								<i class="icon-paper-plane"></i>
+							</span>
+							<h3>Fast Shipping</h3>
+							<p>Express shipping service can deliver artwork to customers in about 3 hours</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
   <div id="fh5co-product">
 		<div class="container">
 			<div class="row animate-box">
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<span>Cool Stuff</span>
-					<h2>Products.</h2>
-					<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+					<!-- <span>Cool Stuff</span> -->
+					<h2>Featured Artworks</h2>
+					<p>Featured artworks - Let's enjoy!</p>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4 text-center animate-box">
+				<div class="col-md-4 text-center animate-box" v-for="pdfeature in productFeatures">
 					<div class="product">
-						<div class="product-grid" style="background-image:url(images/product-1.jpg);">
+						<div class="product-grid" style="border-radius: 5px;" :style="{ 'background-image' : 'url('+baseUrl+ +pdfeature.fileDetailsId+')'  }">
+							<span class="sale">Featured</span>
 							<div class="inner">
 								<p>
-									<a href="/detail" class="icon"><i class="icon-shopping-cart"></i></a>
-									<a href="/detail" class="icon"><i class="icon-eye"></i></a>
+									<router-link :to="{ name: 'detail', params: { id: pdfeature.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link>
+									<router-link :to="{ name: 'detail', params: { id: pdfeature.id } }" class="icon"><i class="icon-eye"></i></router-link>
 								</p>
 							</div>
 						</div>
 						<div class="desc">
-							<h3><a href="/detail">Hauteville Concrete Rocking Chair</a></h3>
-							<span class="price">$350</span>
+							<h3><router-link :to="{ name: 'detail', params: { id: pdfeature.id } }" class="icon">{{ pdfeature.name }}</router-link></h3>
+							<span class="price">Price: ${{ pdfeature.price }}</span>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4 text-center animate-box">
-					<div class="product">
-						<div class="product-grid" style="background-image:url(images/product-2.jpg);">
-							<span class="sale">Sale</span>
-							<div class="inner">
-								<p>
-									<a href="/detail" class="icon"><i class="icon-shopping-cart"></i></a>
-									<a href="/detail" class="icon"><i class="icon-eye"></i></a>
-								</p>
-							</div>
-						</div>
-						<div class="desc">
-							<h3><a href="/detail">Pavilion Speaker</a></h3>
-							<span class="price">$600</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<div class="product">
-						<div class="product-grid" style="background-image:url(images/product-3.jpg);">
-							<div class="inner">
-								<p>
-									<a href="/detail" class="icon"><i class="icon-shopping-cart"></i></a>
-									<a href="/detail" class="icon"><i class="icon-eye"></i></a>
-								</p>
-							</div>
-						</div>
-						<div class="desc">
-							<h3><a href="/detail">Ligomancer</a></h3>
-							<span class="price">$780</span>
-						</div>
-					</div>
+				
+			</div>
+		</div>
+	</div>
+
+	<div id="fh5co-product" v-if="productSales.length >0">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<!-- <span>Cool Stuff</span> -->
+					<h2>Sale Artworks</h2>
+					<p>Sale artworks - Let's enjoy!</p>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4 text-center animate-box">
+				<div class="col-md-4 text-center animate-box" v-for="pdsale in productSales">
 					<div class="product">
-						<div class="product-grid" style="background-image:url(images/product-4.jpg);">
+						<div class="product-grid" style="border-radius: 5px;" :style="{ 'background-image' : 'url('+baseUrl+ +pdsale.fileDetailsId+')'  }">
+							<span class="sale">Sale {{ pdsale.salePercent}}%</span>
 							<div class="inner">
 								<p>
-									<a href="/detail" class="icon"><i class="icon-shopping-cart"></i></a>
-									<a href="/detail" class="icon"><i class="icon-eye"></i></a>
+									<router-link :to="{ name: 'detail', params: { id: pdsale.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link>
+									<router-link :to="{ name: 'detail', params: { id: pdsale.id } }" class="icon"><i class="icon-eye"></i></router-link>
 								</p>
 							</div>
 						</div>
 						<div class="desc">
-							<h3><a href="/detail">Alato Cabinet</a></h3>
-							<span class="price">$800</span>
+							<h3><router-link :to="{ name: 'detail', params: { id: pdsale.id } }" class="icon">{{ pdsale.name }}</router-link></h3>
+							<span class="price">Price: ${{ pdsale.price }}</span>
+							<p class="price" style="color:#d1c286; font-weight: bold;" v-if="pdsale.salePercent >0">Sale: ${{ pdsale.priceSale }}</p> 
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4 text-center animate-box">
-					<div class="product">
-						<div class="product-grid" style="background-image:url(images/product-5.jpg);">
-							<div class="inner">
-								<p>
-									<a href="/detail" class="icon"><i class="icon-shopping-cart"></i></a>
-									<a href="/detail" class="icon"><i class="icon-eye"></i></a>
-								</p>
-							</div>
-						</div>
-						<div class="desc">
-							<h3><a href="/detail">Earing Wireless</a></h3>
-							<span class="price">$100</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 text-center animate-box">
-					<div class="product">
-						<div class="product-grid" style="background-image:url(images/product-6.jpg);">
-							<div class="inner">
-								<p>
-									<a href="/detail" class="icon"><i class="icon-shopping-cart"></i></a>
-									<a href="/detail" class="icon"><i class="icon-eye"></i></a>
-								</p>
-							</div>
-						</div>
-						<div class="desc">
-							<h3><a href="/detail">Sculptural Coffee Table</a></h3>
-							<span class="price">$960</span>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -219,44 +120,56 @@
 		<div class="container">
 			<div class="row animate-box">
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<span>Testimony</span>
-					<h2>Happy Clients</h2>
+					<span>Art Galary</span>
+					<h2>Customer Reviews</h2>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-10 col-md-offset-1">
+				<div class="col-md-4">
 					<div class="row animate-box">
-						<div class="owl-carousel owl-carousel-fullwidth">
+						<div class="">
 							<div class="item">
 								<div class="testimony-slide active text-center">
 									<figure>
-										<img src="images/person1.jpg" alt="user">
+										<img :src="require(`@/assets/images/person1.jpg`)" alt="user">
 									</figure>
-									<span>Jean Doe, via <a href="#" class="twitter">Twitter</a></span>
+									<span>Jean Doe, via <a class="twitter">Twitter</a></span>
 									<blockquote>
 										<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
 									</blockquote>
 								</div>
 							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="row animate-box">
+						<div class="">
 							<div class="item">
 								<div class="testimony-slide active text-center">
 									<figure>
-										<img src="images/person2.jpg" alt="user">
+										<img :src="require(`@/assets/images/person2.jpg`)" alt="user">
 									</figure>
-									<span>John Doe, via <a href="#" class="twitter">Twitter</a></span>
+									<span>Athony, via <a class="twitter">Twitter</a></span>
 									<blockquote>
-										<p>&ldquo;Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+										<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
 									</blockquote>
 								</div>
 							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="row animate-box">
+						<div class="">
 							<div class="item">
 								<div class="testimony-slide active text-center">
 									<figure>
-										<img src="images/person3.jpg" alt="user">
+										<img :src="require(`@/assets/images/person3.jpg`)" alt="user">
 									</figure>
-									<span>John Doe, via <a href="#" class="twitter">Twitter</a></span>
+									<span>Peter, via <a class="twitter">Twitter</a></span>
 									<blockquote>
-										<p>&ldquo;Far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+										<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
 									</blockquote>
 								</div>
 							</div>
@@ -267,7 +180,7 @@
 		</div>
 	</div>
 
-  <div id="fh5co-counter" class="fh5co-bg fh5co-counter" :style="{ backgroundImage: `url(${img_bg_5})` }">
+  <div id="fh5co-counter" class="fh5co-bg fh5co-counter" :style="{ backgroundImage: `url(${artgallery})` }">
 		<div class="container">
 			<div class="row">
 				<div class="display-t">
@@ -362,22 +275,62 @@
 
 import Header from './Header.vue'
 import Footer from './Footer.vue'
-import img_bg_5 from '../../assets/images/bg5.jpg'
+import artgallery from '../../assets/images/artgallery.jpg'
 import img_bg_4 from '../../assets/images/bg4.jpg'
 import img_bg_3 from '../../assets/images/bg3.jpg'
 import img_bg_2 from '../../assets/images/bg2.jpg'
 import img_bg_1 from '../../assets/images/bg1.jpg'
+import BannerAuction from '../../assets/images/BannerAuction.jpg'
+import person1 from '../../assets/images/person1.jpg'
+import ProductService from '@/services/ProductService';
+import base from "@/../base.json"
 
 export default {
   data() {
+		let productFeatures
+		let productSales =[]
+		let categories
+		let baseUrl=''
     return {
-      img_bg_5,
+      artgallery,
       img_bg_4,
       img_bg_3,
       img_bg_2,
       img_bg_1,
+			BannerAuction,
+			productFeatures,
+			categories,
+			baseUrl,
+			base,
+			person1,
+			productSales
     }
   },
+	methods: {
+		getAllByFeature() {
+			ProductService.getAllByFeature()
+			.then((response) => {
+          this.productFeatures = response.data;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+		},
+		getAllBySale() {
+			ProductService.getAllBySale()
+			.then((response) => {
+          this.productSales = response.data;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+		},
+	},
+	created() {
+		this.baseUrl = this.base.baseUrl+ 'api/files/'
+		this.getAllByFeature()
+		this.getAllBySale()
+	},
   components: {
     Header,
     Footer

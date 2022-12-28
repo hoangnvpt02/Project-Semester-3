@@ -3,7 +3,7 @@
     public class UserRoleModel
     {
         public long id { get; set; }
-        public long? UserId { get; set; }
+        public string ? AspNetUsersId { get; set; }
 
         public long? RoleId { get; set; }
 
