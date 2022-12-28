@@ -17,7 +17,7 @@ namespace NetCore_Backend.Services.Impl
             {
                 Id = d.Id,
                 GalaryId = (long)d.GalaryId,
-                UserId = d.UserId,
+                AspNetUsersId = d.AspNetUsersId,
                 NumberId = d.NumberId,
                 IsActive = d.IsActive,
                 Created = d.Created,
@@ -35,7 +35,7 @@ namespace NetCore_Backend.Services.Impl
                 {
                     Id = d.Id,
                     GalaryId = (long)d.GalaryId,
-                    UserId = d.UserId,
+                    AspNetUsersId = d.AspNetUsersId,
                     NumberId = d.NumberId,
                     IsActive = d.IsActive,
                     Created = d.Created,
@@ -51,7 +51,7 @@ namespace NetCore_Backend.Services.Impl
             var _dossier = new Dossier();
            
             _dossier.GalaryId = dossierModel.GalaryId;
-            _dossier.UserId = dossierModel.UserId;
+            _dossier.AspNetUsersId = dossierModel.AspNetUsersId;
             _dossier.NumberId = dossierModel.NumberId;
             _dossier.IsActive = dossierModel.IsActive;
             _dossier.Created = dossierModel.Created;
@@ -62,7 +62,7 @@ namespace NetCore_Backend.Services.Impl
             {
                
                 GalaryId = (long)_dossier.GalaryId,
-                UserId = _dossier.UserId,
+                AspNetUsersId = _dossier.AspNetUsersId,
                 NumberId = _dossier.NumberId,
                 IsActive = _dossier.IsActive,
                 Created = _dossier.Created,
@@ -76,7 +76,7 @@ namespace NetCore_Backend.Services.Impl
             if (_dossier != null)
             {
                 _dossier.GalaryId = dossierModel.GalaryId;
-                _dossier.UserId = _dossier.UserId;
+                _dossier.AspNetUsersId = _dossier.AspNetUsersId;
                 _dossier.NumberId = _dossier.NumberId;
                 _dossier.IsActive = _dossier.IsActive;
                 _dossier.Updated = _dossier.Updated;

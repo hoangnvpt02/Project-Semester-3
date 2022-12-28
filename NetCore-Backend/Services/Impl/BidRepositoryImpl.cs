@@ -14,7 +14,7 @@ namespace NetCore_Backend.Services.Impl
         public BidModel Add(BidModel bidModel)
         {
             var bid = new Bid();
-            bid.UserId = bidModel.UserId;
+            bid.AspNetUsersId = bidModel.AspNetUsersId;
             bid.ProductId = bidModel.ProductId;
             bid.GalaryId = bidModel.GalaryId;
             bid.DidTime = bidModel.DidTime;
@@ -25,7 +25,7 @@ namespace NetCore_Backend.Services.Impl
             return new BidModel()
             {
                 Id = bid.Id,
-                UserId = bid.UserId,
+                AspNetUsersId = bid.AspNetUsersId,
                 ProductId = bid.ProductId,
                 GalaryId = bid.GalaryId,
                 DidTime = bid.DidTime,
@@ -49,7 +49,7 @@ namespace NetCore_Backend.Services.Impl
             var bids = _content.Bid.Select(b => new BidModel()
             {
                 Id = b.Id,
-                UserId = b.UserId,
+                AspNetUsersId = b.AspNetUsersId,
                 ProductId = b.ProductId,
                 GalaryId = b.GalaryId,
                 DidTime = b.DidTime,
@@ -67,7 +67,7 @@ namespace NetCore_Backend.Services.Impl
                 return new BidModel()
                 {
                     Id = b.Id,
-                    UserId = b.UserId,
+                    AspNetUsersId = b.AspNetUsersId,
                     ProductId = b.ProductId,
                     GalaryId = b.GalaryId,
                     DidTime = b.DidTime,
@@ -83,7 +83,7 @@ namespace NetCore_Backend.Services.Impl
             var bid = _content.Bid.FirstOrDefault(b => b.Id == bidModel.Id);
             if(bid != null)
             {
-                bid.UserId = bidModel.UserId;
+                bid.AspNetUsersId = bidModel.AspNetUsersId;
                 bid.ProductId = bidModel.ProductId;
                 bid.GalaryId = bidModel.GalaryId;
                 bid.Price = bidModel.Price;
