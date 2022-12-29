@@ -39,7 +39,7 @@ namespace NetCore_Backend.Services.Impl
             product.Author = productModel.Author;
             product.Name = productModel.Name;
 
-            product.Discription = productModel.Discription;
+            product.Description = productModel.Description;
             product.AspNetUsersId = productModel.AspNetUsersId;
 
             product.CountryId = productModel.CountryId;
@@ -57,7 +57,7 @@ namespace NetCore_Backend.Services.Impl
                 Address = product.Address,
                 Author = product.Author,
 
-                Discription = product.Discription,
+                Description = product.Description,
                 AspNetUsersId = product.AspNetUsersId,
 
                 CountryId = product.CountryId,
@@ -249,7 +249,7 @@ namespace NetCore_Backend.Services.Impl
            var products = _context.Products.Where(p => p.IsFeature == 0).Select(p => new ProductModel()
             {
                 Id = p.Id,
-                UserId = p.UserId,
+               AspNetUsersId = p.AspNetUsersId,
                 CountryId = p.CountryId,
                 Price = p.Price,
                 Author = p.Author,
@@ -276,7 +276,7 @@ namespace NetCore_Backend.Services.Impl
             var products = _context.Products.Where(p => p.SalePercent > 0).Select(p => new ProductModel()
             {
                 Id = p.Id,
-                UserId = p.UserId,
+                AspNetUsersId = p.AspNetUsersId,
                 CountryId = p.CountryId,
                 Price = p.Price,
                 Author = p.Author,
