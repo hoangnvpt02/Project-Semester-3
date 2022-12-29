@@ -224,6 +224,53 @@ namespace NetCoreBackend.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("NetCore_Backend.Data.AuctionProduct", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("AspNetUsersId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("FileDetailsId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("IsActive")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("PriceStart")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Quanlity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AuctionProduct");
+                });
+
             modelBuilder.Entity("NetCore_Backend.Data.Bid", b =>
                 {
                     b.Property<long>("Id")
@@ -231,6 +278,9 @@ namespace NetCoreBackend.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("AspNetUsersId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DidTime")
                         .HasColumnType("datetime2");
@@ -245,9 +295,6 @@ namespace NetCoreBackend.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<long?>("ProductId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("UserId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -297,6 +344,9 @@ namespace NetCoreBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<string>("AspNetUsersId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -312,9 +362,6 @@ namespace NetCoreBackend.Migrations
 
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
-
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -357,6 +404,9 @@ namespace NetCoreBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<string>("AspNetUsersId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("Created")
                         .HasColumnType("datetime2");
 
@@ -371,9 +421,6 @@ namespace NetCoreBackend.Migrations
 
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime2");
-
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -417,6 +464,9 @@ namespace NetCoreBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("AspNetUsersId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Authen")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -440,9 +490,6 @@ namespace NetCoreBackend.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.ToTable("Galary");
@@ -455,6 +502,12 @@ namespace NetCoreBackend.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("AspNetUsersId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("AuctionProductId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -474,10 +527,9 @@ namespace NetCoreBackend.Migrations
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("AuctionProductId");
 
                     b.HasIndex("ProductId");
 
@@ -493,6 +545,9 @@ namespace NetCoreBackend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspNetUsersId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Author")
@@ -542,9 +597,6 @@ namespace NetCoreBackend.Migrations
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.ToTable("Product");
@@ -557,6 +609,9 @@ namespace NetCoreBackend.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long?>("AuctionProductId")
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("CategoryId")
                         .HasColumnType("bigint");
@@ -574,6 +629,8 @@ namespace NetCoreBackend.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuctionProductId");
 
                     b.HasIndex("CategoryId");
 
@@ -622,6 +679,9 @@ namespace NetCoreBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<string>("AspNetUsersId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
@@ -638,9 +698,6 @@ namespace NetCoreBackend.Migrations
 
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
-
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -759,6 +816,10 @@ namespace NetCoreBackend.Migrations
 
             modelBuilder.Entity("NetCore_Backend.Data.Order", b =>
                 {
+                    b.HasOne("NetCore_Backend.Data.AuctionProduct", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("AuctionProductId");
+
                     b.HasOne("NetCore_Backend.Data.Product", null)
                         .WithMany("Orders")
                         .HasForeignKey("ProductId");
@@ -766,6 +827,10 @@ namespace NetCoreBackend.Migrations
 
             modelBuilder.Entity("NetCore_Backend.Data.ProductCate", b =>
                 {
+                    b.HasOne("NetCore_Backend.Data.AuctionProduct", null)
+                        .WithMany("Cate")
+                        .HasForeignKey("AuctionProductId");
+
                     b.HasOne("NetCore_Backend.Data.Category", null)
                         .WithMany("Cate")
                         .HasForeignKey("CategoryId");
@@ -803,6 +868,13 @@ namespace NetCoreBackend.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("WatchList");
+                });
+
+            modelBuilder.Entity("NetCore_Backend.Data.AuctionProduct", b =>
+                {
+                    b.Navigation("Cate");
+
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.Category", b =>
