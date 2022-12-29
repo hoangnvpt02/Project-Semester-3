@@ -1,12 +1,12 @@
 import http from "../../http-common";
 
 class AuthenticationService {
-  login(user_name, password) {
-    return http.post(`api/Authenticate/Login/${user_name, password}`);
+  login(form) {
+    return http.post(`api/Authenticate/Login`, form);
   }
 
-  register(user_name, email, password) {
-    return http.post(`api/Authenticate/Register/${user_name, email, password}`);
+  register(form) {
+    return http.post(`api/Authenticate/Register`, form);
   }
 }
 export default new AuthenticationService();

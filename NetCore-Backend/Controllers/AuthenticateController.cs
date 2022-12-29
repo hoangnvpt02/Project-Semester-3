@@ -51,6 +51,7 @@ namespace NetCore_Backend.Controllers
                         }
                     });
                 }
+
                 if(!await _roleManager.RoleExistsAsync(UserRoles.Admin))
                 {
                     await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
@@ -68,7 +69,7 @@ namespace NetCore_Backend.Controllers
                 var new_user = new IdentityUser()
                 {
                     Email = requestDto.Email,
-                    UserName = requestDto.Name
+                    UserName = requestDto.UserName
                 };
 
                 var is_created = await _userManager.CreateAsync(new_user, requestDto.Password);
@@ -115,11 +116,24 @@ namespace NetCore_Backend.Controllers
                     });
                 }
 
+                if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+                }
+                if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+                }
+                if (!await _roleManager.RoleExistsAsync(UserRoles.Seller))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(UserRoles.Seller));
+                }
+
                 // tạo user
                 var new_user = new IdentityUser()
                 {
                     Email = requestDto.Email,
-                    UserName = requestDto.Name
+                    UserName = requestDto.UserName
                 };
 
                 var is_created = await _userManager.CreateAsync(new_user, requestDto.Password);
@@ -253,7 +267,7 @@ namespace NetCore_Backend.Controllers
         {
             if (ModelState.IsValid)
             {
-                var exsiting_user = await _userManager.FindByEmailAsync(loginRequestDto.Email);
+                var exsiting_user = await _userManager.FindByNameAsync(loginRequestDto.UserName);
 
                 if (exsiting_user == null)
                 {

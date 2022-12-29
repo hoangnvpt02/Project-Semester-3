@@ -4,15 +4,26 @@
     <h2>Login</h2>
     <form>
       <div class="user-box">
-        {{ user_name }}
-        <input v-mode="user_name" type="text" name="" required="">
+        <input v-model="form.userName"
+          type="text" 
+          name=""
+          @blur="this.validateUserName()"
+          v-bind:class="{'is-invalid':errors.userName}"
+          >
         <label>Username</label>
+        <div class="invalid-feedback">{{ errors.userName }}</div>
       </div>
       <div class="user-box">
-        <input v-mode="password" type="password" name="" required="">
+        <input v-model="form.password" 
+          type="password" 
+          name="" 
+          @blur="validatePassword()"
+          v-bind:class="{'is-invalid':errors.password}" 
+          >
         <label>Password</label>
+        <div class="invalid-feedback">{{ errors.password }}</div>
       </div>
-      <a @click="clickButtonLogin()">
+      <a @click="clickButtonLogin(form)">
         <span></span>
         <span></span>
         <span></span>
@@ -30,21 +41,54 @@ import AuthenticationService from '@/services/AuthenticationService';
 export default {
   data() {
     return {
-      user_name: '',
-      password: '',
-      response: ''
+      errors: {
+        userName: '',
+        password: ''
+      },
+      form: {
+        userName: '',
+        password: ''
+      },
     }
   },
   methods: {
-    clickButtonLogin() {
-      console.log(this.user_name);
-      // AuthenticationService.login(form.user_name, form.password)
-      // .then((response) => {
-      //     this.response = response.data;
-      //   })
-      //   .catch((e) => {
-      //     console.log(e);
-      //   });
+    validate() {
+      this.errors = {
+        userName: '',
+        password: ''
+      }
+      if (this.validateUserName() && this.validatePassword()) {
+        return true;
+      }
+      return false;
+    },
+    validateUserName() {
+      if (!this.form.userName) {
+        this.errors.userName = "Username is required";
+        return false;
+      }
+      this.errors.userName = "";
+      return true;
+    },
+    validatePassword() {
+      if (!this.form.password) {
+        this.errors.password = "Password is required";
+        return false;
+      }
+      this.errors.password = "";
+      return true;
+    },
+    clickButtonLogin(form) {
+      var result = this.validate();
+      if (result) {
+        AuthenticationService.login(form)
+        .then((response) => {
+            this.response = response.data;
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }
     },
 
   },
@@ -53,4 +97,5 @@ export default {
 
 <style>
 @import '../../assets/css/login.css';
+@import '../../assets/css/bootstrap.css';
 </style>
