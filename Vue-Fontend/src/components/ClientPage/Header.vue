@@ -5,7 +5,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 col-xs-2">
-					<div id="fh5co-logo"><a href="/home">TRUNG ABCD</a></div>
+					<div id="fh5co-logo"><a href="/home" style="color:#d1c286">ART GALARY</a></div>
 				</div>
 				<div class="col-md-6 col-xs-6 text-center menu-1">
 					<ul>

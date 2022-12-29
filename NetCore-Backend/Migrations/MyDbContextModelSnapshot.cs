@@ -232,6 +232,9 @@ namespace NetCoreBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<string>("AspNetUsersId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DidTime")
                         .HasColumnType("datetime2");
 
@@ -245,9 +248,6 @@ namespace NetCoreBackend.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<long?>("ProductId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("UserId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -297,6 +297,9 @@ namespace NetCoreBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<string>("AspNetUsersId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -312,9 +315,6 @@ namespace NetCoreBackend.Migrations
 
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
-
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -357,6 +357,9 @@ namespace NetCoreBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<string>("AspNetUsersId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("Created")
                         .HasColumnType("datetime2");
 
@@ -371,9 +374,6 @@ namespace NetCoreBackend.Migrations
 
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime2");
-
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -417,6 +417,9 @@ namespace NetCoreBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("AspNetUsersId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Authen")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -440,9 +443,6 @@ namespace NetCoreBackend.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.ToTable("Galary");
@@ -455,6 +455,9 @@ namespace NetCoreBackend.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("AspNetUsersId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -474,9 +477,6 @@ namespace NetCoreBackend.Migrations
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
@@ -493,7 +493,9 @@ namespace NetCoreBackend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Address")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AspNetUsersId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Author")
@@ -506,7 +508,7 @@ namespace NetCoreBackend.Migrations
                     b.Property<DateTime?>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Discription")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -514,6 +516,9 @@ namespace NetCoreBackend.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<int>("IsActive")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IsFeature")
                         .HasColumnType("int");
 
                     b.Property<string>("ManufactureYear")
@@ -527,15 +532,18 @@ namespace NetCoreBackend.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal?>("PriceSale")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("Quanlity")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<float>("SalePercent")
+                        .HasColumnType("real");
+
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime2");
-
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -614,6 +622,9 @@ namespace NetCoreBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<string>("AspNetUsersId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
@@ -630,9 +641,6 @@ namespace NetCoreBackend.Migrations
 
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
-
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 

@@ -133,5 +133,35 @@ namespace NetCore_Backend.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet("feature")]
+
+        public IActionResult GetAllProductByFeature ()
+        {
+
+            try
+            {
+                return Ok(_productRepository.GetAllProductByFeature());
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("sale")]
+
+        public IActionResult GetAllProductBySale()
+        {
+
+            try
+            {
+                return Ok(_productRepository.GetAllProductBySale());
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

@@ -21,8 +21,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1 animate-box">
-					<div class="owl-carousel owl-carousel-fullwidth product-carousel">
-					<!-- <div class="owl-carousel owl-carousel-fullwidth product-carousel"> -->
+					<!-- <div class="owl-carousel owl-carousel-fullwidth product-carousel">
 						<div class="item">
 							<div class="active text-center">
 								<figure>
@@ -37,10 +36,17 @@
 								</figure>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<div class="row animate-box">
 						<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-							<h2>{{ product.name }}</h2>
+							<h2 style="color:#d1c286; padding:30px">{{ product.name }}</h2>
+							<div class="item">
+							<div class="active text-center" >
+								<figure>
+									<img :src="baseUrl + product.fileDetailsId" style="width:400px; border-radius: 5px;" >
+								</figure>
+							</div>
+						</div>
 							<p>
 								<a href="#" class="btn btn-primary btn-outline btn-lg">Add to Cart</a>
 								<a href="#" class="btn btn-primary btn-outline btn-lg">Compare</a>
@@ -173,16 +179,22 @@ import Footer from './Footer.vue'
 import img_bg_2 from '../../assets/images/bg2.jpg'
 import ProductService from '@/services/ProductService'
 import bannerproduct from '../../assets/images/bannerproduct.png'
+import base from "@/../base.json"
+
 export default {
 	props: {
     id: Number
   },
   data() {
 		let product
+		let baseUrl=''
+
 		return {
       img_bg_2,
 			product,
-			bannerproduct
+			bannerproduct,
+			baseUrl,
+			base,
     }
   },
 	methods: {
@@ -198,6 +210,7 @@ export default {
 
 	},
 	created() {
+		this.baseUrl = this.base.baseUrl+ 'api/files/'
     this.getProductById(this.$route.params.id);
 	},
   components: {
