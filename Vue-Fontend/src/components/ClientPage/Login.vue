@@ -77,6 +77,12 @@ export default {
         this.errors.password = "Password is required";
         return false;
       }
+      var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,}$/;
+      if(!this.form.password.match(passw)) 
+      { 
+        this.errors.password = "Password must have at least 6 characters 1 uppercase letter 1 special character and 1 number";
+        return false;
+      }
       this.errors.password = "";
       return true;
     },
