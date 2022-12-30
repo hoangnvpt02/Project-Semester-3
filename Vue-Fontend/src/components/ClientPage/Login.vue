@@ -1,36 +1,38 @@
 <template>
 <div>
-  <div class="login-box">
-    <h2>Login</h2>
-    <form>
-      <div class="user-box">
-        <input v-model="form.userName"
-          type="text" 
-          name=""
-          @blur="this.validateUserName()"
-          v-bind:class="{'is-invalid':errors.userName}"
-          >
-        <label>Username</label>
-        <div class="invalid-feedback">{{ errors.userName }}</div>
-      </div>
-      <div class="user-box">
-        <input v-model="form.password" 
-          type="password" 
-          name="" 
-          @blur="validatePassword()"
-          v-bind:class="{'is-invalid':errors.password}" 
-          >
-        <label>Password</label>
-        <div class="invalid-feedback">{{ errors.password }}</div>
-      </div>
-      <a @click="clickButtonLogin(form)">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        Login
-      </a>
-    </form>
+  <div id="body-login">
+    <div class="login-box">
+      <h2>Login</h2>
+      <form>
+        <div class="user-box">
+          <input v-model="form.userName"
+            type="text" 
+            name=""
+            @blur="this.validateUserName()"
+            v-bind:class="{'is-invalid':errors.userName}"
+            >
+          <label>Username</label>
+          <div class="invalid-feedback">{{ errors.userName }}</div>
+        </div>
+        <div class="user-box">
+          <input v-model="form.password" 
+            type="password" 
+            name="" 
+            @blur="validatePassword()"
+            v-bind:class="{'is-invalid':errors.password}" 
+            >
+          <label>Password</label>
+          <div class="invalid-feedback">{{ errors.password }}</div>
+        </div>
+        <a @click="clickButtonLogin(form)">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Login
+        </a>
+      </form>
+    </div>
   </div>
 </div>
 </template>
