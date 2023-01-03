@@ -19,6 +19,7 @@ namespace NetCore_Backend.Data
         public DbSet<Galary> Galarys { get; set; }
         public DbSet<Dossier> Dossiers { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<AuctionProduct> AuctionProducts { get; set; }
         public DbSet<ProductCate> ProductCates { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<ProductGalary> ProductGalaries { get; set; }

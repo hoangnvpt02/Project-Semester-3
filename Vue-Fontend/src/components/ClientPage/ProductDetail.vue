@@ -48,8 +48,8 @@
 							</div>
 						</div>
 							<p>
-								<a href="#" class="btn btn-primary btn-outline btn-lg">Add to Cart</a>
-								<a href="#" class="btn btn-primary btn-outline btn-lg">Compare</a>
+								<a href="#" class="btn btn-primary btn-outline btn-lg" style="width:500px; border-radius: 5px;">Add to Cart</a>
+								<!-- <a href="#" class="btn btn-primary btn-outline btn-lg">Compare</a> -->
 							</p>
 						</div>
 					</div>
@@ -58,10 +58,10 @@
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
 					<div class="fh5co-tabs animate-box">
-						<ul class="fh5co-tab-nav">
-							<li class="active"><a href="#" data-tab="1"><span class="icon visible-xs"><i class="icon-file"></i></span><span class="hidden-xs">Product Details</span></a></li>
-							<li><a href="#" data-tab="2"><span class="icon visible-xs"><i class="icon-bar-graph"></i></span><span class="hidden-xs">Specification</span></a></li>
-							<li><a href="#" data-tab="3"><span class="icon visible-xs"><i class="icon-star"></i></span><span class="hidden-xs">Feedback &amp; Ratings</span></a></li>
+						<ul class="fh5co-tab-nav" >
+							<li class="active"><a style="width:300%"><span class="icon visible-xs"><i class="icon-file"></i></span><span class="hidden-xs">Product Details</span></a></li>
+							<!-- <li ><a href="#"><span class="icon visible-xs"><i class="icon-bar-graph"></i></span><span class="hidden-xs">Specification</span></a></li> -->
+							<!-- <li><a href="#" data-tab="3"><span class="icon visible-xs"><i class="icon-star"></i></span><span class="hidden-xs">Feedback &amp; Ratings</span></a></li> -->
 						</ul>
 
 						<!-- Tabs -->
