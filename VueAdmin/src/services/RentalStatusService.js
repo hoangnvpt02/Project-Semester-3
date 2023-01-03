@@ -1,4 +1,4 @@
-import http from "@/http-common";
+import http from "../../http-common";
 import authHeader from './auth-header';
 
 /* eslint-disable */

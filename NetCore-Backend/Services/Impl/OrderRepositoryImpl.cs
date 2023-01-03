@@ -53,14 +53,17 @@ namespace NetCore_Backend.Services.Impl
 
             var orders = _context.Orders
             .Join(_context.Products, order => order.ProductId, product => product.Id, (order, product) => new { order,product })
+            .Join(_context.Users, o => o.order.AspNetUsersId, user => user.Id, (order1, user) => new { order1, user })
             .Select(o => new
              {
-                Id = o.order.Id,
-                Price = o.order.Price,
-                Status = o.order.Status,
-                IsActive = o.order.IsActive,
-                Name = o.product.Name,
-                FileDetailsId = o.product.FileDetailsId,
+                Id = o.order1.order.Id,
+                TotalPrice = o.order1.order.Price,
+                Status = o.order1.order.Status,
+                IsActive = o.order1.order.IsActive,
+                UserName = o.user.UserName,
+                Name = o.order1.product.Name,
+                PriceProduct = o.order1.product.Price,
+                FileDetailsId = o.order1.product.FileDetailsId,
             }) 
             .ToList()
             .ToArray();
@@ -108,6 +111,17 @@ namespace NetCore_Backend.Services.Impl
         {
             var total = _context.Orders.ToList().Count;
             return total;
+        }
+
+        public void UpdateStatus(long id, int status)
+        {
+            var order = _context.Orders.FirstOrDefault(o => o.Id == id);
+            if (order != null)
+            {
+                order.Status = status;
+                _context.Update(order);
+                _context.SaveChanges();
+            }
         }
     }
 }

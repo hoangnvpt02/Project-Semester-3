@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import OrderList from "@/components/Cards/OrderList.vue";
+import OrderList from "@/components/admin/OrderList.vue";
 
 export default {
   components: {

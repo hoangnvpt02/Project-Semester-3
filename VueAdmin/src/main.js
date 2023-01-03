@@ -21,9 +21,11 @@ import Dashboard from "@/views/admin/Dashboard.vue";
 import Settings from "@/views/admin/Settings.vue";
 import Tables from "@/views/admin/Tables.vue";
 import Maps from "@/views/admin/Maps.vue";
-import Order from "@/views/admin/Order.vue";
 import EditCarPage from "./components/Cards/EditCarPage.vue";
 import OrderDetail from "./components/Cards/OrderDetails.vue";
+
+import Order from "@/views/admin/Order.vue";
+import product from "./components/admin/ProductList.vue";
 
 // views for Auth layout
 
@@ -44,7 +46,7 @@ const routes = [
     path: "/admin",
     redirect: "/admin/car-manage",
     component: Admin,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
     children: [
       {
         path: "/admin/dashboard",
@@ -74,6 +76,10 @@ const routes = [
       {
         path: "/admin/order",
         component: Order,
+      },
+      {
+        path: "/admin/product",
+        component: product,
       },
     ],
   },
