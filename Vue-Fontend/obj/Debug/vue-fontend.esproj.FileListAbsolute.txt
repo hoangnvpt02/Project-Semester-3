@@ -6,3 +6,5 @@ D:\Project\Project-Semester-3\Vue-Fontend\obj\Debug\vue-fontend.esproj.Suggested
 D:\Project\Project-Semester-3\Vue-Fontend\obj\Debug\vue-fontend.esproj.CoreCompileInputs.cache
 D:\Works\PracClas\Project-Semester-3\Vue-Fontend\obj\Debug\vue-fontend.esproj.SuggestedBindingRedirects.cache
 D:\Works\PracClas\Project-Semester-3\Vue-Fontend\obj\Debug\vue-fontend.esproj.CoreCompileInputs.cache
+D:\project3\Vue-Fontend\obj\Debug\vue-fontend.esproj.SuggestedBindingRedirects.cache
+D:\project3\Vue-Fontend\obj\Debug\vue-fontend.esproj.CoreCompileInputs.cache
