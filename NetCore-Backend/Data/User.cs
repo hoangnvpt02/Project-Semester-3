@@ -26,7 +26,7 @@ namespace NetCore_Backend.Data
         public virtual ICollection<UserRole> Roles { get; set; }
         public virtual ICollection<Galary> Galarys { get; set; }
         public virtual ICollection<Dossier> Dossiers { get; set; }
-        public virtual ICollection<WatchList> WatchLists { get; set; }
+       
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Bid> Bids { get; set; }
