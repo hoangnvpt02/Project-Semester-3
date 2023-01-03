@@ -15,7 +15,7 @@ namespace NetCore_Backend.Services.Impl
         {
             var comment = new Comment();
             comment.Content = commentModel.Content;
-            comment.UserId = commentModel.UserId;
+            comment.AspNetUsersId = commentModel.AspNetUsersId;
             comment.ProductId = commentModel.ProductId;
             comment.IsActive = commentModel.IsActive;
             comment.Updated = commentModel.Updated;
@@ -29,7 +29,7 @@ namespace NetCore_Backend.Services.Impl
                 IsActive = comment.IsActive,
                 Updated = comment.Updated,
                 Created = comment.Created,
-                UserId = comment.UserId,
+                AspNetUsersId = comment.AspNetUsersId,
                 ProductId = comment.ProductId,
             };
         }
@@ -53,7 +53,7 @@ namespace NetCore_Backend.Services.Impl
                 IsActive = c.IsActive,
                 Updated = c.Updated,
                 Created = c.Created,
-                UserId = c.UserId,
+                AspNetUsersId = c.AspNetUsersId,
                 ProductId = c.ProductId,
             });
             return comments.ToList();
@@ -71,7 +71,7 @@ namespace NetCore_Backend.Services.Impl
                     IsActive = comment.IsActive,
                     Updated = comment.Updated,
                     Created = comment.Created,
-                    UserId = comment.UserId,
+                    AspNetUsersId = comment.AspNetUsersId,
                     ProductId = comment.ProductId,
                 };
             }
@@ -83,7 +83,7 @@ namespace NetCore_Backend.Services.Impl
             var comment = _context.Comments.FirstOrDefault(c => c.Id == commentModel.Id);
             if(comment != null)
             {
-                comment.UserId = commentModel.UserId;
+                comment.AspNetUsersId = commentModel.AspNetUsersId;
                 comment.Content = commentModel.Content;
                 comment.IsActive = commentModel.IsActive;
                 comment.Updated = commentModel.Updated;

@@ -31,11 +31,12 @@
 					<div class="col-md-3 col-sm-3 text-center"  v-for="cate in categories">
 						<div class="feature-center animate-box" data-animate-effect="fadeIn">
 							<span class="icon">
-								<i class="icon-credit-card"></i>
+								<i class="icon-shop"></i>
 							</span>
 							<h3>{{cate.name}}</h3>
 							<p>{{cate.description}}</p>
-							<p><a class="btn btn-primary btn-outline">View More</a></p>
+							<router-link :to="{ name: 'productAsCate', params: { id: cate.id } }" class="btn btn-primary btn-outline">View More</router-link>
+							<!-- <p><a class="btn btn-primary btn-outline">View More</a></p> -->
 						</div>
 					</div>
 				</div>
@@ -44,8 +45,8 @@
 			<div class="row">
 				<div class="col-md-4 text-center animate-box" v-for="pd in products">
 					<div class="product">
-						<div class="product-grid" style="background-image:url(images/product-1.jpg);">
-							<img :src="image" />
+						<div class="product-grid" :style="{ 'background-image' : 'url('+baseUrl+ +pd.fileDetailsId+')'  }">
+							<!-- <img class="product-grid" :src="image"/> -->
 							<div class="inner">
 								<p>
 									<router-link :to="{ name: 'detail', params: { id: pd.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link>
@@ -96,40 +97,31 @@ import Header from './Header.vue'
 import Footer from './Footer.vue'
 import ProductService from '@/services/ProductService';
 import CategoryService from '@/services/CategoryService';
-import FileService from '@/services/FileService';
 import bannerproduct from '../../assets/images/bannerproduct.png'
+import base from "@/../base.json"
 
 export default {
 	data() {
-	const products=[]
-	const categories=[]
-	let image
+	let products
+	let categories
+	let baseUrl=''
 	return {
 		products,
 		categories,
 		bannerproduct,
-		image
+		baseUrl,
+		base
 	}
 	},
 	methods: {
-		retrieveFile() {
-			FileService.getFile(1)
-			.then((response) => {
-          this.image = response;
-					console.log(response)
-        })
-        // .catch((e) => {
-        //   console.log(e);
-        // });
-		},
 		retrieveProduct() {
 			ProductService.getAll()
 			.then((response) => {
           this.products = response.data;
         })
-        // .catch((e) => {
-        //   console.log(e);
-        // });
+        .catch((e) => {
+          console.log(e);
+        });
 		},
 		retrieveCategories() {
 			CategoryService.getAll()
@@ -142,7 +134,7 @@ export default {
 		},
 	},
 	created() {
-		this.retrieveFile()
+		this.baseUrl = this.base.baseUrl+ 'api/files/'
 		this.retrieveProduct()
 		this.retrieveCategories()
 	},
