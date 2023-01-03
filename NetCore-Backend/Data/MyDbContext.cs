@@ -31,6 +31,8 @@ namespace NetCore_Backend.Data
 
         public DbSet<FileDetails> FileDetails { get; set; }
 
+        public DbSet<ProductDetailImage> ProductDetails { get; set; }
+
 
 
     }

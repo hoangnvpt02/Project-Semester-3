@@ -39,7 +39,7 @@ namespace NetCore_Backend.Services.Impl
             product.Author = productModel.Author;
             product.Name = productModel.Name;
 
-            product.Discription = productModel.Discription;
+            product.Description = productModel.Description;
             product.AspNetUsersId = productModel.AspNetUsersId;
 
             product.CountryId = productModel.CountryId;
@@ -56,7 +56,7 @@ namespace NetCore_Backend.Services.Impl
                 Address = product.Address,
                 Author = product.Author,
 
-                Discription = product.Discription,
+                Description = product.Description,
                 AspNetUsersId = product.AspNetUsersId,
 
                 CountryId = product.CountryId,
