@@ -39,7 +39,29 @@ namespace NetCore_Backend.Controllers
                 return BadRequest();
             }
         }
-        
+
+        [HttpGet("/cate")]
+        public IActionResult GetAllProductByCate(long id)
+        {
+            try
+            {
+                var product = _productRepository.GetAllProductByCate();
+                if (product != null)
+                {
+                    return Ok(product);
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpGet]
         public IActionResult GetAll(int start,int end,String ? sortBy)
         {

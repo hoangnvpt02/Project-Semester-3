@@ -55,8 +55,8 @@ namespace NetCore_Backend.Services.Impl
                 Author = product.Author,
                 Name = product.Name,
                 Discription = product.Discription,
-                UserId = (long)product.UserId,
-                CountryId = (long)product.CountryId,
+                UserId = product.UserId,
+                CountryId = product.CountryId,
                 ManufactureYear = product.ManufactureYear,
                 Quanlity = product.Quanlity,
                 Updated = product.Updated,
@@ -84,8 +84,8 @@ namespace NetCore_Backend.Services.Impl
             var products = _context.Products.Select(p => new ProductModel()
             {
                 Id = p.Id,
-                CountryId = (long)p.CountryId,
-                UserId = (long)p.UserId,
+                CountryId = p.CountryId,
+                UserId = p.UserId,
                 Address = p.Address,
                 Author = p.Author,
                 Name = p.Name,
@@ -119,19 +119,16 @@ namespace NetCore_Backend.Services.Impl
             return products.ToList();
         }
 
-       
-
         public ProductModel GetById(long id)
         {
             var product = _context.Products.FirstOrDefault(p => p.Id == id);
             if( product != null)
             {
-                Product product1 = product;
                 return new ProductModel()
                 {
                     Id = product.Id,
-                    CountryId = (long)product.CountryId,
-                    UserId = (long)product.UserId,
+                    CountryId = product.CountryId,
+                    UserId = product.UserId,
                     Address = product.Address,
                     Author = product.Author,
                     Name = product.Name,
@@ -168,6 +165,29 @@ namespace NetCore_Backend.Services.Impl
             }
            
         }
+
+        public List<ProductModel> GetAllProductByCate()
+        {
+            var categorizedProducts = _context.Products
+                                    .Join(_context.ProductCates, p => p.Id, pc => pc.ProductId, (p, pc) => new { p, pc })
+                                    .Join(_context.Categories, ppc => ppc.pc.CategoryId, c => c.Id, (ppc, c) => new { ppc, c })
+                                    .Select(m => new ProductModel
+                                    {
+                                        Id = m.ppc.p.Id,
+                                        Name = m.ppc.p.Name,
+                                        CountryId = m.ppc.p.CountryId,
+                                        UserId = m.ppc.p.UserId,
+                                        Address = m.ppc.p.Address,
+                                        Author = m.ppc.p.Author,
+                                        Price = m.ppc.p.Price,
+                                        ManufactureYear = m.ppc.p.ManufactureYear,
+                                        Quanlity = m.ppc.p.Quanlity,
+                                        IsActive = m.ppc.p.IsActive,
+                                        Updated = m.ppc.p.Updated
+        });
+            return (List<ProductModel>)categorizedProducts;
+        }
+
         public List<ProductModel> GetCateById(long id)
         {
             List<ProductCate> productCates = _context.ProductCates.Where(c => c.CategoryId == id).ToList();
@@ -179,8 +199,8 @@ namespace NetCore_Backend.Services.Impl
                     Product product = _context.Products.FirstOrDefault(c => c.Id == productCate.Id);
                     ProductModel model = new ProductModel() { 
                         Id = product.Id,
-                        UserId= (long)product.UserId,
-                        CountryId = (long)product.CountryId,
+                        UserId=product.UserId,
+                        CountryId = product.CountryId,
                         Price = product.Price,
                         Author = product.Author,
                         Name = product.Name,
