@@ -565,11 +565,10 @@ namespace NetCoreBackend.Migrations
                     b.Property<int>("IsActive")
                         .HasColumnType("int");
 
-                    b.Property<int>("IsFeature")
+                    b.Property<int?>("IsFeature")
                         .HasColumnType("int");
 
                     b.Property<string>("ManufactureYear")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -586,7 +585,7 @@ namespace NetCoreBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("SalePercent")
+                    b.Property<float?>("SalePercent")
                         .HasColumnType("real");
 
                     b.Property<DateTime?>("Updated")
