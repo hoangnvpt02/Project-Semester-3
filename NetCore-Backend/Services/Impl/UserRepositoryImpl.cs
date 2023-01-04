@@ -7,9 +7,11 @@ namespace NetCore_Backend.Services.Impl
     public class UserRepositoryImpl : IUserRepository
     {
         private readonly MyDbContext _context;
-        public UserRepositoryImpl(MyDbContext context)
+        private readonly UserManager<IdentityUser> _user;
+        public UserRepositoryImpl(MyDbContext context, UserManager<IdentityUser> user)
         {
             _context = context;
+            _user = user;
         }
 
         public List<UserModel> GetAll()
