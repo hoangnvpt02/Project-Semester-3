@@ -1,13 +1,16 @@
-﻿using NetCore_Backend.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using NetCore_Backend.Models;
 using NetCore_Backend.Data;
 namespace NetCore_Backend.Services.Impl
 {
     public class ProductRepositoryImpl : IProductRepository
     {
         private readonly MyDbContext _context;
-        public ProductRepositoryImpl(MyDbContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+        public ProductRepositoryImpl(MyDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public ProductModel Add(ProductModel productModel, IFormFile fileData, FileType fileType)
@@ -31,8 +34,7 @@ namespace NetCore_Backend.Services.Impl
                 var result = _context.FileDetails.Add(fileDetails);
                 _context.SaveChanges();
             }
-          
-          
+         
             var product = new Product();
             product.Address = productModel.Address;
             product.FileDetailsId = fileDetails.ID;

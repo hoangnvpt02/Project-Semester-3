@@ -256,7 +256,7 @@ namespace NetCoreBackend.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Bid");
+                    b.ToTable("Bid", (string)null);
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.Category", b =>
@@ -286,7 +286,7 @@ namespace NetCoreBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Category", (string)null);
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.Comment", b =>
@@ -320,7 +320,7 @@ namespace NetCoreBackend.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Comment");
+                    b.ToTable("Comment", (string)null);
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.Country", b =>
@@ -346,7 +346,7 @@ namespace NetCoreBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Country");
+                    b.ToTable("Country", (string)null);
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.Dossier", b =>
@@ -379,7 +379,7 @@ namespace NetCoreBackend.Migrations
 
                     b.HasIndex("GalaryId");
 
-                    b.ToTable("Dossier");
+                    b.ToTable("Dossier", (string)null);
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.FileDetails", b =>
@@ -402,7 +402,7 @@ namespace NetCoreBackend.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("FileDetails");
+                    b.ToTable("FileDetails", (string)null);
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.Galary", b =>
@@ -445,7 +445,7 @@ namespace NetCoreBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Galary");
+                    b.ToTable("Galary", (string)null);
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.Order", b =>
@@ -481,7 +481,7 @@ namespace NetCoreBackend.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Order", (string)null);
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.Product", b =>
@@ -539,7 +539,7 @@ namespace NetCoreBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Product");
+                    b.ToTable("Product", (string)null);
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.ProductCate", b =>
@@ -571,7 +571,7 @@ namespace NetCoreBackend.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductCate");
+                    b.ToTable("ProductCate", (string)null);
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.ProductDetailImage", b =>
@@ -590,7 +590,7 @@ namespace NetCoreBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductDetailImage");
+                    b.ToTable("ProductDetailImage", (string)null);
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.ProductGalary", b =>
@@ -622,7 +622,7 @@ namespace NetCoreBackend.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductGalary");
+                    b.ToTable("ProductGalary", (string)null);
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.WatchList", b =>
@@ -655,7 +655,7 @@ namespace NetCoreBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WatchLish");
+                    b.ToTable("WatchLish", (string)null);
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.WatchListProduct", b =>
@@ -689,7 +689,7 @@ namespace NetCoreBackend.Migrations
 
                     b.HasIndex("WatchListId");
 
-                    b.ToTable("WatchListProduct");
+                    b.ToTable("WatchListProduct", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
