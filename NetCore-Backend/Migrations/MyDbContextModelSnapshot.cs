@@ -605,9 +605,6 @@ namespace NetCoreBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<long?>("AuctionProductId")
-                        .HasColumnType("bigint");
-
                     b.Property<long?>("CategoryId")
                         .HasColumnType("bigint");
 
@@ -625,13 +622,30 @@ namespace NetCoreBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuctionProductId");
-
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductCate");
+                });
+
+            modelBuilder.Entity("NetCore_Backend.Data.ProductDetailImage", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("FileDetailsId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductDetailImage");
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.ProductGalary", b =>
@@ -811,10 +825,6 @@ namespace NetCoreBackend.Migrations
 
             modelBuilder.Entity("NetCore_Backend.Data.Order", b =>
                 {
-                    b.HasOne("NetCore_Backend.Data.AuctionProduct", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("AuctionProductId");
-
                     b.HasOne("NetCore_Backend.Data.Product", null)
                         .WithMany("Orders")
                         .HasForeignKey("ProductId");
@@ -822,10 +832,6 @@ namespace NetCoreBackend.Migrations
 
             modelBuilder.Entity("NetCore_Backend.Data.ProductCate", b =>
                 {
-                    b.HasOne("NetCore_Backend.Data.AuctionProduct", null)
-                        .WithMany("Cate")
-                        .HasForeignKey("AuctionProductId");
-
                     b.HasOne("NetCore_Backend.Data.Category", null)
                         .WithMany("Cate")
                         .HasForeignKey("CategoryId");
@@ -863,13 +869,6 @@ namespace NetCoreBackend.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("WatchList");
-                });
-
-            modelBuilder.Entity("NetCore_Backend.Data.AuctionProduct", b =>
-                {
-                    b.Navigation("Cate");
-
-                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("NetCore_Backend.Data.Category", b =>
