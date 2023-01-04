@@ -6,6 +6,8 @@ namespace NetCore_Backend.Services
     {
         List<ProductModel> GetAll(int start,int end,String ? sortBy);
         List<ProductModel> GetAllProductByCate();
+        List<ProductModel> GetAllProductByFeature();
+        List<ProductModel> GetAllProductBySale();
         ProductModel GetById(long id);
         ProductModel Add(ProductModel productModel, IFormFile fileData, FileType fileType);
         void Update(ProductModel productModel);

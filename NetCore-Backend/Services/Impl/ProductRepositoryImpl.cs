@@ -50,6 +50,7 @@ namespace NetCore_Backend.Services.Impl
             product.Updated = DateTime.Now;
             product.Created =DateTime.Now;
             product.IsActive = productModel.IsActive;
+            product.IsFeature = productModel.IsFeature;
             product.Price = productModel.Price;
             _context.Products.Add(product);
             _context.SaveChanges();
@@ -67,6 +68,7 @@ namespace NetCore_Backend.Services.Impl
                 Updated = product.Updated,
                 Created = product.Created,
                 IsActive = product.IsActive,
+                IsFeature = product.IsFeature,
                 Price = product.Price,
                 FileDetailsId = product.FileDetailsId,
             };
@@ -100,6 +102,9 @@ namespace NetCore_Backend.Services.Impl
                 Description = p.Description,
                 FileDetailsId = p.FileDetailsId,
                 IsActive = p.IsActive,
+                IsFeature = p.IsFeature,
+                SalePercent = p.SalePercent,
+                PriceSale = p.PriceSale,
                 Created = p.Created,
                 Updated = p.Updated,
             });
@@ -141,7 +146,11 @@ namespace NetCore_Backend.Services.Impl
                     ManufactureYear = product.ManufactureYear,
                     Quanlity = product.Quanlity,
                     Description = product.Description,
+                    FileDetailsId = product.FileDetailsId,
                     IsActive = product.IsActive,
+                    IsFeature = product.IsFeature,
+                    SalePercent = product.SalePercent,
+                    PriceSale = product.PriceSale,
                     Created = product.Created,
                     Updated = product.Updated,
                 };
@@ -164,7 +173,13 @@ namespace NetCore_Backend.Services.Impl
                 product.Quanlity = productModel.Quanlity;
                 product.Description = productModel.Description;
                 product.IsActive = productModel.IsActive;
+                product.IsFeature = productModel.IsFeature;
+                product.SalePercent = productModel.SalePercent;
                 product.Updated = productModel.Updated;
+                if (productModel.SalePercent > 0)
+                {
+                    product.PriceSale = product.Price - (product.Price * (decimal)productModel.SalePercent /100);
+                }
                 _context.Update(product);
                 _context.SaveChanges();
             }
@@ -188,6 +203,9 @@ namespace NetCore_Backend.Services.Impl
                                         ManufactureYear = m.ppc.p.ManufactureYear,
                                         Quanlity = m.ppc.p.Quanlity,
                                         IsActive = m.ppc.p.IsActive,
+                                        IsFeature = m.ppc.p.IsFeature,
+                                        SalePercent = m.ppc.p.SalePercent,
+                                        PriceSale = m.ppc.p.PriceSale,
                                         Updated = m.ppc.p.Updated
         });
             return (List<ProductModel>)categorizedProducts;
@@ -214,6 +232,9 @@ namespace NetCore_Backend.Services.Impl
                         FileDetailsId = product.FileDetailsId,
                         Quanlity = product.Quanlity,
                         IsActive = product.IsActive,
+                        IsFeature = product.IsFeature,
+                        SalePercent = product.SalePercent,
+                        PriceSale = product.PriceSale,
                         Address = product.Address,
                         Created = product.Created,
                         Updated = product.Updated,
@@ -223,6 +244,59 @@ namespace NetCore_Backend.Services.Impl
                 return products;
             }
             return null;
+        }
+
+        public List<ProductModel> GetAllProductByFeature()
+        {
+           var products = _context.Products.Where(p => p.IsFeature == 0).Select(p => new ProductModel()
+            {
+                Id = p.Id,
+               AspNetUsersId = p.AspNetUsersId,
+                CountryId = p.CountryId,
+                Price = p.Price,
+                Author = p.Author,
+                Name = p.Name,
+                ManufactureYear = p.ManufactureYear,
+                Description = p.Description,
+                FileDetailsId = p.FileDetailsId,
+                Quanlity = p.Quanlity,
+                IsActive = p.IsActive,
+                IsFeature = p.IsFeature,
+                SalePercent = p.SalePercent,
+                PriceSale = p.PriceSale,
+                Address = p.Address,
+                Created = p.Created,
+                Updated = p.Updated,
+            });
+
+          
+            return products.ToList();
+        }
+
+        public List<ProductModel> GetAllProductBySale()
+        {
+            var products = _context.Products.Where(p => p.SalePercent > 0).Select(p => new ProductModel()
+            {
+                Id = p.Id,
+                AspNetUsersId = p.AspNetUsersId,
+                CountryId = p.CountryId,
+                Price = p.Price,
+                Author = p.Author,
+                Name = p.Name,
+                ManufactureYear = p.ManufactureYear,
+                Description = p.Description,
+                FileDetailsId = p.FileDetailsId,
+                Quanlity = p.Quanlity,
+                IsActive = p.IsActive,
+                IsFeature = p.IsFeature,
+                SalePercent = p.SalePercent,
+                PriceSale = p.PriceSale,
+                Address = p.Address,
+                Created = p.Created,
+                Updated = p.Updated,
+            });
+
+            return products.ToList();
         }
     }
 }

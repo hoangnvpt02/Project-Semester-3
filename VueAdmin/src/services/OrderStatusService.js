@@ -1,4 +1,4 @@
-import http from "@/http-common";
+import http from "../../http-common";
 
 /* eslint-disable */
 class OrderStatusService {
@@ -7,11 +7,11 @@ class OrderStatusService {
   }
 
   getById(id) {
-    return http.get(`/api/order/get-by-id/${id}`);
+    return http.get(`/api/order/${id}`);
   }
 
   create(data) {
-    return http.post("/api/order/add", data);
+    return http.post("/api/order/", data);
   }
 
   update(id, data) {

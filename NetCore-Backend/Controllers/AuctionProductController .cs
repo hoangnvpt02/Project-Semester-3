@@ -11,12 +11,12 @@ namespace NetCore_Backend.Controllers
     
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class AuctionProductController : ControllerBase
     {
-        private readonly IProductRepository _productRepository;
-        public ProductController(IProductRepository productRepository)
+        private readonly IAuctionProductRepository _auctionproductRe;
+        public AuctionProductController(IAuctionProductRepository auctionproductRe)
         {
-            _productRepository = productRepository;
+            _auctionproductRe = auctionproductRe;
         }
 
         [HttpGet("{id}")]
@@ -24,29 +24,7 @@ namespace NetCore_Backend.Controllers
         {
             try
             {
-                var product = _productRepository.GetById(id);
-                if (product != null)
-                {
-                    return Ok(product);
-                }
-                else
-                {
-                    return NotFound();
-                }
-
-            }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
-        }
-
-        [HttpGet("/cate")]
-        public IActionResult GetAllProductByCate(long id)
-        {
-            try
-            {
-                var product = _productRepository.GetAllProductByCate();
+                var product = _auctionproductRe.GetById(id);
                 if (product != null)
                 {
                     return Ok(product);
@@ -68,7 +46,7 @@ namespace NetCore_Backend.Controllers
         {
             try
             {
-                return Ok(_productRepository.GetAll(start,end,sortBy));
+                return Ok(_auctionproductRe.GetAll(start,end,sortBy));
             }
             catch (Exception e)
             {
@@ -77,12 +55,12 @@ namespace NetCore_Backend.Controllers
         }
         
         [HttpPut]
-        public IActionResult Update(ProductModel productModel)
+        public IActionResult Update(AuctionProductModel auctionProductModel)
         {
 
             try
             {
-                _productRepository.Update(productModel);
+                _auctionproductRe.Update(auctionProductModel);
                 return Ok();
 
             }
@@ -97,7 +75,7 @@ namespace NetCore_Backend.Controllers
         {
             try
             {
-                _productRepository.Delete(id);
+                _auctionproductRe.Delete(id);
                 return Ok();
 
             }
@@ -108,11 +86,11 @@ namespace NetCore_Backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add([FromForm]ProductModel productModel,  IFormFile fileDetails,FileType fileType)
+        public IActionResult Add([FromForm]AuctionProductModel auctionProductModel,  IFormFile fileDetails,FileType fileType)
         {
             try
             {
-                return Ok(_productRepository.Add(productModel, fileDetails,fileType));
+                return Ok(_auctionproductRe.Add(auctionProductModel, fileDetails,fileType));
             }
             catch (Exception e)
             {
@@ -126,7 +104,7 @@ namespace NetCore_Backend.Controllers
 
             try
             {
-                return Ok(_productRepository.GetCateById(CategoryId));
+                return Ok(_auctionproductRe.GetCateById(CategoryId));
             }
             catch (Exception e)
             {
@@ -134,34 +112,5 @@ namespace NetCore_Backend.Controllers
             }
         }
 
-        [HttpGet("feature")]
-
-        public IActionResult GetAllProductByFeature ()
-        {
-
-            try
-            {
-                return Ok(_productRepository.GetAllProductByFeature());
-            }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
-        }
-
-        [HttpGet("sale")]
-
-        public IActionResult GetAllProductBySale()
-        {
-
-            try
-            {
-                return Ok(_productRepository.GetAllProductBySale());
-            }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
-        }
     }
 }

@@ -46,7 +46,7 @@
 			<div class="row">
 				<div class="col-md-4 text-center animate-box" v-for="pd in products">
 					<div class="product">
-						<div class="product-grid" :style="{ 'background-image' : 'url('+baseUrl+ +pd.fileDetailsId+')'  }">
+						<div class="product-grid" style="border-radius: 5px;" :style="{ 'background-image' : 'url('+baseUrl+ +pd.fileDetailsId+')'  }">
 							<!-- <img class="product-grid" :src="image"/> -->
 							<div class="inner">
 								<p>
@@ -56,8 +56,9 @@
 							</div>
 						</div>
 						<div class="desc">
-							<h3><a href="/detail">{{ pd.name }}</a></h3>
-							<span class="price">{{ pd.price }}</span>
+							<h3><a :href="'/detail/' + pd.id">{{ pd.name }}</a></h3>
+							<span class="price">Price: ${{ pd.price }}</span>
+							<p style="color:#d1c286; font-weight: bold;"  class="price" v-if="pd.salePercent >0">Sale: ${{ pd.priceSale }}</p>
 						</div>
 					</div>
 				</div>

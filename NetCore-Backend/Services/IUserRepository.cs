@@ -5,9 +5,9 @@ namespace NetCore_Backend.Services
     public interface IUserRepository
     {
         List<UserModel> GetAll();
-        UserModel GetById(long id);
+        UserModel GetById(string id);
         UserModel Add(UserModel user);
         void Update(UserModel user);
-        void Delete(long id);
+        void Delete(string id);
     }
 }
