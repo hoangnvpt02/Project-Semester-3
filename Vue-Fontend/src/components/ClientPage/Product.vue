@@ -63,8 +63,8 @@
 						</div>
 						<div class="desc">
 							<h3><a :href="'/detail/' + pd.id">{{ pd.name }}</a></h3>
-							<span class="price" v-if="pd.salePercent >0">Sale: ${{ pd.priceSale }}</span>
-							<span class="price" v-else>Price: ${{ pd.price }}</span>
+							<span class="price">Price: ${{ pd.price }}</span>
+							<p style="color:#d1c286; font-weight: bold;"  class="price" v-if="pd.salePercent >0">Sale: ${{ pd.priceSale }}</p>
 						</div>
 					</div>
 				</div>

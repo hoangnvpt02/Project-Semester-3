@@ -1,5 +1,7 @@
 ﻿using NetCore_Backend.Models;
 using NetCore_Backend.Data;
+using Microsoft.CodeAnalysis;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace NetCore_Backend.Services.Impl
 {
@@ -46,20 +48,27 @@ namespace NetCore_Backend.Services.Impl
             }
         }
 
-        public List<OrderModel> GetAll()
+        public Array GetAll()
         {
-            var orders = _context.Orders.Select(o => new OrderModel()
-            {
-                Id = o.Id,
-                ProductId = o.ProductId,
-                AspNetUsersId = o.AspNetUsersId,
-                Price = o.Price,
-                Status = o.Status,
-                IsActive = o.IsActive,
-                Created = o.Created,
-                Updated = o.Updated,
-            });
-            return orders.ToList();
+
+            var orders = _context.Orders
+            .Join(_context.Products, order => order.ProductId, product => product.Id, (order, product) => new { order,product })
+            .Join(_context.Users, o => o.order.AspNetUsersId, user => user.Id, (order1, user) => new { order1, user })
+            .Select(o => new
+             {
+                Id = o.order1.order.Id,
+                TotalPrice = o.order1.order.Price,
+                Status = o.order1.order.Status,
+                IsActive = o.order1.order.IsActive,
+                UserName = o.user.UserName,
+                Name = o.order1.product.Name,
+                PriceProduct = o.order1.product.Price,
+                FileDetailsId = o.order1.product.FileDetailsId,
+            }) 
+            .ToList()
+            .ToArray();
+
+            return orders;
         }
 
         public OrderModel GetById(long id)
@@ -93,6 +102,23 @@ namespace NetCore_Backend.Services.Impl
                 order.AspNetUsersId = orderModel.AspNetUsersId;
                 order.Price = orderModel.Price;
                 order.ProductId = orderModel.ProductId;
+                _context.Update(order);
+                _context.SaveChanges();
+            }
+        }
+
+        public int GetQuantityOrder()
+        {
+            var total = _context.Orders.ToList().Count;
+            return total;
+        }
+
+        public void UpdateStatus(long id, int status)
+        {
+            var order = _context.Orders.FirstOrDefault(o => o.Id == id);
+            if (order != null)
+            {
+                order.Status = status;
                 _context.Update(order);
                 _context.SaveChanges();
             }

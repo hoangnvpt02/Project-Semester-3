@@ -39,7 +39,7 @@
 						      </span>
 						    </div>
 						</li>
-						<li class="shopping-cart"><a href="#" class="cart"><span><small>0</small><i class="icon-shopping-cart"></i></span></a></li>
+						<li class="shopping-cart"><a href="#" class="cart"><span><small>{{ quantity_order }}</small><i class="icon-shopping-cart"></i></span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -50,9 +50,27 @@
   </div>
 </template>
 <script>
-
+import OrderService from '@/services/OrderService';
 export default {
-  
+	data () {
+		return {
+			quantity_order: 0,
+		}
+	},
+	created () {
+		this.getQuantityOrder();
+	},
+	methods: {
+		getQuantityOrder() {
+			OrderService.GetQuantityOrder()
+			.then((response) => {
+				this.quantity_order = response.data;
+			});
+			// .catch((e) => {
+			//   	console.log(e);
+			// });
+		}
+	},
 }
 </script>
 <style>
