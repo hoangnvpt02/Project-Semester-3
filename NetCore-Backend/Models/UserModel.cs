@@ -1,8 +1,9 @@
-﻿using Microsoft.Build.Framework;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Build.Framework;
 
 namespace NetCore_Backend.Models
 {
-    public class UserModel
+    public class UserModel : IdentityUser
     {
         public string Id { get; set; }
        
