@@ -1,6 +1,6 @@
 module.exports = {
     lintOnSave: false,
     devServer: {
-        port: 4001
+        port: 6001
     }
 }
