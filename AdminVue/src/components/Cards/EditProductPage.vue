@@ -3,91 +3,117 @@
   <div class="flex-auto px-4 lg:px-10 py-10 pt-0" id="add-car">
     <form @submit.prevent>
       <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-        Edit Doctor Information
+        Edit Product Information
       </h6>
       <div class="flex flex-wrap">
         <div class="w-full lg:w-6/12 px-4">
           <div class="relative w-full mb-3">
             <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-              Full Name
+              Product Name
             </label>
-            <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" required v-model="doctors.name" name="name" />
+            <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" required v-model="product.name" name="name" />
           </div>
         </div>
         <div class="w-full lg:w-6/12 px-4">
           <div class="relative w-full mb-3">
             <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-              Phone
+              Price
             </label>
-            <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" required v-model="doctors.phone" name="address" />
+            <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" required v-model="product.price" name="price" />
           </div>
         </div>
         <div class="w-full lg:w-6/12 px-4">
           <div class="relative w-full mb-3">
             <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-              Address
+              Author
             </label>
-            <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" required v-model="doctors.address" name="phone" />
+            <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" required v-model="product.author" name="author" />
           </div>
         </div>
         <div class="w-full lg:w-6/12 px-4">
           <div class="relative w-full mb-3">
             <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-              Facility
+              Quanlity
             </label>
-            <select class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name="userSelect" v-model="doctors.slFacility">
-              <option v-for="item in facilities" v-bind:key="item.id" v-bind:value="item.id"> {{ item.name }} </option>
+            <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" required v-model="product.quanlity" name="quanlity" />
+          </div>
+        </div>
+        <div class="w-full lg:w-6/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Featured Product
+            </label>
+            <select class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name="feature" v-model="product.feature">
+              <option v-for="item in features" v-bind:key="item.id" v-bind:value="item.id"> {{ item.name }} </option>
             </select>
-            <!-- <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" required v-model="facilities.website" name="license_plates" /> -->
           </div>
         </div>
         <div class="w-full lg:w-6/12 px-4">
           <div class="relative w-full mb-3">
             <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-              Specialist
+              Category
             </label>
-            <select class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name="userSelect" v-model="doctors.slSpecialist">
-              <option v-for="item in specialist" v-bind:key="item.id" v-bind:value="item.id"> {{ item.name }} </option>
+            <select class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name="userSelect" v-model="categoryId">
+              <option v-for="item in categories" v-bind:key="item.id" v-bind:value="item.id"> {{ item.name }} </option>
             </select>
-            <!-- <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" required v-model="facilities.website" name="license_plates" /> -->
           </div>
         </div>
         <div class="w-full lg:w-6/12 px-4">
           <div class="relative w-full mb-3">
             <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-              Gender
+              Percent Discount
             </label>
-            <select class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name="userSelect" v-model="doctors.slGender">
-              <option v-for="item in genders" v-bind:key="item.id" v-bind:value="item.id"> {{ item.name }} </option>
+            <input type="number" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" required v-model="product.discount" name="discount" />
+
+          </div>
+        </div>
+        <div class="w-full lg:w-6/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              Active
+            </label>
+            <select class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name="userSelect" v-model="product.active">
+              <option v-for="item in actives" v-bind:key="item.id" v-bind:value="item.id"> {{ item.name }} </option>
             </select>
-            <!-- <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" required v-model="facilities.phone" name="seat_number" /> -->
           </div>
         </div>
         <div class="w-full lg:w-12/12 px-4">
           <div class="relative w-full mb-3">
             <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-              Avatar
+              Description
+            </label>
+            <textarea type="text" placeholder="Example:Add description..." class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" rows="4" required v-model="product.description" name="note">
+            </textarea>
+          </div>
+        </div>
+        <div class="w-full lg:w-12/12 px-4">
+          <div class="relative w-full mb-3">
+            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              IMAGE PRODUCT
             </label>
             <div class="flex items-center space-x-6">
               <div v-if="previewImage" class="shrink-0">
                 <img style="width:100px;height:100px" class="object-cover rounded-md" :src="previewImage" alt="Photo" />
               </div>
               <div v-else class="shrink-0">
-                <img style="width:100px;height:100px" class="object-cover rounded-md" src="https://banffventureforum.com/wp-content/uploads/2019/08/No-Image.png" alt="Current profile photo" />
+                <img style="width:100px;height:100px" class="object-cover rounded-md" src="https://png.pngtree.com/png-vector/20190508/ourmid/pngtree-upload-cloud-vector-icon-png-image_1027251.jpg" alt="Photo" />
               </div>
               <label class="block">
                 <span class="sr-only">Choose profile photo</span>
                 <input type="file" accept="image/*" ref="file" @change="selectImage" />
               </label>
-              <button class="block text-center w-2/12 ml-3 bg-emerald-400 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" :disabled="!currentImage" @click="upload">
-                Upload Image
-              </button>
             </div>
           </div>
         </div>
+        <!-- <div class="w-full lg:w-6/12 px-4">
+          <button class="block text-center w-full lg:w-3/12  bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" :disabled="!currentImage" @click="upload">
+            Upload
+          </button>
+
+        </div> -->
       </div>
       <div class="w-full lg:w-12/12 px-4">
-        <a href="/admin/doctor-manage" class="text-center w-full lg:w-3/12  bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
+        <a href="/admin/product-manage" class="text-center w-full lg:w-3/12  bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
           Back
         </a>
         <button @click="updateCar" class="w-full lg:w-3/12 bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="submit">
@@ -100,6 +126,8 @@
 </template>
 
 <script>
+import ProductService from '@/services/ProductService';
+
 import DoctorService from "../../services/DoctorService";
 import SpecialistService from "../../services/SpecialistService";
 import FacilityService from "../../services/FacilityService";
@@ -133,6 +161,34 @@ export default {
         slFacility: null,
         image: null,
       },
+      product: {
+        name: null,
+        price: null,
+        author: null,
+        quanlity: null,
+        feature: null,
+        active: 0,
+        description: null,
+        discount: null,
+      },
+      features: [{
+          id: 0,
+          name: 'Yes'
+        },
+        {
+          id: 1,
+          name: 'No'
+        },
+      ],
+      actives: [{
+          id: 0,
+          name: 'Active'
+        },
+        {
+          id: 1,
+          name: 'InActive'
+        },
+      ],
     }
   },
   methods: {
@@ -181,19 +237,19 @@ export default {
           console.log(e);
         });
     },
-    getCarById(id) {
-      DoctorService.getById(id)
+    getProductById(id) {
+      ProductService.getById(id)
         .then((response) => {
-          console.log(response.data);
-          this.doctors.name = response.data.name;
-          this.doctors.address = response.data.address;
-          this.doctors.phone = response.data.phone;
-          this.doctors.slGender = response.data.gender;
-          this.doctors.slSpecialist = response.data.specialists.id;
-          this.doctors.slFacility = response.data.healthFacilities.id;
+          this.product.name = response.data.name;
+          this.product.price = response.data.price;
+          this.product.author = response.data.author;
+          this.product.quanlity = response.data.quanlity;
+          this.product.feature = response.data.isFeature;
+          this.product.active = response.data.isActive;
           this.currentImage = response.data.image;
           this.previewImage = response.data.image;
-          this.doctors.image = response.data.image;
+          this.product.description = response.data.description;
+          this.product.discount = response.data.salePercent;
         })
         .catch((e) => {
           console.log(e);
@@ -231,10 +287,9 @@ export default {
 
     },
   },
-  mounted() {
-    this.retrievefacilities();
+  created() {
     this.retrieveSpecialist();
-    this.getCarById(this.$route.params.id);
+    this.getProductById(this.$route.params.id);
   },
 
 }

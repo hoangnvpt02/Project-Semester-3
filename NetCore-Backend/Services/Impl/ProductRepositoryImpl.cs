@@ -50,16 +50,25 @@ namespace NetCore_Backend.Services.Impl
             product.IsActive = productModel.IsActive;
             product.IsFeature = productModel.IsFeature;
             product.Price = productModel.Price;
+
+            product.SalePercent = productModel.SalePercent;
+            if (productModel.SalePercent > 0)
+            {
+                product.PriceSale = product.Price - (product.Price * (decimal)productModel.SalePercent / 100);
+            }
+
             _context.Products.Add(product);
             _context.SaveChanges();
             return new ProductModel()
             {
+                Id= product.Id,
                 Address = product.Address,
                 Author = product.Author,
 
                 Description = product.Description,
                 AspNetUsersId = product.AspNetUsersId,
 
+                PriceSale = product.PriceSale,
                 CountryId = product.CountryId,
                 ManufactureYear = product.ManufactureYear,
                 Quanlity = product.Quanlity,
