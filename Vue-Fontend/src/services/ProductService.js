@@ -1,5 +1,5 @@
 import http from "../../http-common";
-import authHeader from './auth-header';
+import authHeader from './authHeader';
 
 
 class ProductService {
