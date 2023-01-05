@@ -1,8 +1,10 @@
 import http from "../../http-common";
+import authHeader from './authHeader';
+
 
 class ProductService {
   getAll() {
-    return http.get("api/product");
+    return http.get("api/product", { headers: authHeader() });
   }
   getAllByFeature() {
     return http.get("api/product/feature");
