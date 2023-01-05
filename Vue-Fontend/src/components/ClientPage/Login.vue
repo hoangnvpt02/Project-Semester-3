@@ -90,12 +90,17 @@ export default {
       var result = this.validate();
       if (result) {
         AuthenticationService.login(form)
-        .then((response) => {
-            this.response = response.data;
-          })
-          .catch((e) => {
-            console.log(e);
-          });
+        .then(response => {
+          console.log(response);
+          if (response.data.token) {
+            localStorage.setItem('user', JSON.stringify(response.data));
+          }
+          window.location.href = "http://localhost:4001/home";
+          return response.data;
+        })
+        .catch(e => {
+          alert("Username or password incorrect");
+        })
       }
     },
 
