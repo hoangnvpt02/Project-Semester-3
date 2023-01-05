@@ -368,7 +368,7 @@ namespace NetCore_Backend.Controllers
             var token = new JwtSecurityToken(
               _configuration.GetSection("JwtConfig:ValidIssuer").Value,
               _configuration.GetSection("JwtConfig:ValidAudience").Value,
-              expires: DateTime.Now.AddMinutes(20),
+              expires: DateTime.Now.AddHours(4),
               claims: authClaims,
               signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature)
           );
