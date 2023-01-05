@@ -21,12 +21,12 @@ import Dashboard from "@/views/admin/Dashboard.vue";
 import Settings from "@/views/admin/Settings.vue";
 import Tables from "@/views/admin/Tables.vue";
 import Specialist from "@/views/admin/Specialist.vue";
-import DoctorList from "@/views/admin/Doctor.vue";
+import ProductList from "@/views/admin/Doctor.vue";
 import MedicineList from "@/views/admin/Medicine.vue";
 import Maps from "@/views/admin/Maps.vue";
 import EditCarPage from "./components/Cards/EditCarPage.vue";
 import EditSpecialist from "./components/Cards/EditSpecialist.vue";
-import EditDoctorPage from "./components/Cards/EditDoctorPage.vue";
+import EditProductPage from "./components/Cards/EditProductPage.vue";
 import EditMedicine from "./components/Cards/EditMedicine.vue";
 
 // views for Auth layout
@@ -45,7 +45,7 @@ import Index from "@/views/Index.vue";
 const routes = [
   {
     path: "/admin",
-    redirect: "/admin/doctor-manage",
+    redirect: "/admin/product-manage",
     component: Admin,
     children: [
       {
@@ -65,8 +65,8 @@ const routes = [
         component: Specialist,
       },
       {
-        path: "/admin/doctor-manage",
-        component: DoctorList,
+        path: "/admin/product-manage",
+        component: ProductList,
       },
       {
         path: "/admin/medicine-manage",
@@ -81,8 +81,8 @@ const routes = [
         component: EditSpecialist,
       },
       {
-        path: "/admin/doctor-edit/:id",
-        component: EditDoctorPage,
+        path: "/admin/product-edit/:id",
+        component: EditProductPage,
       },
       {
         path: "/admin/medicine-edit/:id",
@@ -119,7 +119,7 @@ const routes = [
   },
   {
     path: "/",
-    redirect: "/admin/doctor-manage",
+    redirect: "/admin/product-manage",
     component: Index,
   },
   { path: "/:pathMatch(.*)*", redirect: "/" },

@@ -1,9 +1,13 @@
 import axios from 'axios';
-import authHeader from './auth-header';
+import authHeader from './authHeader';
 
-const API_URL = 'http://localhost:9091/api/test/';
+const API_URL = 'https://localhost:5001/api/Authenticate/Test/';
 
 class UserService {
+
+  getUserId() {
+    return axios.get(API_URL, { headers : authHeader });
+  }
   getPublicContent() {
     return axios.get(API_URL + 'all');
   }

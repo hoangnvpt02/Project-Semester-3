@@ -1,16 +1,16 @@
 <template>
   <div class="flex flex-wrap mt-4">
     <div class="w-full mb-12 px-4">
-      <DoctorList />
+      <ProductList />
     </div>
   </div>
 </template>
 <script>
-import DoctorList from "@/components/Cards/DoctorList.vue";
+import ProductList from "@/components/Cards/ProductList.vue";
 
 export default {
   components: {
-    DoctorList,
+    ProductList,
   },
 };
 </script>
