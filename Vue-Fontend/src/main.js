@@ -7,6 +7,7 @@ import Product from "@/components/ClientPage/Product.vue";
 import ProductAsCate from "@/components/ClientPage/ProductAsCate.vue";
 import Contact from "@/components/ClientPage/Contact.vue";
 import ProductDetail from "@/components/ClientPage/ProductDetail.vue";
+import ProductAuction from "@/components/ClientPage/ProductAuction.vue";
 import Cart from "@/components/ClientPage/Cart.vue";
 import Auction from "@/components/ClientPage/Auction.vue";
 import Login from "@/components/ClientPage/Login.vue";
@@ -42,6 +43,11 @@ const routes = [
     path: "/detail/:id",
     component: ProductDetail,
     name: "detail"
+  },
+  {
+    path: "/product-auction/:id",
+    component: ProductAuction,
+    name: "product-auction"
   },
   {
     path: "/auction",
