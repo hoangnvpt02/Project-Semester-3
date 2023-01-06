@@ -12,6 +12,7 @@
     "core-js": "^3.8.3",
     "jest": "^29.3.1",
     "jest-editor-support": "^30.3.1",
+    "sweetalert": "^2.1.2",
     "vue": "^3.2.13",
     "vue-router": "^4.1.6"
   },

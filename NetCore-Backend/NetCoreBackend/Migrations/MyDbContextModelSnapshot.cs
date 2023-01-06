@@ -484,6 +484,10 @@ namespace NetCoreBackend.Migrations
                     b.Property<int>("IsActive")
                         .HasColumnType("int");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("ToDate")
                         .HasColumnType("datetime2");
 

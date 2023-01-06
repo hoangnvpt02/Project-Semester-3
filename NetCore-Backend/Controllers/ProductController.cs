@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic.FileIO;
 using NetCore_Backend.Data;
@@ -14,9 +16,11 @@ namespace NetCore_Backend.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
-        public ProductController(IProductRepository productRepository)
+        private readonly UserManager<IdentityUser> _userManager;
+        public ProductController(IProductRepository productRepository, UserManager<IdentityUser> userManager)
         {
             _productRepository = productRepository;
+            _userManager = userManager;
         }
 
         [HttpGet("{id}")]
@@ -63,6 +67,7 @@ namespace NetCore_Backend.Controllers
             }
         }
 
+        //[HttpGet, Authorize(Roles = UserRoles.User)]
         [HttpGet]
         public IActionResult GetAll(int start,int end,String ? sortBy)
         {

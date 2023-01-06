@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NetCore_Backend.Models;
 using NetCore_Backend.Services;
@@ -49,7 +50,7 @@ namespace NetCore_Backend.Controllers
             }
         }
         [HttpPut]
-        public IActionResult Update( UserModel userModel)
+        public IActionResult Update(UserModel userModel)
         {
 
             try
