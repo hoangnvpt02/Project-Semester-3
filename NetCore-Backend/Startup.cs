@@ -22,6 +22,7 @@ namespace NetCore_Backend
             {
                 option.UseSqlServer(Configuration.GetConnectionString("MyDb"));
             });
+            services.AddScoped<IUserRepository, UserRepositoryImpl>();
             services.AddScoped<ICountryRepository, CountryRepositoryImpl>();
             services.AddScoped<IGalaryRepository, GalaryRepositoryImpl>();
             services.AddScoped<IDossierRepository, DossierRepositoryImpl>();
@@ -52,7 +53,9 @@ namespace NetCore_Backend
                 app.UseSwaggerUI();
             }
             app.UseHttpsRedirection();
-            
+
+            // Authentication & Authorization
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();
