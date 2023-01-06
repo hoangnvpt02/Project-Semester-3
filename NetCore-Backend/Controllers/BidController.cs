@@ -91,5 +91,17 @@ namespace NetCore_Backend.Controllers
                 return BadRequest();
             }
         }
+        [HttpGet("PriceDesc")]
+        public IActionResult ListProductByGaAndPr(int start,int end,long galaryId,long productId)
+        {
+            try
+            {
+                return Ok(_bidRepository.ListProductByGaAndPr(start,end,galaryId,productId));
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
     }
 }
