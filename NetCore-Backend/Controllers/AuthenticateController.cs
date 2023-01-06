@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using NetCore_Backend.Configurations;
@@ -7,7 +6,6 @@ using NetCore_Backend.Data;
 using NetCore_Backend.Models;
 using NetCore_Backend.Models.DTOs;
 using NuGet.Common;
-using NuGet.Protocol;
 using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -173,16 +171,6 @@ namespace NetCore_Backend.Controllers
                 // check user
                 var user_exsit = await _userManager.FindByEmailAsync(email);
 
-                if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
-                {
-                    await _userManager.RemoveFromRoleAsync(user_exsit, UserRoles.Admin);
-                }
-
-                if (await _roleManager.RoleExistsAsync(UserRoles.User))
-                {
-                    await _userManager.AddToRoleAsync(user_exsit, UserRoles.User);
-                }
-
                 if (await _roleManager.RoleExistsAsync(UserRoles.Seller))
                 {
                     await _userManager.AddToRoleAsync(user_exsit, UserRoles.Seller);
@@ -217,16 +205,6 @@ namespace NetCore_Backend.Controllers
                 // check user
                 var user_exsit = await _userManager.FindByEmailAsync(email);
 
-                if (await _roleManager.RoleExistsAsync(UserRoles.User))
-                {
-                    await _userManager.AddToRoleAsync(user_exsit, UserRoles.User);
-                }
-
-                if (await _roleManager.RoleExistsAsync(UserRoles.Seller))
-                {
-                    await _userManager.AddToRoleAsync(user_exsit, UserRoles.Seller);
-                }
-
                 if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
                 {
                     await _userManager.AddToRoleAsync(user_exsit, UserRoles.Admin);
@@ -260,16 +238,6 @@ namespace NetCore_Backend.Controllers
             {
                 // check user
                 var user_exsit = await _userManager.FindByEmailAsync(email);
-
-                if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
-                {
-                    await _userManager.RemoveFromRoleAsync(user_exsit, UserRoles.Admin);
-                }
-
-                if (await _roleManager.RoleExistsAsync(UserRoles.Seller))
-                {
-                    await _userManager.RemoveFromRoleAsync(user_exsit, UserRoles.Seller);
-                }
 
                 if (await _roleManager.RoleExistsAsync(UserRoles.User))
                 {
@@ -332,8 +300,6 @@ namespace NetCore_Backend.Controllers
                 var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, exsiting_user.Email),
-                    new Claim(ClaimTypes.Name, exsiting_user.UserName),
-                    new Claim(ClaimTypes.NameIdentifier, exsiting_user.Id),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 
@@ -368,21 +334,12 @@ namespace NetCore_Backend.Controllers
             var token = new JwtSecurityToken(
               _configuration.GetSection("JwtConfig:ValidIssuer").Value,
               _configuration.GetSection("JwtConfig:ValidAudience").Value,
-              expires: DateTime.Now.AddHours(4),
+              expires: DateTime.Now.AddMinutes(20),
               claims: authClaims,
               signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature)
           );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
-        [HttpGet("Test"), Authorize(Roles = UserRoles.User)]
-        public IActionResult Test()
-        {
-            var id = _userManager.GetUserId(User);
-            return Ok($"test {id}");
-        }
     }
-
-    
 }

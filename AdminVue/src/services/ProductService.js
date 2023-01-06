@@ -22,5 +22,8 @@ class ProductService {
   create(data) {
     return http.post("api/product/", data);
   }
+  update(data) {
+    return http.put("/api/product/", data);
+  }
 }
 export default new ProductService();

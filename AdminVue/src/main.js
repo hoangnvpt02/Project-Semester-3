@@ -24,7 +24,7 @@ import Specialist from "@/views/admin/Specialist.vue";
 import ProductList from "@/views/admin/Doctor.vue";
 import MedicineList from "@/views/admin/Medicine.vue";
 import Maps from "@/views/admin/Maps.vue";
-import EditCarPage from "./components/Cards/EditCarPage.vue";
+import EditCatePage from "./components/Cards/EditCatePage.vue";
 import EditSpecialist from "./components/Cards/EditSpecialist.vue";
 import EditProductPage from "./components/Cards/EditProductPage.vue";
 import EditMedicine from "./components/Cards/EditMedicine.vue";
@@ -73,8 +73,8 @@ const routes = [
         component: MedicineList,
       },
       {
-        path: "/admin/car-edit/:id",
-        component: EditCarPage,
+        path: "/admin/cate-edit/:id",
+        component: EditCatePage,
       },  
       {
         path: "/admin/specialist-edit/:id",

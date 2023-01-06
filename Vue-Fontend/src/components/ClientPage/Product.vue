@@ -107,7 +107,7 @@ import ProductService from '@/services/ProductService';
 import CategoryService from '@/services/CategoryService';
 import bannerproduct from '../../assets/images/bannerproduct.png'
 import base from "@/../base.json"
-import userService from '@/services/UserService';
+
 export default {
 	data() {
 	let products
@@ -142,21 +142,6 @@ export default {
 		},
 	},
 	created() {
-		// let a= userService.getUserId()
-		// console.log(a);
-		// userService.getUserId().then((response) => { 
-		// 	console.log(response.data);
-		// })
-		// let data = window.localStorage.getItem('user');
-		// let jsondata = JSON.parse(data)
-		// console.log(jsondata.token);
-		// console.log()
-		// fetch('https://localhost:5001/api/Authenticate/Test', { headers: authHeader() })
-		// .then((response) => { 
-    //         return response.json().then((data) => {
-    //             console.log(data);
-    //         })
-    //         })
 		this.baseUrl = this.base.baseUrl+ 'api/files/'
 		this.retrieveProduct()
 		this.retrieveCategories()

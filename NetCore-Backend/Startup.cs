@@ -52,9 +52,7 @@ namespace NetCore_Backend
                 app.UseSwaggerUI();
             }
             app.UseHttpsRedirection();
-
-            // Authentication & Authorization
-            app.UseAuthentication();
+            
             app.UseAuthorization();
 
             app.MapControllers();

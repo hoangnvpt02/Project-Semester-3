@@ -116,7 +116,7 @@
         <a href="/admin/product-manage" class="text-center w-full lg:w-3/12  bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
           Back
         </a>
-        <button @click="updateCar" class="w-full lg:w-3/12 bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="submit">
+        <button @click="fnUpdate" class="w-full lg:w-3/12 bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="submit">
           Save
         </button>
       </div>
@@ -127,16 +127,18 @@
 
 <script>
 import ProductService from '@/services/ProductService';
-
-import DoctorService from "../../services/DoctorService";
-import SpecialistService from "../../services/SpecialistService";
-import FacilityService from "../../services/FacilityService";
+import CategoryService from "../../services/CategoryService";
+import ProductCate from '../../services/ProductCate';
 import UploadService from "../../services/UploadFilesService";
 import swal from 'sweetalert';
 export default {
   data() {
+    let categories;
+    let categoryId
 
     return {
+      categoryId,
+      categories,
       currentImage: undefined,
       previewImage: undefined,
       progress: 0,
@@ -152,16 +154,8 @@ export default {
         },
 
       ],
-      doctors: {
-        name: null,
-        phone: null,
-        address: null,
-        slGender: null,
-        slSpecialist: null,
-        slFacility: null,
-        image: null,
-      },
       product: {
+        id: null,
         name: null,
         price: null,
         author: null,
@@ -170,6 +164,7 @@ export default {
         active: 0,
         description: null,
         discount: null,
+        fileDetailsId: null,
       },
       features: [{
           id: 0,
@@ -192,6 +187,16 @@ export default {
     }
   },
   methods: {
+    getAllCategory() {
+      CategoryService.getAll()
+        .then((response) => {
+          this.categories = response.data;
+          // console.log(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
     selectImage() {
       this.currentImage = this.$refs.file.files.item(0);
       this.previewImage = URL.createObjectURL(this.currentImage);
@@ -217,29 +222,10 @@ export default {
     getFiles() {
 
     },
-    retrievefacilities() {
-      FacilityService.getAll()
-        .then((response) => {
-          this.facilities = response.data.content;
-          console.log(response.data.content);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
-    retrieveSpecialist() {
-      SpecialistService.getAll()
-        .then((response) => {
-          this.specialist = response.data;
-          console.log(response.data.content);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
     getProductById(id) {
       ProductService.getById(id)
         .then((response) => {
+          this.product.id = response.data.id;
           this.product.name = response.data.name;
           this.product.price = response.data.price;
           this.product.author = response.data.author;
@@ -250,28 +236,34 @@ export default {
           this.previewImage = response.data.image;
           this.product.description = response.data.description;
           this.product.discount = response.data.salePercent;
+          this.product.fileDetailsId = response.data.fileDetailsId;
+
         })
         .catch((e) => {
           console.log(e);
         });
     },
 
-    updateCar() {
+    getByProductId(id) {
+      ProductCate.getByProductId(id).then((response) => {
+        // console.log("🚀 ~ file: EditProductPage.vue:254 ~ ProductCate.getByProductId ~ response", response)
+        this.categoryId = response.data.categoryId
+    })
+    },
+    fnUpdate() {
       let data = {
-        name: this.doctors.name,
-        phone: this.doctors.phone,
-        address: this.doctors.address,
-        gender: this.doctors.slGender,
-        specialists: {
-          id: this.doctors.slSpecialist
-        },
-        healthFacilities: {
-          id: this.doctors.slFacility
-        },
-        image:  this.currentImage
+        id : this.product.id,
+        name: this.product.name,
+        price: this.product.price,
+        author: this.product.author,
+        quanlity: this.product.quanlity,
+        feature: this.product.feature,
+        active: this.product.active,
+        description: this.product.description,
+        salePercent: this.product.discount,
       };
 
-      DoctorService.update(this.$route.params.id, data)
+      ProductService.update(data)
         .then(() => {
           swal("Success!", "Update Successfully!", "success", {
             button: false,
@@ -285,11 +277,58 @@ export default {
           });
         });
 
+      // const formData = new FormData();
+      // // formData.append('fileDetails',  this.$refs.file.files.item(0));
+      // formData.append('Id', this.product.id);
+      // formData.append('Name', this.product.name);
+      // formData.append('Price', this.product.price);
+      // formData.append('Author', this.product.author);
+      // formData.append('Quanlity', this.product.quanlity);
+      // formData.append('IsFeature', this.product.feature);
+      // formData.append('IsActive', this.product.active);
+      // formData.append('Description', this.product.description);
+      // formData.append('SalePercent', this.product.discount);
+      //     const data = {
+      //       method: 'PUT',
+      //       body: formData
+      //       // If you add this, upload won't work
+      //       // headers: {
+      //       //   'Content-Type': 'multipart/form-data',
+      //       // }
+      //     };
+      //     fetch('https://localhost:5001/api/Product', data)
+      //     .then((response) => { 
+      //       return response.json().then((data) => {
+      //           console.log(data);
+      //           this.idProduct = data.id
+      //       })
+      //       })
+      //       .then(() => { 
+      //         let data = {
+      //           productId : this.idProduct,
+      //           categoryId : this.categoryId
+      //         }
+      //         ProductCate.create(data)
+      //       })
+      //       .then(() => {
+      //         swal("Success!", "Add Successfully!", "success", {
+      //           button: false,
+      //           timer: 2000
+      //         });
+      //       })
+      //       .catch((res) => {
+      //         console.log(res.message)
+      //         swal("Error!", "Add Failed!", "error", {
+      //           button: false,
+      //           timer: 2000
+      //         });
+      //       });
     },
   },
   created() {
-    this.retrieveSpecialist();
-    this.getProductById(this.$route.params.id);
+    this.getAllCategory()
+    this.getByProductId(this.$route.params.id)
+    this.getProductById(this.$route.params.id)
   },
 
 }

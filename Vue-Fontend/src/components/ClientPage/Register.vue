@@ -142,11 +142,9 @@ export default {
         AuthenticationService.register(form)
         .then((response) => {
             this.response = response.data;
-            alert("Đăng ký thành công");
-            return window.location.href = "http://localhost:4001/login"; 
           })
           .catch((e) => {
-            alert("errors: ", e)
+            console.log(e);
           });
       }
     },
