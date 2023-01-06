@@ -125,10 +125,10 @@ export default {
     },
   },
     mounted() {
-    this.reCountDoctor();
-    this.reCountMedicine();
-    this.reCountSpecialist();
-    this.reCountFacility();
+    // this.reCountDoctor();
+    // this.reCountMedicine();
+    // this.reCountSpecialist();
+    // this.reCountFacility();
   },
 };
 </script>

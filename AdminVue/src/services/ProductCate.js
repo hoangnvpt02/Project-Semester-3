@@ -10,5 +10,8 @@ class ProductCate {
   create(data) {
     return http.post("api/ProductCate/", data);
   }
+  getByProductId(id) {
+    return http.get(`/cate/product-id/${id}`)
+  }
 }
 export default new ProductCate();

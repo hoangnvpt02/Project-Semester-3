@@ -193,7 +193,7 @@ export default {
       CategoryService.getAll()
         .then((response) => {
           this.categories = response.data;
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch((e) => {
           console.log(e);

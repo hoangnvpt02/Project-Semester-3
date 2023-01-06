@@ -96,7 +96,7 @@ export default {
           if (response.data.token) {
             localStorage.setItem('user', JSON.stringify(response.data));
           }
-          // window.location.href = "http://localhost:4001/home";
+          window.location.href = "http://localhost:4001/home";
           return response.data;
         })
         .catch(e => {

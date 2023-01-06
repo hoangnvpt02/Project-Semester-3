@@ -51,39 +51,7 @@
 			</div>
 		</div>
 
-  <div id="fh5co-product">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<!-- <span>Cool Stuff</span> -->
-					<h2>Featured Artworks</h2>
-					<p>Featured artworks - Let's enjoy!</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4 text-center animate-box" v-for="pdfeature in productFeatures">
-					<div class="product">
-						<div class="product-grid" style="border-radius: 5px;" :style="{ 'background-image' : 'url('+baseUrl+ +pdfeature.fileDetailsId+')'  }">
-							<span class="sale">Featured</span>
-							<div class="inner">
-								<p>
-									<router-link :to="{ name: 'detail', params: { id: pdfeature.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link>
-									<router-link :to="{ name: 'detail', params: { id: pdfeature.id } }" class="icon"><i class="icon-eye"></i></router-link>
-								</p>
-							</div>
-						</div>
-						<div class="desc">
-							<h3><router-link :to="{ name: 'detail', params: { id: pdfeature.id } }" class="icon">{{ pdfeature.name }}</router-link></h3>
-							<span class="price">Price: ${{ pdfeature.price }}</span>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-	</div>
-
-	<div id="fh5co-product" v-if="productSales.length >0">
+		<div id="fh5co-product" v-if="productSales.length >0">
 		<div class="container">
 			<div class="row animate-box">
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
@@ -108,6 +76,38 @@
 							<h3><router-link :to="{ name: 'detail', params: { id: pdsale.id } }" class="icon">{{ pdsale.name }}</router-link></h3>
 							<span class="price">Price: ${{ pdsale.price }}</span>
 							<p class="price" style="color:#d1c286; font-weight: bold;" v-if="pdsale.salePercent >0">Sale: ${{ pdsale.priceSale }}</p> 
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+  <div id="fh5co-product">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<!-- <span>Cool Stuff</span> -->
+					<h2>Featured Artworks</h2>
+					<p>Featured artworks - Let's enjoy!</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 text-center animate-box" v-for="pdfeature in productFeatures">
+					<div class="product">
+						<div class="product-grid" style="border-radius: 5px;" :style="{ 'background-image' : 'url('+baseUrl+ +pdfeature.fileDetailsId+')'  }">
+							<span class="sale">Featured</span>
+							<div class="inner">
+								<p>
+									<router-link :to="{ name: 'detail', params: { id: pdfeature.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link>
+									<router-link :to="{ name: 'detail', params: { id: pdfeature.id } }" class="icon"><i class="icon-eye"></i></router-link>
+								</p>
+							</div>
+						</div>
+						<div class="desc">
+							<h3><router-link :to="{ name: 'detail', params: { id: pdfeature.id } }" class="icon">{{ pdfeature.name }}</router-link></h3>
+							<span class="price">Price: ${{ pdfeature.price }}</span>
 						</div>
 					</div>
 				</div>

@@ -6,6 +6,7 @@ namespace NetCore_Backend.Services
     {
         List<ProductCateModel> GetAll();
         ProductCateModel GetById(long id);
+        ProductCateModel getByProductId(long id);
         ProductCateModel Add(ProductCateModel productCateModel);
         void Update(ProductCateModel productCateModel);
         void Delete(long id);

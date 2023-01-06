@@ -68,13 +68,14 @@ namespace NetCore_Backend.Controllers
             }
         }
 
-        [HttpGet, Authorize(Roles = UserRoles.User)]
+        //[HttpGet, Authorize(Roles = UserRoles.User)]
+        [HttpGet]
         public IActionResult GetAll(int start,int end,String ? sortBy)
         {
             try
             {
-                var id = _userManager.GetUserId(User);
-                return Ok($"id: {id}");
+                //var id = _userManager.GetUserId(User);
+                //return Ok($"id: {id}");
                 return Ok(_productRepository.GetAll(start, end,sortBy));
             }
             catch (Exception e)

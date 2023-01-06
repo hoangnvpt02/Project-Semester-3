@@ -12,7 +12,7 @@
     </button>
 
     <router-link
-          :to="'/admin/car-edit/' + carId"
+          :to="'/admin/cate-edit/' + carId"
           class="text-center hover:shadow-md outline-none text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           >Edit
     </router-link>

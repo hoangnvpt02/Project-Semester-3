@@ -29,7 +29,12 @@
             {{ item.isActive==0 ? "True" : "False" }}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-            <table-dropdown :carId="item.id"  />
+            <button v-on:click="fnDelete(item.id)" class="text-center w-full lg:w-3/12  bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
+              Delete
+            </button>
+            <a :href="'/admin/cate-edit/' + item.id" class="text-center w-full lg:w-3/12 bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
+              Edit
+            </a>
           </td>
         </tr>
 
@@ -41,23 +46,19 @@
 
 <script>
  import { ref } from "vue"
-import FacilityService from "../../services/FacilityService";
 import AddCategory from "@/components/Cards/AddCategory.vue";
-import TableDropdown from "@/components/Dropdowns/TableDropdown.vue";
 import CategoryService from "../../services/CategoryService";
-
 
 export default {
   data() {
     const category=ref([]);
-    const titles  = ref(['ID','NAME','IS_ACTIVE','ACTIONS'])
+    const titles  = ref(['ID','NAME','ACTIVE','ACTIONS'])
     return {
       category,
       titles,
     };
   },
   components: {
-    TableDropdown,
     AddCategory,
   },
   props: {
@@ -71,6 +72,37 @@ export default {
   },
 
   methods: {
+    fnDelete : function(id) {
+      swal({
+      title: "Are you sure?",
+      icon: "warning",
+      buttons: [
+        'No, cancel it!',
+        'Yes, I am sure!'
+      ],
+      dangerMode: true,
+    }).then(function(isConfirm) {
+      if (isConfirm) {
+        CategoryService.delete(id).then(() => {
+        swal("Success", "Delete Successfully!", "success",{
+            button: false,
+            timer:2000
+          })
+        .then(function(){ 
+          location.reload();
+        })
+        })
+        .catch(() => {
+          swal("Error", "Delete Failed!", "error",{
+            button: false,
+            timer:2000
+          });
+        });
+      }
+      
+    })
+
+    },
     addCategory() {
       document.getElementById('cars-list').style.display = "none";
       document.getElementById('add-car').style.display = "block";

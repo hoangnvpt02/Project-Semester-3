@@ -227,26 +227,30 @@ namespace NetCore_Backend.Services.Impl
                 foreach (ProductCate productCate in productCates)
                 {
                     Product product = _context.Products.FirstOrDefault(c => c.Id == productCate.Id);
-                    ProductModel model = new ProductModel() { 
-                        Id = product.Id,
-                        AspNetUsersId =product.AspNetUsersId,
-                        CountryId = product.CountryId,
-                        Price = product.Price,
-                        Author = product.Author,
-                        Name = product.Name,
-                        ManufactureYear=product.ManufactureYear,
-                        Description = product.Description,
-                        FileDetailsId = product.FileDetailsId,
-                        Quanlity = product.Quanlity,
-                        IsActive = product.IsActive,
-                        IsFeature = product.IsFeature,
-                        SalePercent = product.SalePercent,
-                        PriceSale = product.PriceSale,
-                        Address = product.Address,
-                        Created = product.Created,
-                        Updated = product.Updated,
-                    };
-                    products.Add(model);
+                    if (product != null)
+                    {
+                        ProductModel model = new ProductModel()
+                        {
+                            Id = product.Id,
+                            AspNetUsersId = product.AspNetUsersId,
+                            CountryId = product.CountryId,
+                            Price = product.Price,
+                            Author = product.Author,
+                            Name = product.Name,
+                            ManufactureYear = product.ManufactureYear,
+                            Description = product.Description,
+                            FileDetailsId = product.FileDetailsId,
+                            Quanlity = product.Quanlity,
+                            IsActive = product.IsActive,
+                            IsFeature = product.IsFeature,
+                            SalePercent = product.SalePercent,
+                            PriceSale = product.PriceSale,
+                            Address = product.Address,
+                            Created = product.Created,
+                            Updated = product.Updated,
+                        };
+                        products.Add(model);
+                    }
                 }
                 return products;
             }
