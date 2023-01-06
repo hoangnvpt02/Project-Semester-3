@@ -139,6 +139,8 @@ namespace NetCore_Backend.Controllers
                 };
 
                 var is_created = await _userManager.CreateAsync(new_user, requestDto.Password);
+                await _userManager.AddToRoleAsync(new_user, UserRoles.User);
+                await _userManager.AddToRoleAsync(new_user, UserRoles.Seller);
                 await _userManager.AddToRoleAsync(new_user, UserRoles.Admin);
 
                 if (is_created.Succeeded)
@@ -312,6 +314,88 @@ namespace NetCore_Backend.Controllers
                         }
                     });
                 }  
+
+                var isCorrect = await _userManager.CheckPasswordAsync(exsiting_user, loginRequestDto.Password);
+
+                if (!isCorrect)
+                {
+                    return BadRequest(new AuthResult()
+                    {
+                        Result = false,
+                        Errors = new List<string>()
+                        {
+                            "Invalid credentials"
+                        }
+                    });
+                }
+
+                var userRoles = await _userManager.GetRolesAsync(exsiting_user);
+
+                var authClaims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Email, exsiting_user.Email),
+                    new Claim(ClaimTypes.Name, exsiting_user.UserName),
+                    new Claim(ClaimTypes.NameIdentifier, exsiting_user.Id),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                };
+
+                foreach (var userRole in userRoles)
+                {
+                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                }
+
+                var jwtToken = GenerateJwtToken(exsiting_user, authClaims);
+
+                return Ok(new AuthResult()
+                {
+                    Id = exsiting_user.Id,
+                    Token = jwtToken.ToString(),
+                    Result = true
+                });
+            }
+            return BadRequest(new AuthResult()
+            {
+                Result = false,
+                Errors = new List<string>()
+                {
+                    "Invalid payload"
+                }
+            });
+        }
+
+        [HttpPost]
+        [Route("LoginAdmin")]
+        public async Task<IActionResult> LoginAdmin([FromBody] UserLoginRequestDto loginRequestDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var exsiting_user = await _userManager.FindByNameAsync(loginRequestDto.UserName);
+
+                if (exsiting_user == null)
+                {
+                    return BadRequest(new AuthResult()
+                    {
+                        Result = false,
+                        Errors = new List<string>()
+                        {
+                            "Invalid payload",
+                        }
+                    });
+                }
+
+                var isAdmin = await _userManager.GetRolesAsync(exsiting_user);
+
+                if (!isAdmin.Contains(UserRoles.Admin))
+                {
+                    return BadRequest(new AuthResult()
+                    {
+                        Result = false,
+                        Errors = new List<string>()
+                        {
+                            "No has role Admin",
+                        }
+                    });
+                }
 
                 var isCorrect = await _userManager.CheckPasswordAsync(exsiting_user, loginRequestDto.Password);
 

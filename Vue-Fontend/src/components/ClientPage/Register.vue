@@ -44,13 +44,16 @@
           <label>Confirm Password</label>
           <div class="invalid-feedback">{{ errors.rePassword }}</div>
         </div>
-        <a @click="clickButtonLogin(form)">
+        <a class="button" @click="clickButtonLogin(form)">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           Register
         </a>
+        <div style="text-align: center;">
+          <a href="/Login">Login</a>
+        </div>
       </form>
     </div>
   </div>
@@ -142,9 +145,11 @@ export default {
         AuthenticationService.register(form)
         .then((response) => {
             this.response = response.data;
+            alert("Đăng ký thành công");
+            return window.location.href = "http://localhost:4001/login";
           })
           .catch((e) => {
-            console.log(e);
+            alert("Tên username đã tồn tại");
           });
       }
     },

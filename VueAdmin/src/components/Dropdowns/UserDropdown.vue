@@ -46,10 +46,11 @@
       </a>
       <div class="h-0 my-2 border border-solid border-blueGray-100" />
       <a
+        @click="handlerLogout()"
         href="javascript:void(0);"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
-        Seprated link
+        Logout
       </a>
     </div>
   </div>
@@ -79,6 +80,24 @@ export default {
         });
       }
     },
+    handlerLogout(user) {
+      this.loading = true;
+
+      this.$store.dispatch("auth/logout", user).then(
+        () => {
+          this.$router.push("/admin");
+        },
+        (error) => {
+          this.loading = false;
+          this.message =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+        }
+      );
+    }
   },
-};
+}
 </script>

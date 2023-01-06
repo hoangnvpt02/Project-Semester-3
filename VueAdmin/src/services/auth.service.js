@@ -1,32 +1,35 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = 'http://localhost:9090/api/auth/';
+const API_URL = "https://localhost:5001/api/Authenticate/";
 
 class AuthService {
   login(user) {
     return axios
-      .post(API_URL + 'signin', {
+      .post(API_URL + "loginAdmin", {
         username: user.username,
-        password: user.password
+        password: user.password,
       })
-      .then(response => {
-        if (response.data.accessToken) {
-          localStorage.setItem('user', JSON.stringify(response.data));
+      .then((response) => {
+        if (response.data.token) {
+          localStorage.setItem("admin", JSON.stringify(response.data));
         }
 
         return response.data;
+      })
+      .catch(() => {
+        alert("Username or password is correct");
       });
   }
 
   logout() {
-    localStorage.removeItem('user');
+    localStorage.removeItem("admin");
   }
 
   register(user) {
-    return axios.post(API_URL + 'signup', {
+    return axios.post(API_URL + "registerAdmin", {
       username: user.username,
       email: user.email,
-      password: user.password
+      password: user.password,
     });
   }
 }
