@@ -11,6 +11,6 @@ namespace NetCore_Backend.Services
         void Delete(long id);
         int GetQuantityOrder();
 
-        void UpdateStatus(long id, int status);
+        void UpdateStatus(int id, int status);
     }
 }

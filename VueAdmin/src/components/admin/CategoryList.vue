@@ -1,5 +1,6 @@
 <template>
 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded" :class="[color === 'light' ? 'bg-white' : 'bg-emerald-900 text-white']">
+    <button class="btn-create" style="background: #28a745;" @click="setData(index, 'CREATE')">Thêm mới</button>
     <div class="block w-full overflow-x-auto" id="cars-list" v-show="viewData">
         <!-- Projects table -->
         <table class="table-order items-center w-full bg-transparent border-collapse">
@@ -19,16 +20,15 @@
                         <b>{{ item.Name }}</b>
                     </td>
                     <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        {{ item.description }}
+                        {{ item.Description }}
                     </td>
-                    <td>
-                        <!-- <button class="btn-status" style="background: #28a745;" @click="setData(index, 'CREATE')">Thêm</button> -->
-                        <!-- <button class="btn-status" style="background: #dc3545;" v-if="item.status == 2" @click="updateStatus(id, 1, index)">Không hoạt động</button> -->
+                    <td style="width: 10%">
+                        <button class="btn-status" style="background: #28a745;" v-if="item.status == 1" @click="updateStatus(id, 2, index)">Hoạt động</button>
+                        <button class="btn-status" style="background: #dc3545;" v-if="item.status == 2" @click="updateStatus(id, 1, index)">Không hoạt động</button>
+                    </td>
+                    <td style="width: 15%">
                         <button type="button" class="btn-status" style="background: rgb(54 40 167); margin-left: 4px;" @click="setData(index, 'EDIT')">
                             Sửa
-                        </button>
-                        <button type="button" class="btn-status" style="background: #dc3545; margin-left: 4px;" @click="deletet(item.id, index)">
-                            Xóa
                         </button>
                     </td>
                 </tr>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="w-full max-w-lg" v-show="!viewData" style="padding: 19px 15px 15px 15px;">
-        <h1 class="-mx-3 mb-6" style="margin-left: 29px" v-if="type_perform == 'CREATE'"><b>Thêm sản Thể loại mới!</b></h1>
+        <h1 class="-mx-3 mb-6" style="margin-left: 29px" v-if="type_perform == 'CREATE'"><b>Thêm Thể loại mới!</b></h1>
         <h1 class="-mx-3 mb-6" style="margin-left: 29px" v-if="type_perform == 'EDIT'"><b>Chỉnh sửa Thể loại!</b></h1>
 
         <div class="flex flex-wrap -mx-3 mb-4" style="margin-left: 19px">
@@ -58,7 +58,6 @@
             <button class="btn-status" style="background: #dc3545; padding: 8px 40px 8px 40px; margin-right: 11px;" @click="viewData = true" type="button">
                 Trở lại
             </button>
-
             <button v-if="type_perform == 'CREATE'" class="btn-status" style="background: #28a745; padding: 8px 40px 8px 40px" type="submit">
                 Thêm
             </button>
@@ -71,17 +70,34 @@
 </div>
 </template>
 
-    
 <script>
 import {
     ref
 } from "vue"
 import ProductService from "../../services/ProductService";
 
-export default {
+export default {    
     data() {
-        const list_product = ref([]);
-        const titles = ref(['ID', 'Tên', 'Mô tả'])
+        const list_product = ref([{
+                Id: 1,
+                Name: "Đá cổ",
+                status: 2,
+                Description: "San pham tot",
+            },
+            {
+                Id: 2,
+                Name: "Bình cổ",
+                status: 2,
+                Description: "San pham tot",
+            },
+            {
+                Id: 3,
+                Name: "Bát cổ",
+                status: 2,
+                Description: "San pham tot",
+            },
+        ]);
+        const titles = ref(['ID', 'Tên', 'Mô tả', 'Trạng thái', 'Thao tác'])
 
         return {
             list_product,
@@ -109,34 +125,9 @@ export default {
             ProductService.getAll()
                 .then((response) => {
                     this.list_product = response.data;
-                    this.list_product = [{
-                            Id: 1,
-                            Name: "Do co 100.000 nam",
-                            status: 1,
-                            Description: "San pham tot",
-                        },
-                        {
-                            Id: 2,
-                            Name: "Do co 100.000 nam",
-                            status: 1,
-                            Description: "San pham tot",
-                        },
-                        {
-                            Id: 3,
-                            Name: "Do co 100.000 nam",
-                            status: 1,
-                            Description: "San pham tot",
-                        },
-                    ];
                 })
                 .catch((e) => {
                     console.log(e);
-                });
-        },
-        deletet(id, index) {
-            ProductService.delete(id)
-                .then(() => {
-                    this.list_product.splice(index, 1);
                 });
         },
         updateStatus(id, status, index) {
@@ -149,17 +140,8 @@ export default {
                 this.type_perform = "CREATE";
                 this.data_edit_add = {
                     Name: null,
-                    Image: null,
-                    Price: null,
-                    Quantity: null,
-                    Author: null,
-                    Address: null,
                     status: null,
-                    ManufactureYear: null,
                     Description: null,
-                    FileDetailsId: null,
-                    SalePercent: null,
-                    PriceSale: null,
                 };
             } else {
                 this.type_perform = "EDIT";
@@ -167,31 +149,9 @@ export default {
                 this.data_edit_add = {
                     id: data.Id,
                     Name: data.Name,
-                    Image: data.Image,
-                    Price: data.Price,
-                    Quantity: data.Quantity,
-                    Author: data.Author,
-                    Address: data.Address,
                     status: data.status,
-                    ManufactureYear: data.ManufactureYear,
                     Description: data.Description,
-                    FileDetailsId: data.FileDetailsId,
-                    SalePercent: data.SalePercent,
-                    PriceSale: data.PriceSale,
                 };
-            }
-        },
-        previewFileUpload(event) {
-            this.data_edit_add.FileDetailsId = event.target.value;
-            const upload_file = document.getElementById("update-file-image");
-            const image = document.getElementById("preview-image");
-
-            document.getElementById("view-image").style.display = "none";
-            image.style.display = "block";
-
-            const [file] = upload_file.files
-            if (file) {
-                image.src = URL.createObjectURL(file)
             }
         },
     },
@@ -201,7 +161,6 @@ export default {
 };
 </script>
 
-    
 <style>
 .table-order th {
     vertical-align: middle;
@@ -217,6 +176,11 @@ export default {
     padding: 5px 11px 5px 11px;
     border-radius: 20px;
     font-size: 11px;
+    color: white;
+}
+.btn-create {
+    background: rgb(40, 167, 69);
+    padding: 7px 35px 7px 35px;
     color: white;
 }
 </style>

@@ -2,26 +2,36 @@
 <template lang="">
 <div>
     <Header></Header>
-    <div class="container mt-5 mb-5">
-        <div class="d-flex justify-content-center row">
-            <div class="col-md-8" style="background: #efefef;padding: 17px;border-radius: 3px;">
+    <div class="container mt-5 mb-5" v-if="!show_payment">
+        <div style="display: flex; justify-content: center;">
+            <div class="col-md-8" style="background: #efefef;padding: 17px;border-radius: 3px; margin: 10px 20px 20px 30px;">
                 <div class="p-2">
                     <h4>Shopping cart</h4>
-                    <div class="d-flex flex-row align-items-center pull-right"><span class="mr-1">Sort by:</span><span class="mr-1 font-weight-bold">Price</span><i class="fa fa-angle-down"></i></div>
                 </div>
-                <div v-for="(order, index) in list_order" :key="index" class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 p-3 rounded">
-                    <div class="mr-1"><img class="rounded" :src="baseUrl +  + order.fileDetailsId" width="100"></div>
-                    <div class="d-flex flex-column align-items-center product-details"><span class="font-weight-bold">{{ order.name }}</span>
+                <div v-for="(order, index) in list_order" :key="index" class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 p-3 rounded item-list-order">
+                    <div class="flex items-center">
+                        <input @change="changeProductPaymentProcessing(index)" id="checkbox-1" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    </div>
+                    <div><img class="rounded" :src="order.fileDetailsId" width="50" height="40" style="border-radius: 10px"></div>
+                    <!-- <div class="mr-1"><img class="rounded" :src="baseUrl +  + order.fileDetailsId" width="50" height="40"></div> -->
+                    <div class="d-flex flex-column align-items-center product-details">
+                        <span class="font-weight-bold">{{ order.name.substr(0, 18) + "..." }}</span>
                     </div>
                     <div>
-                        <h5 class="text-grey">{{ order.price }}</h5>
+                        <h5 class="text-grey" style="margin: 0px;">{{ formatMoney(order.price) }}</h5>
                     </div>
-                    <div class="d-flex align-items-center" @click="deleteOrder(order.id)" style="cursor: pointer;"><i class="fa fa-trash mb-1 text-danger"></i></div>
+                    <div class="d-flex align-items-center" @click="deleteOrder(order.id)" style="cursor: pointer;">
+                        <i class="fa fa-trash mb-1"></i>
+                    </div>
                 </div>
-                <div class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded"><input type="text" class="form-control border-0 gift-card" placeholder="discount code/gift card"><button class="btn btn-outline-warning btn-sm ml-2" type="button">Apply</button></div>
-                <div class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded"><button class="btn btn-warning btn-block btn-lg ml-2 pay-button" type="button">Proceed to Pay</button></div>
+                <div class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded" style="margin-top: 15px">
+                    <button class="btn btn-block btn-lg ml-2 btn-order" type="button" @click="show_payment = !show_payment">Tiến hành đặt hàng</button>
+                </div>
             </div>
         </div>
+    </div>
+    <div v-else>
+        <payment :list_product_payment_processing="list_product_payment_processing"></payment>
     </div>
     <Footer></Footer>
 </div>
@@ -32,45 +42,88 @@ import Header from './Header.vue'
 import Footer from './Footer.vue'
 import OrderService from '@/services/OrderService';
 import base from "@/../base.json"
+import payment from "./Payment.vue";
 
 export default {
     data() {
         return {
-            list_order: [],
+            list_order: [{
+                    id: 1,
+                    fileDetailsId: "https://s3.cloud.cmctelecom.vn/tinhte1/2014/11/2631443_despicable_me_2_minions-1920x1080_VVVaaa.png",
+                    name: "Do co 1000 nam tuoi",
+                    price: 10000000,
+                },
+                {
+                    id: 30,
+                    fileDetailsId: "https://imgs.vietnamnet.vn/Images/2017/03/19/10/20170319101545-co-vat-2.jpg",
+                    name: "Bat co 100 nam tuoi",
+                    price: 20000000,
+                },
+                {
+                    id: 32,
+                    fileDetailsId: "https://imgs.vietnamnet.vn/Images/2017/03/19/10/20170319101545-co-vat-2.jpg",
+                    name: "Chau da co 1000 nam tuoi",
+                    price: 30000000,
+                }
+            ],
+            list_product_payment_processing: [],
             baseUrl: "",
             base,
+            show_payment: false,
         }
     },
     components: {
         Header,
-        Footer
+        Footer,
+        payment
     },
     methods: {
         getAllData() {
             OrderService.getAllData()
-            .then((response) => {
-                this.list_order = response.data;
-            });
+                .then((response) => {
+                    this.list_order = response.data;
+                });
         },
         deleteOrder(id) {
-          OrderService.delete(id)
-          .then(() => {
-              this.getAllData();
-          });
+            OrderService.delete(id)
+                .then(() => {
+                    this.getAllData();
+                });
+        },
+        changeProductPaymentProcessing(index) {
+            this.list_product_payment_processing.push(this.list_order[index]);
+        },
+        formatMoney(n) {
+            return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
         }
     },
     created() {
-      this.baseUrl = this.base.baseUrl + 'api/files/'
-      this.getAllData();
+        this.baseUrl = this.base.baseUrl + 'api/files/'
+        this.getAllData();
     },
 }
 </script>
 
-<style>
-@import "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css";
-@import "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js";
-@import "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js";
-@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css";
+<style scoped>
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css";
+.item-list-order {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 25px 11px 25px;
+    text-align: center;
+    background: white;
+    border-radius: 9px;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.btn-order {
+    border-radius: 10px;
+    font-size: 13px; 
+    background-color: #d1c286; 
+    color: white
+}
 
 .size span {
     font-size: 11px;

@@ -106,7 +106,7 @@ namespace NetCore_Backend.Controllers
         }
 
         [HttpGet("UpdateStatus/{id}/{status}")]
-        public IActionResult UpdateStatus(long id, int status)
+        public IActionResult UpdateStatus(int id, int status = 0)
         {
             try
             {
