@@ -38,13 +38,13 @@ namespace NetCore_Backend.Services.Impl
             var products = _context.ProductCates.FirstOrDefault(p => p.Id == id);
             if(products != null)
             {
-                _context.ProductCates.Remove(products);
+                products.IsActive = 1;
                 _context.SaveChanges();
             }
         }
         public List<ProductCateModel> GetAll()
         {
-            var productCaties = _context.ProductCates.Select(p => new ProductCateModel()
+            var productCaties = _context.ProductCates.Where(p => p.IsActive == 0).Select(p => new ProductCateModel()
             {
                 Id = p.Id,
                 ProductId = p.ProductId,

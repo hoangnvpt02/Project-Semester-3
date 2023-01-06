@@ -26,6 +26,7 @@ import OrderDetail from "./components/Cards/OrderDetails.vue";
 
 import Order from "@/views/admin/Order.vue";
 import product from "./components/admin/ProductList.vue";
+import category from "./components/admin/CategoryList.vue";
 
 // views for Auth layout
 
@@ -80,6 +81,10 @@ const routes = [
       {
         path: "/admin/product",
         component: product,
+      },
+      {
+        path: "/admin/category",
+        component: category,
       },
     ],
   },

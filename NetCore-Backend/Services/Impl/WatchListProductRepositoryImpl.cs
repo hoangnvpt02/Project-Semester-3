@@ -36,14 +36,14 @@ namespace NetCore_Backend.Services.Impl
             var watchListProduct = _context.WatchListProducts.FirstOrDefault(x => x.Id == id);
             if(watchListProduct != null)
             {
-                _context.WatchListProducts.Remove(watchListProduct);
+                watchListProduct.IsActive = 1;
                 _context.SaveChanges();
             }
         }
 
         public List<WatchListProductModel> GetAll()
         {
-            var watchListProducts = _context.WatchListProducts.Select(w => new WatchListProductModel() { 
+            var watchListProducts = _context.WatchListProducts.Where(w => w.IsActive == 0).Select(w => new WatchListProductModel() { 
                 Id = w.Id,
                 WatchListId = w.WatchListId,
                 ProductId = w.ProductId,

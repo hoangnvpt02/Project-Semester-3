@@ -13,7 +13,7 @@ namespace NetCore_Backend.Services.Impl
 
         public List<GalaryModel> GetAll()
         {
-            var galaryList = _context.Galarys.Select(g => new GalaryModel()
+            var galaryList = _context.Galarys.Where(g => g.IsActive == 0).Select(g => new GalaryModel()
             {
                 Id = g.Id,
                 AspNetUsersId = g.AspNetUsersId,
@@ -21,6 +21,7 @@ namespace NetCore_Backend.Services.Impl
                 ToDate = g.ToDate,
                 Authen = g.Authen,
                 Address = g.Address,
+                Name = g.Name,
                 Discription = g.Discription,
                 IsActive = g.IsActive,
                 CreeateDate = g.CreeateDate,
@@ -40,6 +41,7 @@ namespace NetCore_Backend.Services.Impl
                 ToDate = g.ToDate,
                 Authen = g.Authen,
                 Address = g.Address,
+                Name = g.Name,
                 Discription = g.Discription,
                 IsActive = g.IsActive,
                 CreeateDate = g.CreeateDate,
@@ -57,6 +59,7 @@ namespace NetCore_Backend.Services.Impl
                 ToDate = galary.ToDate,
                 Authen = galary.Authen,
                 Address = galary.Address,
+                Name = galary.Name,
                 Discription = galary.Discription,
                 IsActive = galary.IsActive,
                 CreeateDate = galary.CreeateDate,
@@ -72,6 +75,7 @@ namespace NetCore_Backend.Services.Impl
                 ToDate = _galary.ToDate,
                 Authen = _galary.Authen,
                 Address = _galary.Address,
+                Name = _galary.Name,
                 Discription = _galary.Discription,
                 IsActive = _galary.IsActive,
                 CreeateDate = _galary.CreeateDate,
@@ -87,6 +91,7 @@ namespace NetCore_Backend.Services.Impl
             _galary.ToDate = galary.ToDate;
             _galary.Authen = galary.Authen;
             _galary.Address = galary.Address;
+            _galary.Name = galary.Name;
             _galary.Discription = galary.Discription;
             _galary.IsActive = galary.IsActive;
             _galary.UpdatedDate = galary.UpdatedDate;
@@ -99,7 +104,7 @@ namespace NetCore_Backend.Services.Impl
             var galary = _context.Galarys.FirstOrDefault(g => g.Id == id);
             if (galary != null)
             {
-                _context.Remove(galary);
+                galary.IsActive = 1;
                 _context.SaveChanges();
             }
         }

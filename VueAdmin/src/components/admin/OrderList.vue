@@ -33,7 +33,7 @@
                     <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                         <button class="btn-status" style="background: #ffc107;" v-if="item.status == 1">nhận đơn</button>
                         <button class="btn-status" style="background: #28a745;" v-if="item.status == 2">Hoàn thành</button>
-                        <button class="btn-status" style="background: #dc3545;" v-if="item.status == 3">Xác nhận hủy đơn</button>
+                        <button class="btn-status" style="background: #dc3545;" v-if="item.status == 3">hủy đơn</button>
                     </td>
                 </tr>
             </tbody>
@@ -43,12 +43,41 @@
 </template>
 
 <script>
-import {ref} from "vue"
+import {
+    ref
+} from "vue"
 import OrderService from "../../services/OrderService";
 
 export default {
     data() {
-        const orders = ref([]);
+        const orders = ref([{
+                id: 2,
+                name: "Do co 100.000 nam",
+                image: "",
+                price: "10.000.000",
+                userName: "Thanh Nguyen",
+                totalPrice: "10.000.000",
+                status: 1,
+            },
+            {
+                id: 2,
+                name: "Do co 100.000 nam",
+                image: "",
+                price: "10.000.000",
+                userName: "Thanh Nguyen",
+                totalPrice: "10.000.000",
+                status: 2,
+            },
+            {
+                id: 3,
+                name: "Do co 100.000 nam",
+                image: "",
+                price: "10.000.000",
+                userName: "Thanh Nguyen",
+                totalPrice: "10.000.000",
+                status: 3,
+            }
+        ]);
         const titles = ref(['ID', 'NAME', 'IMAGE', 'PRICE', 'USER NAME', 'TOTAL MONEY', 'STATUS'])
 
         return {
@@ -71,35 +100,6 @@ export default {
             OrderService.getAll()
                 .then((response) => {
                     this.orders = response.data;
-                    this.orders = [
-                        {
-                            id: 2,
-                            name: "Do co 100.000 nam",
-                            image: "http://vanhoanghethuat.vn/datasite///201807/BAI_VIET_14562/03%20(3).jpg",
-                            price: "10.000.000",
-                            userName: "Thanh Nguyen",
-                            totalPrice: "10.000.000",
-                            status: 1,
-                        },
-                        {
-                            id: 2,
-                            name: "Do co 100.000 nam",
-                            image: "http://vanhoanghethuat.vn/datasite///201807/BAI_VIET_14562/03%20(3).jpg",
-                            price: "10.000.000",
-                            userName: "Thanh Nguyen",
-                            totalPrice: "10.000.000",
-                            status: 2,
-                        },
-                        {
-                            id: 3,
-                            name: "Do co 100.000 nam",
-                            image: "http://vanhoanghethuat.vn/datasite///201807/BAI_VIET_14562/03%20(3).jpg",
-                            price: "10.000.000",
-                            userName: "Thanh Nguyen",
-                            totalPrice: "10.000.000",
-                            status: 3,
-                        },
-                    ];
                 })
                 .catch((e) => {
                     console.log(e);

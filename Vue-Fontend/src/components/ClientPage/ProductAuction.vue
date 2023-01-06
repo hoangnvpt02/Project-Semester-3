@@ -1,15 +1,15 @@
 <template>
   <div>
     <Header></Header>
-    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" :style="{ backgroundImage: `url(${BannerAuction})` }">
+    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" :style="{ backgroundImage: `url(${bannerproduct})` }">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center">
 					<div class="display-t">
 						<div class="display-tc animate-box" data-animate-effect="fadeIn">
-							<h1>Auction</h1>
-							<h2>Join auction with us at here</h2>
+							<h1>Artworks</h1>
+							<h2>Enjoy artworks at here</h2>
 						</div>
 					</div>
 				</div>
@@ -40,9 +40,35 @@
 					</div>
 				</div>
 			</div>
+		
 	</div>
-
-</div>
+			<div class="row">
+					<div class="row animate-box" style="padding-top:50px">
+						<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+							<!-- <h2>Artworks being auctioned</h2> -->
+							<p>Let's have a look at the products in our store and enjoy the works of art</p>
+						</div>
+					</div>
+				<div class="col-md-4 text-center animate-box" v-for="pd in products">
+					<div class="product">
+						<div class="product-grid" style="border-radius: 5px;" :style="{ 'background-image' : 'url('+baseUrl+ +pd.fileDetailsId+')'  }">
+							<span class="sale" v-if="pd.salePercent >0">Sale {{ pd.salePercent}}%</span>
+							<div class="inner">
+								<p>
+									<router-link :to="{ name: 'detail', params: { id: pd.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link>
+									<router-link :to="{ name: 'detail', params: { id: pd.id } }" class="icon"><i class="icon-eye"></i></router-link>
+								</p>
+							</div>
+						</div>
+						<div class="desc">
+							<h3><a :href="'/detail/' + pd.id">{{ pd.name }}</a></h3>
+							<span class="price">Price: ${{ pd.price }}</span>
+							<p style="color:#d1c286; font-weight: bold;"  class="price" v-if="pd.salePercent >0">Sale: ${{ pd.priceSale }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div id="fh5co-started">
 		<div class="container">
@@ -78,18 +104,23 @@ import Header from './Header.vue'
 import Footer from './Footer.vue'
 import ProductService from '@/services/ProductService';
 import CategoryService from '@/services/CategoryService';
-import BannerAuction from '../../assets/images/BannerAuction.jpg'
+import bannerproduct from '../../assets/images/bannerproduct.png'
+import base from "@/../base.json"
 import GalaryService from '@/services/GalaryService';
 export default {
 	data() {
-	const products=[]
-	const categories=[]
+	let products
+	let categories
+	let baseUrl=''
 	let galary
+
 	return {
 		galary,
 		products,
 		categories,
-    BannerAuction
+		bannerproduct,
+		baseUrl,
+		base
 	}
 	},
 	methods: {
@@ -102,15 +133,23 @@ export default {
         //   console.log(e);
         // });
 		},
-		
+		getProductByGalary(id) {
+			GalaryService.getProductByGalary()
+			.then((response) => {
+          this.products = response.data;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+		},
 		retrieveProduct() {
 			ProductService.getAll()
 			.then((response) => {
           this.products = response.data;
         })
-        // .catch((e) => {
-        //   console.log(e);
-        // });
+        .catch((e) => {
+          console.log(e);
+        });
 		},
 		retrieveCategories() {
 			CategoryService.getAll()
@@ -123,9 +162,11 @@ export default {
 		},
 	},
 	created() {
-		this.getAllGalary()
+		this.baseUrl = this.base.baseUrl+ 'api/files/'
 		this.retrieveProduct()
 		this.retrieveCategories()
+		this.getProductByGalary(this.$route.params.id)
+		this.getAllGalary()
 	},
   components: {
     Header,
