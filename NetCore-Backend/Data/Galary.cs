@@ -7,6 +7,7 @@ namespace NetCore_Backend.Data
     public class Galary
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         public string ? AspNetUsersId { get; set; }
        

@@ -13,7 +13,7 @@ namespace NetCore_Backend.Services.Impl
 
         public List<GalaryModel> GetAll()
         {
-            var galaryList = _context.Galarys.Select(g => new GalaryModel()
+            var galaryList = _context.Galarys.Where(g => g.IsActive == 0).Select(g => new GalaryModel()
             {
                 Id = g.Id,
                 AspNetUsersId = g.AspNetUsersId,
@@ -34,7 +34,7 @@ namespace NetCore_Backend.Services.Impl
             var g = _context.Galarys.FirstOrDefault(ga => ga.Id == id);
             return new GalaryModel()
             {
-                Id = g.Id,
+                
                 AspNetUsersId = g.AspNetUsersId,
                 FromDate = g.FromDate,
                 ToDate = g.ToDate,
@@ -99,9 +99,53 @@ namespace NetCore_Backend.Services.Impl
             var galary = _context.Galarys.FirstOrDefault(g => g.Id == id);
             if (galary != null)
             {
-                _context.Remove(galary);
+                galary.IsActive = 1;
                 _context.SaveChanges();
             }
+        }
+
+        public List<ProductModel> GetProductByGalaryId(long galaryId)
+        {
+            if (galaryId > 0)
+            {
+                var productGalarys = _context.ProductGalaries.Where(p => p.GalaryId == galaryId).ToList();
+                if (productGalarys.Count > 0)
+                {
+                    List<ProductModel> productModels = new List<ProductModel>();
+                    foreach (var productGalary in productGalarys)
+                    {
+                        Product product = _context.Products.Where(p => p.Id == productGalary.ProductId).FirstOrDefault();
+                        if (product != null)
+                        {
+                            ProductModel model = new ProductModel()
+                            {
+                                Id = product.Id,
+                                AspNetUsersId = product.AspNetUsersId,
+                                CountryId = product.CountryId,
+                                Price = product.Price,
+                                Author = product.Author,
+                                Name = product.Name,
+                                ManufactureYear = product.ManufactureYear,
+                                Description = product.Description,
+                                FileDetailsId = product.FileDetailsId,
+                                Quanlity = product.Quanlity,
+                                IsActive = product.IsActive,
+                                IsFeature = product.IsFeature,
+                                SalePercent = product.SalePercent,
+                                PriceSale = product.PriceSale,
+                                Address = product.Address,
+                                Created = product.Created,
+                                Updated = product.Updated,
+
+                            };
+                            productModels.Add(model);
+                        }
+                    }
+
+                    return productModels;
+                }
+            }
+            throw new NotImplementedException();
         }
     }
 }

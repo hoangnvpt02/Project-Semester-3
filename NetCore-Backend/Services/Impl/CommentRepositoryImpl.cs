@@ -39,14 +39,14 @@ namespace NetCore_Backend.Services.Impl
             var comment = _context.Comments.FirstOrDefault(c => c.Id == id);
             if(comment != null)
             {
-                _context.Comments.Remove(comment);
+                comment.IsActive = 1;
                 _context.SaveChanges();
             }
         }
 
         public List<CommentModel> GetAll()
         {
-            var comments = _context.Comments.Select(c => new CommentModel()
+            var comments = _context.Comments.Where(c => c.IsActive == 0).Select(c => new CommentModel()
             {
                 Id = c.Id,
                 Content = c.Content,

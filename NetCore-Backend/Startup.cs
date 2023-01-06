@@ -35,6 +35,7 @@ namespace NetCore_Backend
             services.AddScoped<IOrderRepository, OrderRepositoryImpl>();
             services.AddScoped<IBidRepository, BidRepositoryImpl>();
             services.AddScoped<IFileService, FileService>();
+            services.AddScoped<IProductDetailImage, ProductDetailImageImpl>();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment env)

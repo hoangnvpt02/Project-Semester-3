@@ -37,14 +37,14 @@ namespace NetCore_Backend.Services.Impl
             var productGalary = _context.ProductGalaries.FirstOrDefault(x => x.Id == id);
             if(productGalary != null)
             {
-                _context.ProductGalaries.Remove(productGalary);
+                productGalary.IsActive = 1;
                 _context.SaveChanges();
             }
         }
 
         public List<ProductGalaryModel> GetAll()
         {
-            var productGalaries = _context.ProductGalaries.Select(p => new ProductGalaryModel()
+            var productGalaries = _context.ProductGalaries.Where(p => p.IsActive == 0).Select(p => new ProductGalaryModel()
             {
                 Id = p.Id,
                 ProductId = p.ProductId,

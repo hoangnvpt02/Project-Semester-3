@@ -36,14 +36,14 @@ namespace NetCore_Backend.Services.Impl
             var category = _context.Categories.FirstOrDefault(c => c.Id == id);
             if(category != null)
             {
-                _context.Remove(category);
+                category.IsActive = 1;
                 _context.SaveChanges();
             }
         }
 
         public List<CategoryModel> GetAll()
         {
-            var categories = _context.Categories.Select(c => new CategoryModel()
+            var categories = _context.Categories.Where(c => c.IsActive == 0).Select(c => new CategoryModel()
             {
                 Id = c.Id,
                 Name = c.Name,
