@@ -67,10 +67,10 @@ namespace NetCore_Backend.Controllers
             }
         }
 
-        [HttpGet, Authorize(Roles = UserRoles.User)]
+        //[HttpGet, Authorize(Roles = UserRoles.User)]
+        [HttpGet]
         public IActionResult GetAll(int start,int end,String ? sortBy)
         {
-            var id = _userManager.GetUserId(User);
             try
             {
                 return Ok(_productRepository.GetAll(start,end,sortBy));

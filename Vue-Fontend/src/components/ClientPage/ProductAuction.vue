@@ -52,18 +52,17 @@
 				<div class="col-md-4 text-center animate-box" v-for="pd in products">
 					<div class="product">
 						<div class="product-grid" style="border-radius: 5px;" :style="{ 'background-image' : 'url('+baseUrl+ +pd.fileDetailsId+')'  }">
-							<span class="sale" v-if="pd.salePercent >0">Sale {{ pd.salePercent}}%</span>
 							<div class="inner">
 								<p>
-									<router-link :to="{ name: 'detail', params: { id: pd.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link>
+									<!-- <router-link :to="{ name: 'detail', params: { id: pd.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link> -->
 									<router-link :to="{ name: 'detail', params: { id: pd.id } }" class="icon"><i class="icon-eye"></i></router-link>
 								</p>
 							</div>
 						</div>
 						<div class="desc">
 							<h3><a :href="'/detail/' + pd.id">{{ pd.name }}</a></h3>
-							<span class="price">Price: ${{ pd.price }}</span>
-							<p style="color:#d1c286; font-weight: bold;"  class="price" v-if="pd.salePercent >0">Sale: ${{ pd.priceSale }}</p>
+							<p class="price" >Starting Price:<span style="color:#d1c286;"> ${{ pd.price }} </span> </p>
+							<button @click="auction(pd.id, pd.price)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">Auction</button>
 						</div>
 					</div>
 				</div>
@@ -107,6 +106,9 @@ import CategoryService from '@/services/CategoryService';
 import bannerproduct from '../../assets/images/bannerproduct.png'
 import base from "@/../base.json"
 import GalaryService from '@/services/GalaryService';
+import BidService from '@/services/BidService';
+import swal from 'sweetalert';
+
 export default {
 	data() {
 	let products
@@ -124,6 +126,38 @@ export default {
 	}
 	},
 	methods: {
+		auction(id, price) {
+			swal({
+			content: "input",
+			})
+			.then((response) => { 
+				if (response < price) {
+					swal("Error!", "The entered price must be greater than the bid price", "error", {
+            button: false,
+            timer: 2000
+          });
+				} else {
+					let userId = ''
+  				let user = JSON.parse(localStorage.getItem('user'));
+					if (user) { 
+						userId = user.id
+					}
+					let data = {
+					galaryId : this.$route.params.id,
+					price : response,
+					productId : id,
+					aspNetUsersId : userId
+					}
+					BidService.create(data).then((response) => {
+						swal("Success!", "Successfully!", "success", {
+            button: false,
+            timer: 2000
+          });
+						console.log("🚀 ~ file: ProductAuction.vue:139 ~ BidService.create ~ response", response)
+					})
+				}
+			});
+		},
 		getAllGalary() {
 			GalaryService.getAll()
 			.then((response) => {
@@ -134,16 +168,7 @@ export default {
         // });
 		},
 		getProductByGalary(id) {
-			GalaryService.getProductByGalary()
-			.then((response) => {
-          this.products = response.data;
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-		},
-		retrieveProduct() {
-			ProductService.getAll()
+			GalaryService.getProductByGalary(id)
 			.then((response) => {
           this.products = response.data;
         })
@@ -163,7 +188,6 @@ export default {
 	},
 	created() {
 		this.baseUrl = this.base.baseUrl+ 'api/files/'
-		this.retrieveProduct()
 		this.retrieveCategories()
 		this.getProductByGalary(this.$route.params.id)
 		this.getAllGalary()

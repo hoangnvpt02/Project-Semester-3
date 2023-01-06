@@ -7,6 +7,6 @@ class GalaryService {
   getAll() {
     return http.get("api/Galary");
   }
-  
+
 }
 export default new GalaryService();
