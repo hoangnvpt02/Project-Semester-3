@@ -39,14 +39,14 @@ namespace NetCore_Backend.Services.Impl
             var watchList = _context.WatchLists.FirstOrDefault(x => x.Id == id);
             if(watchList != null)
             {
-                _context.WatchLists.Remove(watchList);
+                watchList.IsActive = 1;
                 _context.SaveChanges();
             }
         }
 
         public List<WatchListModel> GetAll()
         {
-            var watchLists = _context.WatchLists.Select(w => new WatchListModel()
+            var watchLists = _context.WatchLists.Where(p => p.IsActive == 0).Select(w => new WatchListModel()
             {
                 Id = w.Id,
                 AspNetUsersId = w.AspNetUsersId,
