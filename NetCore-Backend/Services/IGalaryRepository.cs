@@ -9,5 +9,6 @@ namespace NetCore_Backend.Services
         GalaryModel Add(GalaryModel galary);
         void Update(GalaryModel galary);
         void Delete(long id);
+        List<ProductModel> GetProductByGalaryId(long galaryId);
     }
 }
