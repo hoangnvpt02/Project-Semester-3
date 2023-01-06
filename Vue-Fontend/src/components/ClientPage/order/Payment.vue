@@ -5,12 +5,12 @@
         <div style="display: flex;justify-content: center; margin: 10px 20px 20px 30px;">
             <div class="col-md-5" style="background: #efefef;padding: 17px;border-radius: 3px;">
                 <div v-for="(order, index) in list_product_payment_processing" :key="index" class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 p-3 rounded item-list-order">
-                    <div><img class="rounded" :src="order.fileDetailsId" width="50" height="40" style="border-radius: 10px"></div>
-                    <!-- <div class="mr-1"><img class="rounded" :src="baseUrl +  + order.fileDetailsId" width="50" height="40"></div> -->
+                    <!-- <div><img class="rounded" :src="order.fileDetailsId" width="50" height="40" style="border-radius: 10px"></div> -->
+                    <div class="mr-1"><img class="rounded" :src="baseUrl +  + order.fileDetailsId" width="50" height="40"></div>
                     <div class="d-flex flex-column align-items-center product-details"><span class="font-weight-bold">{{ order.name }}</span>
                     </div>
                     <div>
-                        <h5 class="text-grey" style="margin: 0px; position: static;">{{ formatMoney(order.price) }}</h5>
+                        <h5 class="text-grey" style="margin: 0px; position: static;">{{ formatMoney(order.totalPrice) }}</h5>
                     </div>
                 </div>
                 <div>
@@ -49,7 +49,14 @@
                     <textarea class="ip-imput-form" id="exampleFormControlTextarea1" placeholder="Note" rows="3" style="height: 87px"></textarea>
                 </div>
                 <div class="col-md-12" style="padding: 0px;margin-top: 10px;">
-                    <button class="btn btn-block btn-lg ml-2 btn-payment" type="button" @click="updateStatus()">Order now</button>
+                    <div class="col-md-6" style="padding: 0px;">
+                        <button class="btn btn-block btn-lg ml-2 btn-payment" type="button" @click="updateStatus()">Order now</button>
+                    </div>
+                    <div class="col-md-6" style="padding: 0px;">
+                        <a href="/cart" class="btn btn-block btn-lg ml-2 btn-payment" style="background: #dc3545; margin-right: 11px;"  type="button">
+                            Trở lại
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,6 +72,9 @@ export default {
     props: {
         list_product_payment_processing: {
             type: Array,
+        },
+        show_payment: {
+            type: Boolean,
         }
     },
     data() {

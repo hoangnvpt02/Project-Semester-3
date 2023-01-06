@@ -14,7 +14,7 @@ class ProductService {
     return http.delete(`/api/Order/${id}`);
   }
   updateStatus(id, status) {
-    return http.delete(`/api/UpdateStatus/${id}/${status}`);
+    return http.get(`/api/Order/UpdateStatus/${id}/${status}`);
   }
 }
 export default new ProductService();

@@ -113,7 +113,7 @@ namespace NetCore_Backend.Services.Impl
             return total;
         }
 
-        public void UpdateStatus(int id, int status)
+        public void UpdateStatus(long id, int status)
         {
             var order = _context.Orders.FirstOrDefault(o => o.Id == id);
             if (order != null)
