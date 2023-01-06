@@ -9,5 +9,6 @@ namespace NetCore_Backend.Services
         BidModel Add(BidModel bidModel);
         void Update(BidModel bidModel);
         void Delete(long id);
+        List<BidModel> ListProductByGaAndPr(int start, int end,long galaryId,long productId);
     }
 }

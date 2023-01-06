@@ -44,6 +44,25 @@ namespace NetCore_Backend.Services.Impl
             }
         }
 
+        public List<BidModel> ListProductByGaAndPr(int start,int end,long galaryId, long productId)
+        {
+            var bids = _content.Bid.Where(x => x.ProductId == productId).Where(x => x.GalaryId == galaryId).OrderByDescending(x=>x.Price).Select(b => new BidModel()
+            {
+                Id = b.Id,
+                AspNetUsersId = b.AspNetUsersId,
+                ProductId = b.ProductId,
+                GalaryId = b.GalaryId,
+                DidTime = b.DidTime,
+                Price = b.Price,
+                IsActive = b.IsActive,
+            });
+            if (start != 0 || end != 0)
+            {
+                bids = bids.Skip(start).Take(end);
+            }
+            return bids.ToList();
+        }
+
         public List<BidModel> GetAll()
         {
             var bids = _content.Bid.Where(b => b.IsActive == 0).Select(b => new BidModel()

@@ -13,7 +13,7 @@ namespace NetCore_Backend.Services.Impl
             _userManager = userManager;
         }
 
-        public ProductModel Add(ProductModel productModel, IFormFile fileData, FileType fileType)
+        public ProductModel Add(ProductModel productModel, IFormFile fileData, FileType fileType,string id)
         {
             var fileDetails = new FileDetails()
             {
@@ -21,7 +21,7 @@ namespace NetCore_Backend.Services.Impl
                 FileName = fileData.FileName,
                 FileType = fileType,
             };
-
+            
             if (fileData != null)
             {
                
@@ -40,6 +40,7 @@ namespace NetCore_Backend.Services.Impl
             product.FileDetailsId = fileDetails.ID;
             product.Author = productModel.Author;
             product.Name = productModel.Name;
+            product.AspNetUsersId = id;
 
             product.Description = productModel.Description;
             product.AspNetUsersId = productModel.AspNetUsersId;
@@ -93,7 +94,7 @@ namespace NetCore_Backend.Services.Impl
         public List<ProductModel> GetAll(int start,int end,String sortBy)
         {
 
-            var products = _context.Products.Where(p => p.IsActive == 0).Select(p => new ProductModel()
+            var products = _context.Products.Where(p => p.IsActive == 0).Where(p => p.AspNetUsersId == "aaa").Select(p => new ProductModel()
             {
                 Id = p.Id,
                 CountryId = p.CountryId,
