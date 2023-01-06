@@ -39,14 +39,14 @@ namespace NetCore_Backend.Services.Impl
             var bid = _content.Bid.FirstOrDefault(x => x.Id == id);
             if(bid != null)
             {
-                _content.Remove(bid);
+                bid.IsActive = 1;
                 _content.SaveChanges();
             }
         }
 
         public List<BidModel> GetAll()
         {
-            var bids = _content.Bid.Select(b => new BidModel()
+            var bids = _content.Bid.Where(b => b.IsActive == 0).Select(b => new BidModel()
             {
                 Id = b.Id,
                 AspNetUsersId = b.AspNetUsersId,

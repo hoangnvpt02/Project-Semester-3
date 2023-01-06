@@ -13,7 +13,7 @@ namespace NetCore_Backend.Services.Impl
 
         public List<DossierModel> GetAll()
         {
-            var dossiers = _context.Dossiers.Select(d => new DossierModel()
+            var dossiers = _context.Dossiers.Where(d => d.IsActive == 0).Select(d => new DossierModel()
             {
                 Id = d.Id,
                 GalaryId = (long)d.GalaryId,
@@ -90,7 +90,7 @@ namespace NetCore_Backend.Services.Impl
             var dossier = _context.Dossiers.FirstOrDefault(d => d.Id == id);
             if (dossier != null)
             {
-                _context.Remove(dossier);
+                dossier.IsActive = 1;
                 _context.SaveChanges();
             }
         }

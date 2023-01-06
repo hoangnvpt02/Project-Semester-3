@@ -80,7 +80,7 @@ namespace NetCore_Backend.Services.Impl
             var product = _context.Products.FirstOrDefault(p => p.Id == id);
             if(product != null)
             {
-                _context.Products.Remove(product);
+                product.IsActive = 1;
                 _context.SaveChanges();
             }
         }
@@ -88,7 +88,7 @@ namespace NetCore_Backend.Services.Impl
         public List<ProductModel> GetAll(int start,int end,String sortBy)
         {
 
-            var products = _context.Products.Select(p => new ProductModel()
+            var products = _context.Products.Where(p => p.IsActive == 0).Select(p => new ProductModel()
             {
                 Id = p.Id,
                 CountryId = p.CountryId,

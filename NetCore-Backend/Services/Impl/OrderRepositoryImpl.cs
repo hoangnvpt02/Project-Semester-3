@@ -43,7 +43,7 @@ namespace NetCore_Backend.Services.Impl
             var order = _context.Orders.FirstOrDefault(o => o.Id == id);
             if(order != null)
             {
-                _context.Orders.Remove(order);
+                order.IsActive = 1;
                 _context.SaveChanges();
             }
         }
