@@ -38,13 +38,13 @@ namespace NetCore_Backend.Services.Impl
             var products = _context.ProductCates.FirstOrDefault(p => p.Id == id);
             if(products != null)
             {
-                _context.ProductCates.Remove(products);
+                products.IsActive = 1;
                 _context.SaveChanges();
             }
         }
         public List<ProductCateModel> GetAll()
         {
-            var productCaties = _context.ProductCates.Select(p => new ProductCateModel()
+            var productCaties = _context.ProductCates.Where(p => p.IsActive == 0).Select(p => new ProductCateModel()
             {
                 Id = p.Id,
                 ProductId = p.ProductId,
@@ -85,24 +85,5 @@ namespace NetCore_Backend.Services.Impl
                 _context.SaveChanges();
             }
         }
-
-        public ProductCateModel getByProductId(long productId)
-        {
-            var productCate = _context.ProductCates.FirstOrDefault(p => p.ProductId == productId);
-            if (productCate != null)
-            {
-                return new ProductCateModel()
-                {
-                    Id = productCate.Id,
-                    ProductId = productCate.ProductId,
-                    CategoryId = productCate.CategoryId,
-                    IsActive = productCate.IsActive,
-                    Updated = productCate.Updated,
-                    Created = productCate.Created,
-                };
-            }
-            return null;
-        }
-
     }
 }

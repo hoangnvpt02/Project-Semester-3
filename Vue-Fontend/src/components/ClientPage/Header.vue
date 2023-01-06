@@ -31,10 +31,14 @@
 				</div>
 				<div class="col-md-3 col-xs-4 text-right hidden-xs menu-2">
 					<ul>
-						<li v-if="!exist"><a href="/login">Login</a></li>
-						<li v-if="!exist"><a href="/register">Register</a></li>
-						<li v-if="exist"><a href="#" @click="logout()">Logout</a></li>
-						<li v-if="exist"><div><a href="">Profile</a></div></li>
+						<li class="search">
+							<div class="input-group">
+						      <input type="text" placeholder="Search..">
+						      <span class="input-group-btn">
+						        <button class="btn btn-primary" type="button"><i class="icon-search"></i></button>
+						      </span>
+						    </div>
+						</li>
 						<li class="shopping-cart"><a href="#" class="cart"><span><small>{{ quantity_order }}</small><i class="icon-shopping-cart"></i></span></a></li>
 					</ul>
 				</div>
@@ -47,19 +51,14 @@
 </template>
 <script>
 import OrderService from '@/services/OrderService';
-import AuthenticationService from '@/services/AuthenticationService';
-
 export default {
 	data () {
 		return {
 			quantity_order: 0,
-			exist: null,
-			
 		}
 	},
 	created () {
 		this.getQuantityOrder();
-		this.checkExistLogin();
 	},
 	methods: {
 		getQuantityOrder() {
@@ -70,17 +69,6 @@ export default {
 			// .catch((e) => {
 			//   	console.log(e);
 			// });
-		},
-		checkExistLogin() {
-			if (localStorage.getItem("user") === null) {
-				this.exist = false;
-			} else {
-				this.exist = true;
-			}
-		},
-		logout() {
-			AuthenticationService.logout();
-			return window.location.href = "http://localhost:4001/home";
 		}
 	},
 }

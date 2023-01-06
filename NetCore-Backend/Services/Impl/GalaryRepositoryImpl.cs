@@ -13,7 +13,7 @@ namespace NetCore_Backend.Services.Impl
 
         public List<GalaryModel> GetAll()
         {
-            var galaryList = _context.Galarys.Select(g => new GalaryModel()
+            var galaryList = _context.Galarys.Where(g => g.IsActive == 0).Select(g => new GalaryModel()
             {
                 Id = g.Id,
                 AspNetUsersId = g.AspNetUsersId,
@@ -34,7 +34,7 @@ namespace NetCore_Backend.Services.Impl
             var g = _context.Galarys.FirstOrDefault(ga => ga.Id == id);
             return new GalaryModel()
             {
-                Id = g.Id,
+                
                 AspNetUsersId = g.AspNetUsersId,
                 FromDate = g.FromDate,
                 ToDate = g.ToDate,
@@ -99,7 +99,7 @@ namespace NetCore_Backend.Services.Impl
             var galary = _context.Galarys.FirstOrDefault(g => g.Id == id);
             if (galary != null)
             {
-                _context.Remove(galary);
+                galary.IsActive = 1;
                 _context.SaveChanges();
             }
         }

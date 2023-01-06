@@ -12,7 +12,7 @@ namespace NetCore_Backend.Services.Impl
         }
         public List<CountryResultModel> GetAll()
         {
-            var countryList = _context.Countries.Select(ct => new CountryResultModel()
+            var countryList = _context.Countries.Where(c => c.IsActive == 0).Select(ct => new CountryResultModel()
             {
                 Id = ct.Id,
                 Name = ct.Name,
@@ -72,7 +72,7 @@ namespace NetCore_Backend.Services.Impl
             var country = _context.Countries.FirstOrDefault(c => c.Id == id);
             if (country != null)
             {
-                _context.Remove(country);
+                country.IsActive = 1;
                 _context.SaveChanges();
             }
         }

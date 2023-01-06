@@ -375,14 +375,6 @@ namespace NetCore_Backend.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
-        [HttpGet("Test"), Authorize(Roles = UserRoles.User)]
-        public IActionResult Test()
-        {
-            var id = _userManager.GetUserId(User);
-            return Ok($"test {id}");
-        }
+        
     }
-
-    
 }
