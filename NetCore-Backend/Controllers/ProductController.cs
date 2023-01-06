@@ -112,12 +112,13 @@ namespace NetCore_Backend.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = UserRoles.User)]
         public IActionResult Add([FromForm]ProductModel productModel,  IFormFile fileDetails,FileType fileType)
         {
             try
             {
-                return Ok(_productRepository.Add(productModel, fileDetails,fileType));
+                var id = _userManager.GetUserId(User);
+                return Ok(_productRepository.Add(productModel, fileDetails,fileType,id));
             }
             catch (Exception e)
             {
