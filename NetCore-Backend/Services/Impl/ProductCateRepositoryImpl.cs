@@ -85,24 +85,5 @@ namespace NetCore_Backend.Services.Impl
                 _context.SaveChanges();
             }
         }
-
-        public ProductCateModel getByProductId(long productId)
-        {
-            var productCate = _context.ProductCates.FirstOrDefault(p => p.ProductId == productId);
-            if (productCate != null)
-            {
-                return new ProductCateModel()
-                {
-                    Id = productCate.Id,
-                    ProductId = productCate.ProductId,
-                    CategoryId = productCate.CategoryId,
-                    IsActive = productCate.IsActive,
-                    Updated = productCate.Updated,
-                    Created = productCate.Created,
-                };
-            }
-            return null;
-        }
-
     }
 }

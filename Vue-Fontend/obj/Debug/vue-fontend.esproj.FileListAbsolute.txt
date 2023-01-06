@@ -2,6 +2,8 @@ C:\Users\hoang\source\repos\Project\Vue-Fontend\obj\Debug\vue-fontend.esproj.Sug
 C:\Users\hoang\source\repos\Project\Vue-Fontend\obj\Debug\vue-fontend.esproj.CoreCompileInputs.cache
 E:\ProjectSemi3\Vue-Fontend\obj\Debug\vue-fontend.esproj.SuggestedBindingRedirects.cache
 E:\ProjectSemi3\Vue-Fontend\obj\Debug\vue-fontend.esproj.CoreCompileInputs.cache
+D:\Project\Project-Semester-3\Vue-Fontend\obj\Debug\vue-fontend.esproj.SuggestedBindingRedirects.cache
+D:\Project\Project-Semester-3\Vue-Fontend\obj\Debug\vue-fontend.esproj.CoreCompileInputs.cache
 D:\Works\PracClas\Project-Semester-3\Vue-Fontend\obj\Debug\vue-fontend.esproj.SuggestedBindingRedirects.cache
 D:\Works\PracClas\Project-Semester-3\Vue-Fontend\obj\Debug\vue-fontend.esproj.CoreCompileInputs.cache
 C:\Users\Admin\Project-Semester-3\Vue-Fontend\obj\Debug\vue-fontend.esproj.SuggestedBindingRedirects.cache

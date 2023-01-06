@@ -43,7 +43,7 @@
 							<div class="item">
 							<div class="active text-center" >
 								<figure>
-									<img :src="baseUrl + product.fileDetailsId" style="width:500px; border-radius: 5px;" >
+									<img :src="baseUrl + product.fileDetailsId" style="width:400px; border-radius: 5px;" >
 								</figure>
 							</div>
 						</div>

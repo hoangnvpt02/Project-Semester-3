@@ -1,13 +1,16 @@
-﻿using NetCore_Backend.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using NetCore_Backend.Models;
 using NetCore_Backend.Data;
 namespace NetCore_Backend.Services.Impl
 {
     public class ProductRepositoryImpl : IProductRepository
     {
         private readonly MyDbContext _context;
-        public ProductRepositoryImpl(MyDbContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+        public ProductRepositoryImpl(MyDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public ProductModel Add(ProductModel productModel, IFormFile fileData, FileType fileType)
@@ -31,8 +34,7 @@ namespace NetCore_Backend.Services.Impl
                 var result = _context.FileDetails.Add(fileDetails);
                 _context.SaveChanges();
             }
-          
-          
+         
             var product = new Product();
             product.Address = productModel.Address;
             product.FileDetailsId = fileDetails.ID;
@@ -50,25 +52,16 @@ namespace NetCore_Backend.Services.Impl
             product.IsActive = productModel.IsActive;
             product.IsFeature = productModel.IsFeature;
             product.Price = productModel.Price;
-
-            product.SalePercent = productModel.SalePercent;
-            if (productModel.SalePercent > 0)
-            {
-                product.PriceSale = product.Price - (product.Price * (decimal)productModel.SalePercent / 100);
-            }
-
             _context.Products.Add(product);
             _context.SaveChanges();
             return new ProductModel()
             {
-                Id= product.Id,
                 Address = product.Address,
                 Author = product.Author,
 
                 Description = product.Description,
                 AspNetUsersId = product.AspNetUsersId,
 
-                PriceSale = product.PriceSale,
                 CountryId = product.CountryId,
                 ManufactureYear = product.ManufactureYear,
                 Quanlity = product.Quanlity,
@@ -227,30 +220,26 @@ namespace NetCore_Backend.Services.Impl
                 foreach (ProductCate productCate in productCates)
                 {
                     Product product = _context.Products.FirstOrDefault(c => c.Id == productCate.Id);
-                    if (product != null)
-                    {
-                        ProductModel model = new ProductModel()
-                        {
-                            Id = product.Id,
-                            AspNetUsersId = product.AspNetUsersId,
-                            CountryId = product.CountryId,
-                            Price = product.Price,
-                            Author = product.Author,
-                            Name = product.Name,
-                            ManufactureYear = product.ManufactureYear,
-                            Description = product.Description,
-                            FileDetailsId = product.FileDetailsId,
-                            Quanlity = product.Quanlity,
-                            IsActive = product.IsActive,
-                            IsFeature = product.IsFeature,
-                            SalePercent = product.SalePercent,
-                            PriceSale = product.PriceSale,
-                            Address = product.Address,
-                            Created = product.Created,
-                            Updated = product.Updated,
-                        };
-                        products.Add(model);
-                    }
+                    ProductModel model = new ProductModel() { 
+                        Id = product.Id,
+                        AspNetUsersId =product.AspNetUsersId,
+                        CountryId = product.CountryId,
+                        Price = product.Price,
+                        Author = product.Author,
+                        Name = product.Name,
+                        ManufactureYear=product.ManufactureYear,
+                        Description = product.Description,
+                        FileDetailsId = product.FileDetailsId,
+                        Quanlity = product.Quanlity,
+                        IsActive = product.IsActive,
+                        IsFeature = product.IsFeature,
+                        SalePercent = product.SalePercent,
+                        PriceSale = product.PriceSale,
+                        Address = product.Address,
+                        Created = product.Created,
+                        Updated = product.Updated,
+                    };
+                    products.Add(model);
                 }
                 return products;
             }

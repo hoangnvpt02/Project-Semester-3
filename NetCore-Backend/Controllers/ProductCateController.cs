@@ -48,29 +48,6 @@ namespace NetCore_Backend.Controllers
                 return BadRequest();
             }
         }
-
-        [HttpGet("/cate/product-id/{productId}")]
-        public IActionResult getByProductId(long productId)
-        {
-            try
-            {
-                var productCate = _productCateRepository.getByProductId(productId);
-                if (productCate != null)
-                {
-                    return Ok(productCate);
-                }
-                else
-                {
-                    return NotFound();
-                }
-
-            }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
-        }
-
         [HttpPut]
         public IActionResult Update(ProductCateModel productCateModel)
         {

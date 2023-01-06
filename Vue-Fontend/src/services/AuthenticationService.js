@@ -8,9 +8,5 @@ class AuthenticationService {
   register(form) {
     return http.post(`api/Authenticate/Register`, form);
   }
-
-  logout() {
-    localStorage.removeItem('user');
-  }
 }
 export default new AuthenticationService();
