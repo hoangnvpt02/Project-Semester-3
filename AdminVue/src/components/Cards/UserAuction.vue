@@ -101,10 +101,23 @@ export default {
       .then((response) => {
           let productId = response.data.productId;
           let userId = response.data.aspNetUsersId;
-          ProductService.getById(productId).then((response) => {
-            console.log("🚀 ~ file: UserAuction.vue:104 ~ ProductService.getById ~ response", response)
-            
-          })
+          let data = {
+            id: productId,
+            aspNetUsersId: userId
+          }
+          ProductService.UpdatePrBid(data).then(() => {
+              swal("Success!", " Successfully!", "success", {
+                button: false,
+                timer: 2000
+              });
+            })
+            .catch((res) => {
+              console.log(res.message)
+              swal("Error!", " Failed!", "error", {
+                button: false,
+                timer: 2000
+              });
+            });
         })
         .catch((e) => {
           console.log(e);
@@ -163,7 +176,7 @@ export default {
 		this.baseUrl = this.base.baseUrl+ 'api/files/'
 		this.getAllGalary()
 		// this.getProductByGalary(this.$route.params.id)
-    this.getAll(1,3)
+    this.getAll(this.$route.params.idGa,this.$route.params.idPd)
 
   },
 };

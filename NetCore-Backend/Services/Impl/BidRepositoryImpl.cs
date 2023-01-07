@@ -19,6 +19,7 @@ namespace NetCore_Backend.Services.Impl
             bid.GalaryId = bidModel.GalaryId;
             bid.DidTime = bidModel.DidTime;
             bid.Price = bidModel.Price;
+            bid.Name = bidModel.Name;
             bid.IsActive = bidModel.IsActive;
             _content.Add(bid);
             _content.SaveChanges();
@@ -50,6 +51,7 @@ namespace NetCore_Backend.Services.Impl
             {
                 Id = b.Id,
                 AspNetUsersId = b.AspNetUsersId,
+                Name = b.Name,
                 ProductId = b.ProductId,
                 GalaryId = b.GalaryId,
                 DidTime = b.DidTime,
@@ -69,6 +71,7 @@ namespace NetCore_Backend.Services.Impl
             {
                 Id = b.Id,
                 AspNetUsersId = b.AspNetUsersId,
+                Name = b.Name,
                 ProductId = b.ProductId,
                 GalaryId = b.GalaryId,
                 DidTime = b.DidTime,
@@ -87,6 +90,7 @@ namespace NetCore_Backend.Services.Impl
                 {
                     Id = b.Id,
                     AspNetUsersId = b.AspNetUsersId,
+                    Name = b.Name,
                     ProductId = b.ProductId,
                     GalaryId = b.GalaryId,
                     DidTime = b.DidTime,
@@ -103,6 +107,7 @@ namespace NetCore_Backend.Services.Impl
             if(bid != null)
             {
                 bid.AspNetUsersId = bidModel.AspNetUsersId;
+                bid.Name = bidModel.Name;
                 bid.ProductId = bidModel.ProductId;
                 bid.GalaryId = bidModel.GalaryId;
                 bid.Price = bidModel.Price;
