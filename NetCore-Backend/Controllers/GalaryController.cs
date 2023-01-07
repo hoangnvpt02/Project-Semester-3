@@ -91,5 +91,27 @@ namespace NetCore_Backend.Controllers
                 return BadRequest();
             }
         }
+        [HttpGet("/ProductByGaId")]
+
+        public IActionResult GetListProductByGalaryId(long galaryId)
+        {
+            try
+            {
+                var galary = _galaryRepository.GetProductByGalaryId(galaryId);
+                if (galary != null)
+                {
+                    return Ok(galary);
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
     }
 }
