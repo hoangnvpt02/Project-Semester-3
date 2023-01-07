@@ -15,6 +15,26 @@
           <div class="invalid-feedback">{{ errors.name }}</div>
         </div>
         <div class="user-box">
+          <input v-model="form.phone"
+            type="text" 
+            name=""
+            @blur="validatePhone()"
+            v-bind:class="{'is-invalid':errors.phone}"
+          >
+          <label>Phone</label>
+          <div class="invalid-feedback">{{ errors.phone }}</div>
+        </div>
+        <div class="user-box">
+          <input v-model="form.address"
+            type="text" 
+            name=""
+            @blur="validateAddress()"
+            v-bind:class="{'is-invalid':errors.address}"
+          >
+          <label>Address</label>
+          <div class="invalid-feedback">{{ errors.address }}</div>
+        </div>
+        <div class="user-box">
           <input v-model="form.userName"
             type="text" 
             name=""
@@ -78,6 +98,8 @@ export default {
     return {
       errors: {
         name: '',
+        phone: '',
+        address: '',
         userName: '',
         email: '',
         password: '',
@@ -85,6 +107,8 @@ export default {
       },
       form: {
         name: '',
+        phone: '',
+        address: '',
         userName: '',
         email: '',
         password: '',
@@ -95,12 +119,15 @@ export default {
   methods: {
     validate() {
       this.errors = {
+        name: '',
+        phone: '',
+        address: '',
         userName: '',
         email: '',
         password: '',
         rePassword: ''
       }
-      if (this.validateName() && this.validateUserName() && this.validatePassword() && this.validateEmail() && this.validateRePassword()) {
+      if (this.validateName() && this.validatePhone() && this.validateAddress() && this.validateUserName() && this.validatePassword() && this.validateEmail() && this.validateRePassword()) {
         return true;
       }
       return false;
@@ -111,6 +138,22 @@ export default {
         return false;
       }
       this.errors.name = "";
+      return true;
+    },
+    validatePhone() {
+      if (!this.form.phone) {
+        this.errors.phone = "Phone is required";
+        return false;
+      }
+      this.errors.phone = "";
+      return true;
+    },
+    validateAddress() {
+      if (!this.form.address) {
+        this.errors.address = "Address is required";
+        return false;
+      }
+      this.errors.address = "";
       return true;
     },
     validateUserName() {
