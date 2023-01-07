@@ -102,6 +102,7 @@ namespace NetCore_Backend.Services.Impl
                 Address = p.Address,
                 Author = p.Author,
                 Name = p.Name,
+                PriceAuction   = p.PriceAuction,
                 Price = p.Price,
                 ManufactureYear = p.ManufactureYear,
                 Quanlity = p.Quanlity,
@@ -149,6 +150,7 @@ namespace NetCore_Backend.Services.Impl
                     Author = product.Author,
                     Name = product.Name,
                     Price = product.Price,
+                    PriceAuction   = product.PriceAuction,
                     ManufactureYear = product.ManufactureYear,
                     Quanlity = product.Quanlity,
                     Description = product.Description,
@@ -301,7 +303,7 @@ namespace NetCore_Backend.Services.Impl
             if (product != null && productModel.AspNetUsersId != null)
             {
                 product.AspNetUsersId = productModel.AspNetUsersId;
-                product.PriceAution = productModel.PriceAution;
+                product.PriceAuction = productModel.PriceAuction;
                 _context.Update(product);
                 _context.SaveChanges();
             }

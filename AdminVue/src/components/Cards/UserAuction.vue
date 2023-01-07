@@ -24,10 +24,10 @@
             {{ index+1 }}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-            {{ item.aspNetUsersId }}
+            {{ item.name }}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-            {{ item.price  }}
+            ${{ item.price  }}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
             <button style ="width: 150px;" v-on:click="fnAgree(item.id)" class="text-center w-full lg:w-3/12 bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
@@ -101,9 +101,11 @@ export default {
       .then((response) => {
           let productId = response.data.productId;
           let userId = response.data.aspNetUsersId;
+          let price = response.data.price;
           let data = {
             id: productId,
-            aspNetUsersId: userId
+            aspNetUsersId: userId,
+            priceAuction : price
           }
           ProductService.UpdatePrBid(data).then(() => {
               swal("Success!", " Successfully!", "success", {

@@ -62,7 +62,7 @@
 						<div class="desc">
 							<h3><a :href="'/detail/' + pd.id">{{ pd.name }}</a></h3>
 							<p class="price" >Starting Price:<span style="color:#d1c286;"> ${{ pd.price }} </span> </p>
-							<p v-if="pd.aspNetUsersId == userIdLogin" class="price" style="color:#d1c286; font-weight: bolder;">you have won the bid</p>
+							<p v-if="pd.aspNetUsersId == userIdLogin" class="price" style="color:#d1c286; font-weight: bolder;">you have won the bid with price ${{ pd.priceAuction }}</p>
 							<button v-if="pd.aspNetUsersId == userIdLogin" @click="auction(pd.id, pd.price)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">Add to Cart</button>
 							<button v-else @click="auction(pd.id, pd.price)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">Auction</button>
 						</div>
@@ -141,15 +141,18 @@ export default {
           });
 				} else {
 					let userId = ''
+					let name = ''
   				let user = JSON.parse(localStorage.getItem('user'));
 					if (user) { 
-						userId = user.id
+						userId = user.id,
+						name = user.name
 					}
 					let data = {
 					galaryId : this.$route.params.id,
 					price : response,
 					productId : id,
-					aspNetUsersId : userId
+					aspNetUsersId : userId,
+					name: name
 					}
 					BidService.create(data).then((response) => {
 						swal("Success!", "Successfully!", "success", {
