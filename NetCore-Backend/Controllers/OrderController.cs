@@ -15,7 +15,7 @@ namespace NetCore_Backend.Controllers
             _orderRepository = orderRepository;
         }
         [HttpGet]
-        public IActionResult GetAll(string userId, int status = 0)
+        public IActionResult GetAll(string userId = "Admin", int status = 0)
         {
             try
             {

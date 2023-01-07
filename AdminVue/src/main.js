@@ -31,6 +31,8 @@ import EditSpecialist from "./components/Cards/EditSpecialist.vue";
 import EditProductPage from "./components/Cards/EditProductPage.vue";
 import EditMedicine from "./components/Cards/EditMedicine.vue";
 
+import Order from "./components/Cards/OrderList.vue";
+
 // views for Auth layout
 
 import Login from "@/views/auth/Login.vue";
@@ -49,7 +51,7 @@ const routes = [
     path: "/admin",
     redirect: "/admin/product-manage",
     component: Admin,
-    meta: { requiresAuth: true },
+    // meta: { requiresAuth: true },
     children: [
       {
         path: "/admin/dashboard",
@@ -102,6 +104,10 @@ const routes = [
       {
         path: "/admin/maps",
         component: Maps,
+      },
+      {
+        path: "/admin/order",
+        component: Order,
       },
     ],
   },

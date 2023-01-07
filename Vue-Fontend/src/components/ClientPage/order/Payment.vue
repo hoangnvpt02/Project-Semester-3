@@ -23,7 +23,7 @@
                         <span style='float:right; text-align:right;'>
                             <div class='thin dense'>$68.75</div>
                             <div class='thin dense'>$4.95</div>
-                            $435.55
+                            {{ total_money }}
                         </span>
                     </div>
                 </div>
@@ -88,10 +88,12 @@ export default {
                 address: data_user.address,
                 address_detail: "",
             },
+            total_money: 0,
         }
     },
     methods: {
         formatMoney(n) {
+            this.total_money += n;
             return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
         },
         updateStatus() {
