@@ -49,7 +49,7 @@ builder.Services.AddAuthentication(options =>
 
         };
     });
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<MyDbContext>()
     .AddDefaultTokenProviders();
