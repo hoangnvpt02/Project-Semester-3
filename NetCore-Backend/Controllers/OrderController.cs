@@ -106,11 +106,11 @@ namespace NetCore_Backend.Controllers
         }
 
         [HttpGet("UpdateStatus/{id}/{status}")]
-        public IActionResult UpdateStatus(long id, int status = 0)
+        public IActionResult UpdateStatus(long id, int status = 0, string email = "Empty", string address = "Empty")
         {
             try
             {
-                _orderRepository.UpdateStatus(id, status);
+                _orderRepository.UpdateStatus(id, status, email, address);
                 return Ok();
             }
             catch (Exception e)
