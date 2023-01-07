@@ -73,6 +73,8 @@ namespace NetCore_Backend.Controllers
                     Email = requestDto.Email,
                     UserName = requestDto.UserName,
                     Name = requestDto.Name,
+                    PhoneNumber = requestDto.Phone,
+                    Address = requestDto.Address,
                     IsActive = 0
                 };
 
