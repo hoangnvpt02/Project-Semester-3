@@ -52,6 +52,8 @@ export default {
             if (this.user != null) {
                 userId = this.user.id;
             }
+
+            console.log(this.user);
             
             OrderService.getAllData(userId, 1)
                 .then((response) => {
