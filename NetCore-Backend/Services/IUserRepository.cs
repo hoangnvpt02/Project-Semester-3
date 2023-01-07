@@ -6,7 +6,6 @@ namespace NetCore_Backend.Services
     {
         List<UserModel> GetAll();
         UserModel GetById(string id);
-        UserModel Add(UserModel user);
         void Update(UserModel user);
         void Delete(string id);
     }

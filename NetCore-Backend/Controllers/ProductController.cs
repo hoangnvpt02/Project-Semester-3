@@ -16,8 +16,8 @@ namespace NetCore_Backend.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
-        private readonly UserManager<IdentityUser> _userManager;
-        public ProductController(IProductRepository productRepository, UserManager<IdentityUser> userManager)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public ProductController(IProductRepository productRepository, UserManager<ApplicationUser> userManager)
         {
             _productRepository = productRepository;
             _userManager = userManager;
@@ -112,12 +112,13 @@ namespace NetCore_Backend.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = UserRoles.User)]
         public IActionResult Add([FromForm]ProductModel productModel,  IFormFile fileDetails,FileType fileType)
         {
             try
             {
-                return Ok(_productRepository.Add(productModel, fileDetails,fileType));
+                var id = _userManager.GetUserId(User);
+                return Ok(_productRepository.Add(productModel, fileDetails,fileType,id));
             }
             catch (Exception e)
             {

@@ -9,7 +9,7 @@ namespace NetCore_Backend.Services
         List<ProductModel> GetAllProductByFeature();
         List<ProductModel> GetAllProductBySale();
         ProductModel GetById(long id);
-        ProductModel Add(ProductModel productModel, IFormFile fileData, FileType fileType);
+        ProductModel Add(ProductModel productModel, IFormFile fileData, FileType fileType,string UserId);
         void Update(ProductModel productModel);
         void Delete(long id);
 

@@ -19,12 +19,12 @@ namespace NetCore_Backend.Controllers
     [ApiController]
     public class AuthenticateController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
 
         public AuthenticateController(
-            UserManager<IdentityUser> userManager,
+            UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
             IConfiguration configuration)
         {
@@ -68,10 +68,12 @@ namespace NetCore_Backend.Controllers
                 }
 
                 // tạo user
-                var new_user = new IdentityUser()
+                var new_user = new ApplicationUser()
                 {
                     Email = requestDto.Email,
-                    UserName = requestDto.UserName
+                    UserName = requestDto.UserName,
+                    Name = requestDto.Name,
+                    IsActive = 0
                 };
 
                 var is_created = await _userManager.CreateAsync(new_user, requestDto.Password);
@@ -132,10 +134,12 @@ namespace NetCore_Backend.Controllers
                 }
 
                 // tạo user
-                var new_user = new IdentityUser()
+                var new_user = new ApplicationUser()
                 {
                     Email = requestDto.Email,
-                    UserName = requestDto.UserName
+                    UserName = requestDto.UserName,
+                    Name = requestDto.Name,
+                    IsActive = 0
                 };
 
                 var is_created = await _userManager.CreateAsync(new_user, requestDto.Password);
@@ -444,7 +448,7 @@ namespace NetCore_Backend.Controllers
             });
         }
 
-        private string GenerateJwtToken(IdentityUser user, List<Claim> authClaims)
+        private string GenerateJwtToken(ApplicationUser user, List<Claim> authClaims)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("JwtConfig:Secret").Value));

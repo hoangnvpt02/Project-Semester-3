@@ -92,7 +92,7 @@ namespace NetCore_Backend.Controllers
             }
         }
         [HttpGet("/ProductByGaId")]
-        
+
         public IActionResult GetListProductByGalaryId(long galaryId)
         {
             try

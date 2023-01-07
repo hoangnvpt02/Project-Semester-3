@@ -5,7 +5,7 @@ using NetCore_Backend.Data;
 
 namespace NetCore_Backend.Data
 {
-    public class MyDbContext : IdentityDbContext<IdentityUser>
+    public class MyDbContext : IdentityDbContext<ApplicationUser>
     {
         protected readonly IConfiguration Configuration;
 
