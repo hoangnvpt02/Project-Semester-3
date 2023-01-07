@@ -48,14 +48,15 @@ namespace NetCore_Backend.Services.Impl
             }
         }
 
-        public Array GetAll()
+        public Array GetAll(string userId, int status)
         {
 
             var orders = _context.Orders
-            .Join(_context.Products, order => order.ProductId, product => product.Id, (order, product) => new { order,product })
+            .Where(order => order.AspNetUsersId == userId)
+            .Join(_context.Products, order => order.ProductId, product => product.Id, (order, product) => new { order, product })
             .Join(_context.Users, o => o.order.AspNetUsersId, user => user.Id, (order1, user) => new { order1, user })
             .Select(o => new
-             {
+            {
                 Id = o.order1.order.Id,
                 TotalPrice = o.order1.order.Price,
                 Status = o.order1.order.Status,
@@ -64,11 +65,17 @@ namespace NetCore_Backend.Services.Impl
                 Name = o.order1.product.Name,
                 PriceProduct = o.order1.product.Price,
                 FileDetailsId = o.order1.product.FileDetailsId,
-            }) 
-            .ToList()
-            .ToArray();
+            });
 
-            return orders;
+            if (status == 0)
+            {
+                orders = orders.Where(order => order.Status == status);
+            } else
+            {
+                orders = orders.Where(order => order.Status > 0);
+            }
+
+            return orders.ToList().ToArray();
         }
 
         public OrderModel GetById(long id)
@@ -93,7 +100,8 @@ namespace NetCore_Backend.Services.Impl
 
         public void Update(OrderModel orderModel)
         {
-            var order = _context.Orders.FirstOrDefault(o => o.Id == orderModel.Id);
+            var order = _context.Orders
+            .FirstOrDefault(o => o.Id == orderModel.Id);
             if(order != null)
             {
                 order.Status = orderModel.Status;
@@ -107,9 +115,9 @@ namespace NetCore_Backend.Services.Impl
             }
         }
 
-        public int GetQuantityOrder()
+        public int GetQuantityOrder(string userId)
         {
-            var total = _context.Orders.ToList().Count;
+            var total = _context.Orders.Where(order => order.AspNetUsersId == userId).ToList().Count;
             return total;
         }
 

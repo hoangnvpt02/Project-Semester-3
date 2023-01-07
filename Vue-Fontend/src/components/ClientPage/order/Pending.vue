@@ -16,10 +16,10 @@
                 </div>
                 <button class="btn-status" style="background: #17a2b8;" v-if="order.status == 1" @click="updateStatus(order.id, 2, index)">Chờ xác nhận</button>
                 <button class="btn-status" style="background: #ffc107;" v-if="order.status == 2" @click="updateStatus(order.id, 2, index)">Chờ lấy hàng</button>
-                <button class="btn-status" style="background: #28a745;" v-if="order.status == 3" @click="updateStatus(order.id, 2, index)">Đã thanh đoán</button>
+                <button class="btn-status" style="background: #28a745;" v-if="order.status == 3" @click="updateStatus(order.id, 2, index)">Hoàn thành</button>
             </div>
-            <div class="col-md-12" style="padding: 0px;margin-top: 10px;">
-                <a href="/cart" class="btn btn-block btn-lg ml-2 btn-payment" style="background: #dc3545; margin-right: 11px; color: white; border-radius: 5px" type="button">
+            <div class="col-md-2" style="padding: 0px;margin-top: 10px;">
+                <a href="/cart" class="btn btn-block ml-2 btn-payment" style="background: #dc3545; margin-right: 11px; color: white; border-radius: 5px" type="button">
                     Trở lại
                 </a>
             </div>
@@ -43,14 +43,19 @@ export default {
             list_order: [],
             baseUrl: "",
             base,
+            user: JSON.parse(localStorage.getItem('user'))
         }
     },
     methods: {
         getAllData() {
-            OrderService.getAllData()
+            let userId = null;
+            if (this.user != null) {
+                userId = this.user.id;
+            }
+            
+            OrderService.getAllData(userId, 1)
                 .then((response) => {
                     this.list_order = response.data;
-                    console.log(response.data);
                 });
         },
         formatMoney(n) {

@@ -1,14 +1,14 @@
 import http from "../../http-common";
 
 class ProductService {
-  GetQuantityOrder() {
-    return http.get("/api/Order/GetQuantityOrder");
+  GetQuantityOrder(userId) {
+    return http.get(`/api/Order/GetQuantityOrder?userId=${userId}`);
   }
   create(data) {
     return http.post("/api/Order/", data);
   }
-  getAllData() {
-    return http.get("/api/Order");
+  getAllData(userId, status = 0) {
+    return http.get(`/api/Order?userId=${userId}&status=${status}`);
   }
   delete(id) {
     return http.delete(`/api/Order/${id}`);

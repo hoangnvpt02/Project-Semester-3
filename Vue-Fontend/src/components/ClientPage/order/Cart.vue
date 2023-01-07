@@ -58,6 +58,7 @@ export default {
             base,
             show_payment: false,
             show_order_peding: false,
+            user: JSON.parse(localStorage.getItem('user'))
         }
     },
     components: {
@@ -68,10 +69,14 @@ export default {
     },
     methods: {
         getAllData() {
-            OrderService.getAllData()
+            let userId = null;
+            if (this.user != null) {
+                userId = this.user.id;
+            }
+
+            OrderService.getAllData(userId)
                 .then((response) => {
                     this.list_order = response.data;
-                    console.log(response.data);
                 });
         },
         deleteOrder(id) {

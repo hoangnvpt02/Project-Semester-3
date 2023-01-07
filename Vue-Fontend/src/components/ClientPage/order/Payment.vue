@@ -50,10 +50,10 @@
                 </div>
                 <div class="col-md-12" style="padding: 0px;margin-top: 10px;">
                     <div class="col-md-6" style="padding: 0px;">
-                        <button class="btn btn-block btn-lg ml-2 btn-payment" type="button" @click="updateStatus()">Order now</button>
+                        <button class="btn btn-block ml-2 btn-payment" type="button" @click="updateStatus()">Order now</button>
                     </div>
                     <div class="col-md-6" style="padding: 0px;">
-                        <a href="/cart" class="btn btn-block btn-lg ml-2 btn-payment" style="background: #dc3545; margin-right: 11px;"  type="button">
+                        <a href="/cart" class="btn btn-block ml-2 btn-payment" style="background: #dc3545; margin-right: 11px;"  type="button">
                             Trở lại
                         </a>
                     </div>
