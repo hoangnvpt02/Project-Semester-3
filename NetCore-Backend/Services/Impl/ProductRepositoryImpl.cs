@@ -6,8 +6,8 @@ namespace NetCore_Backend.Services.Impl
     public class ProductRepositoryImpl : IProductRepository
     {
         private readonly MyDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
-        public ProductRepositoryImpl(MyDbContext context, UserManager<IdentityUser> userManager)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public ProductRepositoryImpl(MyDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;

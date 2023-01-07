@@ -5,6 +5,16 @@
       <h2>Register</h2>
       <form>
         <div class="user-box">
+          <input v-model="form.name"
+            type="text" 
+            name=""
+            @blur="validateName()"
+            v-bind:class="{'is-invalid':errors.name}"
+          >
+          <label>Name</label>
+          <div class="invalid-feedback">{{ errors.name }}</div>
+        </div>
+        <div class="user-box">
           <input v-model="form.userName"
             type="text" 
             name=""
@@ -67,12 +77,14 @@ export default {
   data() {
     return {
       errors: {
+        name: '',
         userName: '',
         email: '',
         password: '',
         rePassword: ''
       },
       form: {
+        name: '',
         userName: '',
         email: '',
         password: '',
@@ -88,10 +100,18 @@ export default {
         password: '',
         rePassword: ''
       }
-      if (this.validateUserName() && this.validatePassword() && this.validateEmail() && this.validateRePassword()) {
+      if (this.validateName() && this.validateUserName() && this.validatePassword() && this.validateEmail() && this.validateRePassword()) {
         return true;
       }
       return false;
+    },
+    validateName() {
+      if (!this.form.name) {
+        this.errors.name = "Name is required";
+        return false;
+      }
+      this.errors.name = "";
+      return true;
     },
     validateUserName() {
       if (!this.form.userName) {

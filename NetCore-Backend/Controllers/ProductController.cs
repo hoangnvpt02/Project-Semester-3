@@ -16,8 +16,8 @@ namespace NetCore_Backend.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
-        private readonly UserManager<IdentityUser> _userManager;
-        public ProductController(IProductRepository productRepository, UserManager<IdentityUser> userManager)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public ProductController(IProductRepository productRepository, UserManager<ApplicationUser> userManager)
         {
             _productRepository = productRepository;
             _userManager = userManager;

@@ -79,18 +79,5 @@ namespace NetCore_Backend.Controllers
                 return BadRequest();
             }
         }
-
-        [HttpPost]
-        public IActionResult Add(UserModel user)
-        {
-            try
-            {
-                return Ok(_userRepository.Add(user));
-            }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
-        }
     }
 }
