@@ -62,7 +62,9 @@
 						<div class="desc">
 							<h3><a :href="'/detail/' + pd.id">{{ pd.name }}</a></h3>
 							<p class="price" >Starting Price:<span style="color:#d1c286;"> ${{ pd.price }} </span> </p>
-							<button @click="auction(pd.id, pd.price)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">Auction</button>
+							<p v-if="pd.aspNetUsersId == userIdLogin" class="price" style="color:#d1c286; font-weight: bolder;">you have won the bid</p>
+							<button v-if="pd.aspNetUsersId == userIdLogin" @click="auction(pd.id, pd.price)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">Add to Cart</button>
+							<button v-else @click="auction(pd.id, pd.price)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">Auction</button>
 						</div>
 					</div>
 				</div>
@@ -115,8 +117,9 @@ export default {
 	let categories
 	let baseUrl=''
 	let galary
-
+	let userIdLogin= null
 	return {
+		userIdLogin,
 		galary,
 		products,
 		categories,
@@ -131,10 +134,10 @@ export default {
 			content: "input",
 			})
 			.then((response) => { 
-				if (response < price) {
+				if (response <= price) {
 					swal("Error!", "The entered price must be greater than the bid price", "error", {
             button: false,
-            timer: 2000
+            timer: 4000
           });
 				} else {
 					let userId = ''
@@ -187,6 +190,10 @@ export default {
 		},
 	},
 	created() {
+		let user = JSON.parse(localStorage.getItem('user'));
+			if (user) { 
+				this.userIdLogin = user.id
+			}
 		this.baseUrl = this.base.baseUrl+ 'api/files/'
 		this.retrieveCategories()
 		this.getProductByGalary(this.$route.params.id)

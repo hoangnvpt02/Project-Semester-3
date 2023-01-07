@@ -359,5 +359,6 @@ namespace NetCore_Backend.Services.Impl
 
             return products.ToList();
         }
+
     }
 }

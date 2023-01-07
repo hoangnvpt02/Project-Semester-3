@@ -140,7 +140,7 @@ namespace NetCore_Backend.Controllers
             }
         }
 
-        [HttpPost, Authorize(Roles = UserRoles.User)]
+        [HttpPost]
         public IActionResult Add([FromForm]ProductModel productModel,  IFormFile fileDetails,FileType fileType)
         {
             try

@@ -23,6 +23,8 @@ import Tables from "@/views/admin/Tables.vue";
 import Specialist from "@/views/admin/Specialist.vue";
 import ProductList from "@/views/admin/Doctor.vue";
 import MedicineList from "@/views/admin/Medicine.vue";
+import ProductAuctionList from "@/views/admin/ProductAuction.vue";
+import UserAuctionProduct from "@/views/admin/UserAuctionProduct.vue";
 import Maps from "@/views/admin/Maps.vue";
 import EditCatePage from "./components/Cards/EditCatePage.vue";
 import EditSpecialist from "./components/Cards/EditSpecialist.vue";
@@ -61,7 +63,7 @@ const routes = [
         component: Tables,
       },
       {
-        path: "/admin/specialist-manage",
+        path: "/admin/auction-manage",
         component: Specialist,
       },
       {
@@ -69,8 +71,16 @@ const routes = [
         component: ProductList,
       },
       {
-        path: "/admin/medicine-manage",
+        path: "/admin/auction-product-manage",
         component: MedicineList,
+      },
+      {
+        path: "/admin/product-auction/:id",
+        component: ProductAuctionList,
+      },
+      {
+        path: "/admin/user-product-auction/:idGa/:idPd",
+        component: UserAuctionProduct,
       },
       {
         path: "/admin/cate-edit/:id",
