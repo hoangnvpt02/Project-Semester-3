@@ -2,6 +2,8 @@
 using NetCore_Backend.Data;
 using Microsoft.CodeAnalysis;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Net;
+using Microsoft.IdentityModel.Tokens;
 
 namespace NetCore_Backend.Services.Impl
 {
@@ -15,11 +17,24 @@ namespace NetCore_Backend.Services.Impl
 
         public OrderModel Add(OrderModel orderModel)
         {
+            var product = _context.Products.FirstOrDefault(p => p.Id == orderModel.ProductId);
+
             var order = new Order();
             order.AspNetUsersId = orderModel.AspNetUsersId;
             order.ProductId = orderModel.ProductId;
             order.Status = orderModel.Status;
-            order.Price = orderModel.Price;
+
+            if (product != null)
+            {
+                if (product.SalePercent > 0)
+                {
+                    order.Price = (decimal)product.PriceSale;
+                } else
+                {
+                    order.Price = product.Price;
+                }
+            }
+
             order.IsActive = orderModel.IsActive;
             order.Created = orderModel.Created;
             order.Updated = orderModel.Updated;
@@ -53,6 +68,7 @@ namespace NetCore_Backend.Services.Impl
 
             var orders = _context.Orders
             .Where(order => order.AspNetUsersId == userId)
+            .Where(order => order.IsActive == 0)
             .Join(_context.Products, order => order.ProductId, product => product.Id, (order, product) => new { order, product })
             .Join(_context.Users, o => o.order.AspNetUsersId, user => user.Id, (order1, user) => new { order1, user })
             .Select(o => new
@@ -65,6 +81,10 @@ namespace NetCore_Backend.Services.Impl
                 Name = o.order1.product.Name,
                 PriceProduct = o.order1.product.Price,
                 FileDetailsId = o.order1.product.FileDetailsId,
+                FullName = o.user.UserName,
+                Email = o.user.Email,
+                Phone = o.user.PhoneNumber,
+                Address = o.user.Address,
             });
 
             if (status == 0)
@@ -117,17 +137,29 @@ namespace NetCore_Backend.Services.Impl
 
         public int GetQuantityOrder(string userId)
         {
-            var total = _context.Orders.Where(order => order.AspNetUsersId == userId).ToList().Count;
+            var total = _context.Orders
+                .Where(order => order.AspNetUsersId == userId)
+                .Where(order => order.Status == 0)
+                .Where(order => order.IsActive == 0)
+                .ToList().Count;
             return total;
         }
 
-        public void UpdateStatus(long id, int status)
+        public void UpdateStatus(long id, int status, string email, string address)
         {
             var order = _context.Orders.FirstOrDefault(o => o.Id == id);
             if (order != null)
             {
                 order.Status = status;
                 _context.Update(order);
+                _context.SaveChanges();
+            }
+
+            var user = _context.Users.Where(u => u.Email == email).FirstOrDefault();
+            if (user != null && email != "Empty" && address != "Empty")
+            {
+                user.Address = address;
+                _context.Update(user);
                 _context.SaveChanges();
             }
         }

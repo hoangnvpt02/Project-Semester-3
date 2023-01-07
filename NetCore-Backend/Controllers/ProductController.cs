@@ -109,6 +109,21 @@ namespace NetCore_Backend.Controllers
                 return BadRequest();
             }
         }
+        [HttpPut("UpdatePrBid")]
+        public IActionResult UpdatePrBid(ProductModel productModel)
+        {
+
+            try
+            {
+                _productRepository.UpdatePrBid(productModel);
+                return Ok();
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
@@ -125,7 +140,7 @@ namespace NetCore_Backend.Controllers
             }
         }
 
-        [HttpPost, Authorize(Roles = UserRoles.User)]
+        [HttpPost]
         public IActionResult Add([FromForm]ProductModel productModel,  IFormFile fileDetails,FileType fileType)
         {
             try

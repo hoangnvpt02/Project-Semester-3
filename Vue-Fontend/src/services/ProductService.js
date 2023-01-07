@@ -4,6 +4,9 @@ class ProductService {
   getAll() {
     return http.get("api/product");
   }
+  get15First() {
+    return http.get("api/product/?start=0&end=15");
+  }
   getAllByFeature() {
     return http.get("api/product/feature");
   }

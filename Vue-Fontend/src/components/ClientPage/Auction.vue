@@ -28,13 +28,15 @@
 		<div>
 			<div class="container">
 				<div class="row">
-					<div class="col-md-3 col-sm-3 text-center"  v-for="item in galary">
+					<div class="col-md-4 col-sm-3 text-center"  v-for="item in galary">
 						<div class="feature-center animate-box" data-animate-effect="fadeIn">
 							<span class="icon">
 								<i class="icon-eye"></i>
 							</span>
 							<h3>{{item.name}}</h3>
 							<p>{{item.discription}}</p>
+							<span style="color:#d1c286"> Time start:</span>  <p>{{item.fromDate}}</p>
+							<span style="color:#d1c286"> Time end: </span><p>{{item.toDate}}</p>
 							<p><a :href="'/product-auction/' + item.id" class="btn btn-primary btn-outline">View Auction Products</a></p>
 						</div>
 					</div>

@@ -54,6 +54,7 @@ export default {
 		return {
 			quantity_order: 0,
 			exist: null,
+			user: JSON.parse(localStorage.getItem('user'))
 		}
 	},
 	created () {
@@ -62,7 +63,7 @@ export default {
 	},
 	methods: {
 		getQuantityOrder() {
-			OrderService.GetQuantityOrder()
+			OrderService.GetQuantityOrder(this.user.id)
 			.then((response) => {
 				this.quantity_order = response.data;
 			});

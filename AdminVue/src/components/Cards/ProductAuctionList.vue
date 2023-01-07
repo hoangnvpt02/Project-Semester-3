@@ -7,16 +7,14 @@
       <AddMedicine/>
     </div>
     <h6 class=" px-4 text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase text-center">
-      INFORMATION OF CURRENT Auctions
+      All Artworks for auction
     </h6>
   <div class="block w-full overflow-x-auto" id="cars-list">
     <div class="flex flex-wrap p-4" >
-        <div class="w-full lg:w-4/12 px-4"  v-for="item in galary">
-          <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">{{item.name}}</h3>
-          <p>{{item.discription}}</p>
-          <span style="color:#d1c286"> Time start:</span>  <p>{{item.fromDate}}</p>
-          <span style="color:#d1c286"> Time end: </span><p>{{item.toDate}}</p>
-          <p><a :href="'/admin/product-auction/' + item.id" class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">View Auction Products</a></p>
+        <div class="w-full lg:w-4/12 px-4 py-4"  v-for="item in products">
+          <img :src="baseUrl + item.fileDetailsId" style="height:200px" alt="Image artwork">
+          <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase text-center">{{item.name}}</h3>
+          <p class="text-center"><a :href="'/admin/user-product-auction/' +$route.params.id+ '/' + item.id" class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">View More</a></p>
         </div>
       </div>
   </div>
@@ -29,17 +27,22 @@ import MedicineService from "../../services/MedicineService";
 import AddMedicine from "@/components/Cards/AddMedicine.vue";
 import MedicineDropdown from "@/components/Dropdowns/MedicineDropdown.vue";
 import GalaryService from "../../services/GalaryService";
-
+import base from "../../base.json";
 export default {
   data() {
     const medicines=ref([]);
     const titles  = ref(['ID','NAME','NOTE','ACTIONS'])
 	  let galary
+    let products
+    let baseUrl=''
 
     return {
+		  products,
 		  galary,
       medicines,
       titles,
+      baseUrl,
+      base
     };
   },
   components: {
@@ -57,6 +60,15 @@ export default {
   },
 
   methods: {
+    getProductByGalary(id) {
+			GalaryService.getProductByGalary(id)
+			.then((response) => {
+          this.products = response.data;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+		},
     getAllGalary() {
 			GalaryService.getAll()
 			.then((response) => {
@@ -98,7 +110,10 @@ export default {
 
   },
   created() {
+		this.baseUrl = this.base.baseUrl+ 'api/files/'
 		this.getAllGalary()
+		this.getProductByGalary(this.$route.params.id)
+
   },
 };
 </script>
