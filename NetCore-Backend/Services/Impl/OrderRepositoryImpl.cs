@@ -29,7 +29,12 @@ namespace NetCore_Backend.Services.Impl
                 if (product.SalePercent > 0)
                 {
                     order.Price = (decimal)product.PriceSale;
-                } else
+                }
+                else if (product.PriceAuction != null)
+                {
+                    order.Price = (decimal)product.PriceAuction;
+                }
+                else
                 {
                     order.Price = product.Price;
                 }

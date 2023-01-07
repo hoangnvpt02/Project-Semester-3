@@ -44,7 +44,7 @@ namespace NetCore_Backend.Services.Impl
         }
         public List<ProductCateModel> GetAll()
         {
-            var productCaties = _context.ProductCates.Where(p => p.IsActive == 0).Select(p => new ProductCateModel()
+            var productCaties = _context.ProductCates.Select(p => new ProductCateModel()
             {
                 Id = p.Id,
                 ProductId = p.ProductId,

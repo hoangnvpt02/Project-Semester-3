@@ -12,7 +12,9 @@
   <div class="block w-full overflow-x-auto" id="cars-list">
     <div class="flex flex-wrap p-4" >
         <div class="w-full lg:w-4/12 px-4"  v-for="item in galary">
+          <img style="width:130px" src="https://img.freepik.com/free-vector/antique-auction-isometric-composition_1284-22062.jpg?w=2000" alt="">
           <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">{{item.name}}</h3>
+          
           <p>{{item.discription}}</p>
           <span style="color:#d1c286"> Time start:</span>  <p>{{item.fromDate}}</p>
           <span style="color:#d1c286"> Time end: </span><p>{{item.toDate}}</p>

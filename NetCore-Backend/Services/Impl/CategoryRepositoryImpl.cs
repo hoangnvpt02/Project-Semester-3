@@ -43,7 +43,7 @@ namespace NetCore_Backend.Services.Impl
 
         public List<CategoryModel> GetAll()
         {
-            var categories = _context.Categories.Where(c => c.IsActive == 0).Select(c => new CategoryModel()
+            var categories = _context.Categories.Select(c => new CategoryModel()
             {
                 Id = c.Id,
                 Name = c.Name,

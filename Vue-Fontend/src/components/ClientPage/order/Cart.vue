@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template lang="">
-<div>
+<div style="background: white;">
     <Header></Header>
     <div class="container mt-5 mb-5" v-if="!show_payment && !show_order_peding">
         <div style="display: flex; justify-content: center;">

@@ -43,7 +43,7 @@
 							<div class="item">
 							<div class="active text-center" >
 								<figure>
-									<img :src="baseUrl + product.fileDetailsId" style="width:400px; border-radius: 5px;" >
+									<img :src="baseUrl + product.fileDetailsId" style="width:500px; border-radius: 5px;" >
 								</figure>
 							</div>
 						</div>
@@ -69,7 +69,9 @@
 
 							<div class="fh5co-tab-content tab-content active" data-tab-content="1">
 								<div class="col-md-10 col-md-offset-1">
-									<span class="price">Price: ${{ product.price }}</span>
+									<p class="price" style="color:#d1c286; font-weight: bold;" v-if="product.salePercent >0">Sale: ${{ product.priceSale }}</p> 
+									<span v-else class="price">Price: ${{ product.price }}</span>
+
 									<h2>{{ product.name }}</h2>
 									<p>{{ product.description }}</p>
 
@@ -217,11 +219,14 @@ export default {
 				status: 0,
 				isActive: 0,
 			});
+			OrderService.GetQuantityOrder(this.user.id);
+
 		}
 	},
 	created() {
 		this.baseUrl = this.base.baseUrl+ 'api/files/'
     this.getProductById(this.$route.params.id);
+		
 	},
   components: {
     Header,

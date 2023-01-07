@@ -63,7 +63,7 @@
 							<h3><a :href="'/detail/' + pd.id">{{ pd.name }}</a></h3>
 							<p class="price" >Starting Price:<span style="color:#d1c286;"> ${{ pd.price }} </span> </p>
 							<p v-if="pd.aspNetUsersId == userIdLogin" class="price" style="color:#d1c286; font-weight: bolder;">you have won the bid with price ${{ pd.priceAuction }}</p>
-							<button v-if="pd.aspNetUsersId == userIdLogin" @click="auction(pd.id, pd.price)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">Add to Cart</button>
+							<button v-if="pd.aspNetUsersId == userIdLogin"  @click="AddToCart(pd)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">Add to Cart</button>
 							<button v-else @click="auction(pd.id, pd.price)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">Auction</button>
 						</div>
 					</div>
@@ -110,6 +110,7 @@ import base from "@/../base.json"
 import GalaryService from '@/services/GalaryService';
 import BidService from '@/services/BidService';
 import swal from 'sweetalert';
+import OrderService from '@/services/OrderService';
 
 export default {
 	data() {
@@ -125,7 +126,8 @@ export default {
 		categories,
 		bannerproduct,
 		baseUrl,
-		base
+		base,
+		user: JSON.parse(localStorage.getItem('user'))
 	}
 	},
 	methods: {
@@ -191,6 +193,17 @@ export default {
           console.log(e);
         });
 		},
+		AddToCart(product) {
+			OrderService.create({
+				productId: product.id,
+				aspNetUsersId: this.user.id,
+				price: 10,
+				status: 0,
+				isActive: 0,
+			});
+			OrderService.GetQuantityOrder(this.user.id);
+
+		}
 	},
 	created() {
 		let user = JSON.parse(localStorage.getItem('user'));
