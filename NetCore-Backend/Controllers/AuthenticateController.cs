@@ -353,6 +353,9 @@ namespace NetCore_Backend.Controllers
                 return Ok(new AuthResult()
                 {
                     Id = exsiting_user.Id,
+                    Name = exsiting_user.Name,
+                    Address = exsiting_user.Address,
+                    Phone = exsiting_user.PhoneNumber,
                     Token = jwtToken.ToString(),
                     Result = true
                 });
@@ -434,6 +437,10 @@ namespace NetCore_Backend.Controllers
 
                 return Ok(new AuthResult()
                 {
+                    Id = exsiting_user.Id,
+                    Name = exsiting_user.Name,
+                    Address = exsiting_user.Address,
+                    Phone = exsiting_user.PhoneNumber,
                     Token = jwtToken.ToString(),
                     Result = true
                 });
