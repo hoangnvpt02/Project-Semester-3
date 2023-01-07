@@ -25,7 +25,7 @@
                         <i class="fa fa-trash mb-1"></i>
                     </div>
                 </div>
-                <div class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded" style="margin-top: 15px">
+                <div class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded" v-if="list_product_payment_processing.length > 0" style="margin-top: 15px">
                     <button class="btn btn-block btn-lg ml-2 btn-order" type="button" @click="show_payment = !show_payment">Tiến hành đặt hàng</button>
                 </div>
             </div>

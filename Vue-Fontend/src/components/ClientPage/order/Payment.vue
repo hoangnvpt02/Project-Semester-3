@@ -34,19 +34,16 @@
                     <h4 style="margin: 0 0 15px 0">Order notification</h4>
                 </div>
                 <div class="col-md-6" style="padding: 4px">
-                    <input class="ip-imput-form" placeholder="Full Name">
+                    <input class="ip-imput-form" v-model="user.name" placeholder="Full Name" disabled>
                 </div>
                 <div class="col-md-6" style="padding: 4px">
-                    <input class="ip-imput-form" placeholder="Email">
+                    <input class="ip-imput-form" v-model="user.email" placeholder="Email" disabled>
                 </div>
                 <div class="col-md-6" style="padding: 4px">
-                    <input class="ip-imput-form" placeholder="Phone">
+                    <input class="ip-imput-form" v-model="user.phone" placeholder="Phone" disabled>
                 </div>
                 <div class="col-md-6" style="padding: 4px">
-                    <input class="ip-imput-form" placeholder="Address">
-                </div>
-                <div class="col-md-12" style="padding: 4px">
-                    <textarea class="ip-imput-form" id="exampleFormControlTextarea1" placeholder="Note" rows="3" style="height: 87px"></textarea>
+                    <input class="ip-imput-form" v-model="user.address" placeholder="Address">
                 </div>
                 <div class="col-md-12" style="padding: 0px;margin-top: 10px;">
                     <div class="col-md-6" style="padding: 0px;">
@@ -54,7 +51,7 @@
                     </div>
                     <div class="col-md-6" style="padding: 0px;">
                         <a href="/cart" class="btn btn-block ml-2 btn-payment" style="background: #dc3545; margin-right: 11px;"  type="button">
-                            Trở lại
+                            Back
                         </a>
                     </div>
                 </div>
@@ -68,6 +65,8 @@
 import OrderService from '@/services/OrderService';
 import base from "@/../base.json"
 
+let data_user = JSON.parse(localStorage.getItem('user'));
+
 export default {
     props: {
         list_product_payment_processing: {
@@ -75,12 +74,20 @@ export default {
         },
         show_payment: {
             type: Boolean,
-        }
+        },
     },
     data() {
         return {
             baseUrl: "",
             base,
+            user: {
+                id: data_user.id,
+                name: data_user.name,
+                email: data_user.email,
+                phone: data_user.phone,
+                address: data_user.address,
+                address_detail: "",
+            },
         }
     },
     methods: {
@@ -88,12 +95,14 @@ export default {
             return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
         },
         updateStatus() {
+            const user = this.user;
             this.list_product_payment_processing.forEach(element => {
-                OrderService.updateStatus(element.id, 1)
+                OrderService.updateStatus(element.id, 1, user.email, user.address)
                 .then(() => {
-                    alert("Đặt hàng thành công, chờ xác nhận đơn từ người bán");
+                    window.location.reload();
                 });
             });
+            alert("Đặt hàng thành công, chờ xác nhận đơn từ người bán");
         }
     },
     created() {

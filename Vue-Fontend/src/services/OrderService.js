@@ -13,8 +13,8 @@ class ProductService {
   delete(id) {
     return http.delete(`/api/Order/${id}`);
   }
-  updateStatus(id, status) {
-    return http.get(`/api/Order/UpdateStatus/${id}/${status}`);
+  updateStatus(id, status, email = null, address = null) {
+    return http.get(`/api/Order/UpdateStatus/${id}/${status}?email=${email}&address=${address}`);
   }
 }
 export default new ProductService();

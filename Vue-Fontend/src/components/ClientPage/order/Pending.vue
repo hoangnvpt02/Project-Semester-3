@@ -20,7 +20,7 @@
             </div>
             <div class="col-md-2" style="padding: 0px;margin-top: 10px;">
                 <a href="/cart" class="btn btn-block ml-2 btn-payment" style="background: #dc3545; margin-right: 11px; color: white; border-radius: 5px" type="button">
-                    Trở lại
+                    Back
                 </a>
             </div>
         </div>
@@ -52,8 +52,6 @@ export default {
             if (this.user != null) {
                 userId = this.user.id;
             }
-
-            console.log(this.user);
             
             OrderService.getAllData(userId, 1)
                 .then((response) => {
