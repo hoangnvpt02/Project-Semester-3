@@ -94,7 +94,7 @@ namespace NetCore_Backend.Services.Impl
         public List<ProductModel> GetAll(int start,int end,String sortBy)
         {
 
-            var products = _context.Products.Where(p => p.IsActive == 0).Where(p => p.AspNetUsersId == "aaa").Select(p => new ProductModel()
+            var products = _context.Products.Where(p => p.IsActive == 0).Select(p => new ProductModel()
             {
                 Id = p.Id,
                 CountryId = p.CountryId,
@@ -304,5 +304,6 @@ namespace NetCore_Backend.Services.Impl
 
             return products.ToList();
         }
+
     }
 }

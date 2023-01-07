@@ -123,7 +123,7 @@ export default {
 	},
 	methods: {
 		retrieveProduct() {
-			ProductService.getAll()
+			ProductService.get15First()
 			.then((response) => {
           this.products = response.data;
         })
