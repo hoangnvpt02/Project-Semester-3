@@ -48,7 +48,7 @@
 							</div>
 						</div>
 							<p>
-								<a href="#" class="btn btn-primary btn-outline btn-lg" style="width:500px; border-radius: 5px;">Add to Cart</a>
+								<a href="#" class="btn btn-primary btn-outline btn-lg" style="width:500px; border-radius: 5px;" @click="AddToCart(product)">Add to Cart</a>
 								<!-- <a href="#" class="btn btn-primary btn-outline btn-lg">Compare</a> -->
 							</p>
 						</div>
@@ -180,6 +180,7 @@ import img_bg_2 from '../../assets/images/bg2.jpg'
 import ProductService from '@/services/ProductService'
 import bannerproduct from '../../assets/images/bannerproduct.png'
 import base from "@/../base.json"
+import OrderService from '@/services/OrderService';
 
 export default {
 	props: {
@@ -195,6 +196,7 @@ export default {
 			bannerproduct,
 			baseUrl,
 			base,
+		user: JSON.parse(localStorage.getItem('user'))
     }
   },
 	methods: {
@@ -207,7 +209,15 @@ export default {
           console.log(e);
         });
 		},
-
+		AddToCart(product) {
+			OrderService.create({
+				productId: product.id,
+				aspNetUsersId: this.user.id,
+				price: 10,
+				status: 0,
+				isActive: 0,
+			});
+		}
 	},
 	created() {
 		this.baseUrl = this.base.baseUrl+ 'api/files/'

@@ -74,7 +74,7 @@ export default {
                 userId = this.user.id;
             }
 
-            OrderService.getAllData(userId)
+            OrderService.getAllData(userId, 0)
                 .then((response) => {
                     this.list_order = response.data;
                 });
