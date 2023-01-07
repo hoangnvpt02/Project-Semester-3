@@ -5,7 +5,7 @@
     <div class="flex flex-wrap items-center md:justify-between justify-center">
       <div class="w-full px-4">
         <div class="text-sm text-blueGray-500 font-semibold py-1 text-center">
-          HEALTH ASSISTANT BY TRIPLEDOT TEAM
+          ONLINE ART GALARY ADMIN
           <!-- <a
               href="https://www.creative-tim.com?ref=vn-footer-admin"
               class="text-blueGray-500 hover:text-blueGray-700 text-sm font-semibold py-1"

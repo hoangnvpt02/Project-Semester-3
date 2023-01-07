@@ -18,7 +18,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in galaries"  :key="index">
+        <tr v-for="(item, index) in specialist"  :key="index">
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
             {{ index+1 }}
           </td>
@@ -27,12 +27,7 @@
           </td>
 
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-            <button v-on:click="deleteProduct(item.id)" class="text-center w-full lg:w-3/12  bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
-              Delete
-            </button>
-            <a :href="'/admin/product-edit/' + item.id" class="text-center w-full lg:w-3/12 bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
-              Edit
-            </a>
+            <SpecialistDropdown :carId="item.id"  />
           </td>
         </tr>
 
@@ -47,19 +42,16 @@
 import SpecialistService from "../../services/SpecialistService";
 import AddSpecialist from "@/components/Cards/AddSpecialist.vue";
 import SpecialistDropdown from "@/components/Dropdowns/SpecialistDropdown.vue";
-import GalaryService from "../../services/GalaryService";
 
 
 export default {
   data() {
-    let galaries
     const specialist=ref([]);
     const titles  = ref(['ID','NAME','ACTIONS'])
 
 
 
     return {
-      galaries,
       specialist,
       titles,
     };
@@ -79,47 +71,6 @@ export default {
   },
 
   methods: {
-    deleteProduct : function(id) {
-      swal({
-      title: "Are you sure?",
-      icon: "warning",
-      buttons: [
-        'No, cancel it!',
-        'Yes, I am sure!'
-      ],
-      dangerMode: true,
-    }).then(function(isConfirm) {
-      if (isConfirm) {
-        ProductService.delete(id).then(() => {
-        swal("Success", "Delete Successfully!", "success",{
-            button: false,
-            timer:2000
-          })
-        .then(function(){ 
-          location.reload();
-        })
-        })
-        .catch(() => {
-          swal("Error", "Delete Failed!", "error",{
-            button: false,
-            timer:2000
-          });
-        });
-      }
-      
-    })
-
-    },
-    getAllGalary() {
-      GalaryService.getAll()
-        .then((response) => {
-          this.galaries = response.data;
-          // console.log(response.data);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
     addCar() {
       document.getElementById('cars-list').style.display = "none";
       document.getElementById('add-specialist').style.display = "block";
@@ -136,9 +87,24 @@ export default {
           console.log(e);
         });
     },
+
+    refreshList() {
+      this.retrievecars();
+      this.currentitem = {} ;
+      this.currentIndex = -1;
+    },
+
+    setActiveitem(item, index = -1) {
+      this.currentitem = item;
+      this.currentIndex = index;
+    },
+
+
+
+
   },
-  created() {
-    this.getAllGalary();
+  mounted() {
+    this.retrieveSpecialist();
   },
 };
 </script>

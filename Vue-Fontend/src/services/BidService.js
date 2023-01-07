@@ -7,6 +7,9 @@ class BidService {
   getAll() {
     return http.get("api/Bid");
   }
+  getById(idGa,idPd) {
+    return http.get(`api/Bid/PriceDesc?galaryId=${idGa}&productId=${idPd}`)
+  }
   create(data) {
     return http.post("/api/Bid/", data);
   }
