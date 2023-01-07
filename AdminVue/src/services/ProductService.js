@@ -1,6 +1,9 @@
 import http from "@/http-common";
 
 class ProductService {
+  UpdatePrBid(data) {
+    return http.put("/api/product/UpdatePrBid", data);
+  }
   delete(id) {
     return http.delete(`/api/product/${id}`);
   }

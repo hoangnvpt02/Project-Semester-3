@@ -15,5 +15,7 @@ namespace NetCore_Backend.Services
 
         List<ProductModel> GetCateById(long id);
         List<ProductModel> GetAllNoActive(int start, int end, String? sortBy);
+
+        void UpdatePrBid(ProductModel productModel);
     }
 }

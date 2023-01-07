@@ -23,6 +23,8 @@ import Tables from "@/views/admin/Tables.vue";
 import Specialist from "@/views/admin/Specialist.vue";
 import ProductList from "@/views/admin/Doctor.vue";
 import MedicineList from "@/views/admin/Medicine.vue";
+import ProductAuctionList from "@/views/admin/ProductAuction.vue";
+import UserAuctionProduct from "@/views/admin/UserAuctionProduct.vue";
 import Maps from "@/views/admin/Maps.vue";
 import EditCatePage from "./components/Cards/EditCatePage.vue";
 import EditSpecialist from "./components/Cards/EditSpecialist.vue";
@@ -47,6 +49,7 @@ const routes = [
     path: "/admin",
     redirect: "/admin/product-manage",
     component: Admin,
+    meta: { requiresAuth: true },
     children: [
       {
         path: "/admin/dashboard",
@@ -61,7 +64,7 @@ const routes = [
         component: Tables,
       },
       {
-        path: "/admin/specialist-manage",
+        path: "/admin/auction-manage",
         component: Specialist,
       },
       {
@@ -69,8 +72,16 @@ const routes = [
         component: ProductList,
       },
       {
-        path: "/admin/medicine-manage",
+        path: "/admin/auction-product-manage",
         component: MedicineList,
+      },
+      {
+        path: "/admin/product-auction/:id",
+        component: ProductAuctionList,
+      },
+      {
+        path: "/admin/user-product-auction/:idGa/:idPd",
+        component: UserAuctionProduct,
       },
       {
         path: "/admin/cate-edit/:id",
@@ -128,6 +139,19 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  // const publicPages = ['/booking-detail/:id','/login', '/register', '/' ,'/booking', '/auth/login'];
+  // const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem('admin');
+  // trying to access a restricted page + not logged in
+  // redirect to login page
+  if (to.meta.requiresAuth && !loggedIn) {
+    next('/auth/login');
+  } else {
+    next();
+  }
 });
 
 createApp(App).use(router).mount("#app");

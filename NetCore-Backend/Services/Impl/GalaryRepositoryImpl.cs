@@ -128,6 +128,7 @@ namespace NetCore_Backend.Services.Impl
                                 AspNetUsersId = product.AspNetUsersId,
                                 CountryId = product.CountryId,
                                 Price = product.Price,
+                                PriceAuction = product.PriceAuction,
                                 Author = product.Author,
                                 Name = product.Name,
                                 ManufactureYear = product.ManufactureYear,

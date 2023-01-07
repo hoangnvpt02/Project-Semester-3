@@ -102,6 +102,7 @@ namespace NetCore_Backend.Services.Impl
                 Address = p.Address,
                 Author = p.Author,
                 Name = p.Name,
+                PriceAuction   = p.PriceAuction,
                 Price = p.Price,
                 ManufactureYear = p.ManufactureYear,
                 Quanlity = p.Quanlity,
@@ -149,6 +150,7 @@ namespace NetCore_Backend.Services.Impl
                     Author = product.Author,
                     Name = product.Name,
                     Price = product.Price,
+                    PriceAuction   = product.PriceAuction,
                     ManufactureYear = product.ManufactureYear,
                     Quanlity = product.Quanlity,
                     Description = product.Description,
@@ -295,6 +297,18 @@ namespace NetCore_Backend.Services.Impl
             return products.ToList();
         }
 
+        public void UpdatePrBid(ProductModel productModel)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == productModel.Id);
+            if (product != null && productModel.AspNetUsersId != null)
+            {
+                product.AspNetUsersId = productModel.AspNetUsersId;
+                product.PriceAuction = productModel.PriceAuction;
+                _context.Update(product);
+                _context.SaveChanges();
+            }
+        }
+
         public List<ProductModel> GetAllProductByFeature()
         {
            var products = _context.Products.Where(p => p.IsFeature == 0).Select(p => new ProductModel()
@@ -347,5 +361,6 @@ namespace NetCore_Backend.Services.Impl
 
             return products.ToList();
         }
+
     }
 }

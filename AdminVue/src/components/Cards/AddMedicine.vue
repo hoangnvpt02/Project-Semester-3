@@ -4,32 +4,35 @@
   <div class="flex-auto px-4 lg:px-10 py-10 pt-0" id="add-specialist">
     <form @submit.prevent="onSubmit">
       <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-        Add Medicine Information
+        Add Product For Auction Information
       </h6>
       <div class="flex flex-wrap">
-        <div class="w-full lg:w-8/12 px-4">
+        <div class="w-full lg:w-12/12 px-4">
           <div class="relative w-full mb-3">
             <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-              Name
+              Auction
             </label>
-            <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" required v-model="medicine.name" name="name" />
+            <select class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name="userSelect" v-model="galaryId">
+              <option v-for="item in galaries" v-bind:key="item.id" v-bind:value="item.id"> {{ item.name }} </option>
+            </select>
           </div>
         </div>
-        <div class="w-full lg:w-8/12 px-4">
+        <div class="w-full lg:w-12/12 px-4">
           <div class="relative w-full mb-3">
             <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-              Note
+              Product for Auction
             </label>
-            <textarea type="text" placeholder="Example: medicine taken once a day..." class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" rows="4" required v-model="medicine.note" name="note">
-            </textarea>
+            <select class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name="userSelect" v-model="productId">
+              <option v-for="item in products" v-bind:key="item.id" v-bind:value="item.id"> {{ item.name }} </option>
+            </select>
           </div>
         </div>
       </div>
       <div class="w-full lg:w-12/12 px-4 mt-8">
-        <a href="/admin/medicine-manage" class="text-center w-full lg:w-3/12  bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
+        <a href="/admin/auction-product-manage" class="text-center w-full lg:w-3/12  bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
           Back
         </a>
-        <button @click="saveCar" class="w-full lg:w-3/12 bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="submit">
+        <button @click="save" class="w-full lg:w-3/12 bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="submit">
           Save
         </button>
       </div>
@@ -43,10 +46,20 @@
 <script>
 import MedicineService from "../../services/MedicineService";
 import swal from 'sweetalert';
-
+import GalaryService from "../../services/GalaryService";
+import ProductService from "../../services/ProductService";
+import ProductGalaryService from "../../services/ProductGalaryService";
 export default {
   data() {
+    let galaries
+    let products
+    let productId
+    let galaryId
     return {
+      productId,
+      galaryId,
+      galaries,
+      products,
       medicine: {
         name: null,
         note: null,
@@ -55,14 +68,32 @@ export default {
     }
   },
   methods: {
-    saveCar() {
+    getAllGalary() {
+      GalaryService.getAll()
+        .then((response) => {
+          this.galaries = response.data;
+          // console.log(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+    getAllProduct() {
+      ProductService.getAll()
+        .then((response) => {
+          this.products = response.data;
+          // console.log(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+    save() {
       let data = {
-        name: this.medicine.name,
-        note: this.medicine.note,
+        galaryId: this.galaryId,
+        productId: this.productId,
       };
-      console.log("log data");
-      console.log(data);
-      MedicineService.create(data)
+      ProductGalaryService.create(data)
         .then(() => {
           swal("Success!", "Add Successfully!", "success", {
             button: false,
@@ -75,17 +106,12 @@ export default {
             timer: 2000
           });
         });
-
-     
-
-
     },
   },
-  // mounted() {
-  //   UploadService.getFiles().then(response => {
-  //     this.imageInfos= response.data;
-  //   });
-  // }
+  created() {
+    this.getAllProduct();
+    this.getAllGalary();
+  }
 }
 </script>
 

@@ -12,11 +12,12 @@ namespace NetCore_Backend.Data
         public string ? AspNetUsersId { get; set; }
         public Decimal Price { get; set; }
         public Decimal ? PriceSale { get; set; }
-        public string Name { get; set; }
-        public string Author { get; set; }
+        public Decimal ? PriceAuction { get; set; }
+        public string ? Name { get; set; }
+        public string ? Author { get; set; }
         public string ? ManufactureYear { get; set; }
-        public string Quanlity { get; set; }
-        public string Description { get; set; }
+        public string ? Quanlity { get; set; }
+        public string ? Description { get; set; }
         public string ? Address { get; set; }
         public long ? FileDetailsId { get; set; }
         [ForeignKey("FileDetailsId")]
