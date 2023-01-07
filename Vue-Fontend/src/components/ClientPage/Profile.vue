@@ -5,7 +5,7 @@
   <div id="page">
     <div class="wrapper">
       <div class="left">
-        <img src="https://i.imgur.com/cMy8V5j.png" alt="user" width="100">
+        <img src="../../assets/images/user.png" alt="user" width="100">
         <h4>User Profile</h4>
       </div>
       <div class="right">
