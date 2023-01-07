@@ -80,7 +80,20 @@ namespace NetCore_Backend.Controllers
                 return BadRequest();
             }
         }
-        
+
+        [HttpGet("GetAllNoActive")]
+        public IActionResult GetAllNoActive(int start, int end, String? sortBy)
+        {
+            try
+            {
+                return Ok(_productRepository.GetAllNoActive(start, end, sortBy));
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPut]
         public IActionResult Update(ProductModel productModel)
         {
@@ -88,6 +101,21 @@ namespace NetCore_Backend.Controllers
             try
             {
                 _productRepository.Update(productModel);
+                return Ok();
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpPut("UpdatePrBid")]
+        public IActionResult UpdatePrBid(ProductModel productModel)
+        {
+
+            try
+            {
+                _productRepository.UpdatePrBid(productModel);
                 return Ok();
 
             }

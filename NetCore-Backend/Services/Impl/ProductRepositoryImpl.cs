@@ -252,6 +252,60 @@ namespace NetCore_Backend.Services.Impl
             return null;
         }
 
+        public List<ProductModel> GetAllNoActive(int start, int end, string? sortBy)
+        {
+            var products = _context.Products.Select(p => new ProductModel()
+            {
+                Id = p.Id,
+                CountryId = p.CountryId,
+                AspNetUsersId = p.AspNetUsersId,
+                Address = p.Address,
+                Author = p.Author,
+                Name = p.Name,
+                Price = p.Price,
+                ManufactureYear = p.ManufactureYear,
+                Quanlity = p.Quanlity,
+                Description = p.Description,
+                FileDetailsId = p.FileDetailsId,
+                IsActive = p.IsActive,
+                IsFeature = p.IsFeature,
+                SalePercent = p.SalePercent,
+                PriceSale = p.PriceSale,
+                Created = p.Created,
+                Updated = p.Updated,
+            });
+
+            products.OrderByDescending(p => p.Created).ToList();
+            if (sortBy != null)
+            {
+                switch (sortBy)
+                {
+                    case "price":
+                        products = products.OrderByDescending(p => p.Price);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (start != 0 || end != 0)
+            {
+                products = products.Skip(start).Take(end);
+            }
+
+            return products.ToList();
+        }
+
+        public void UpdatePrBid(ProductModel productModel)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == productModel.Id);
+            if (product != null && productModel.AspNetUsersId != null)
+            {
+                product.AspNetUsersId = productModel.AspNetUsersId;
+                _context.Update(product);
+                _context.SaveChanges();
+            }
+        }
+
         public List<ProductModel> GetAllProductByFeature()
         {
            var products = _context.Products.Where(p => p.IsFeature == 0).Select(p => new ProductModel()

@@ -35,7 +35,7 @@
 						<li v-if="!exist"><a href="/register">Register</a></li>
 						<li v-if="exist"><a href="#" @click="logout()">Logout</a></li>
 						<li v-if="exist"><div><a href="">Profile</a></div></li>
-						<li class="shopping-cart"><a href="#" class="cart"><span><small>{{ quantity_order }}</small><i class="icon-shopping-cart"></i></span></a></li>
+						<li class="shopping-cart"><a href="/cart" class="cart"><span><small>{{ quantity_order }}</small><i class="icon-shopping-cart"></i></span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -54,6 +54,7 @@ export default {
 		return {
 			quantity_order: 0,
 			exist: null,
+			user: JSON.parse(localStorage.getItem('user'))
 		}
 	},
 	created () {
@@ -62,7 +63,7 @@ export default {
 	},
 	methods: {
 		getQuantityOrder() {
-			OrderService.GetQuantityOrder()
+			OrderService.GetQuantityOrder(this.user.id)
 			.then((response) => {
 				this.quantity_order = response.data;
 			});

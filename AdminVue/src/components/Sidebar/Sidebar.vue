@@ -9,6 +9,7 @@
     <router-link class="text-blue-500 md:block text-left md:pb-2 mr-0 inline-block whitespace-nowrap text-lg uppercase font-bold p-4 px-0" to="/admin/tables">
       ART GALARY
     </router-link>
+    <i class="fas fa-user"><a @click="logout()" style="margin-left: 6px"  href="javascript:void(0)q">Logout</a></i>
     <!-- User -->
     <ul class="md:hidden items-center flex flex-wrap list-none">
       <li class="inline-block relative">
@@ -116,6 +117,7 @@
 <script>
 import NotificationDropdown from "@/components/Dropdowns/NotificationDropdown.vue";
 import UserDropdown from "@/components/Dropdowns/UserDropdown.vue";
+import AuthenticationService from '@/services/AuthenticationService';
 
 export default {
   data() {
@@ -127,6 +129,10 @@ export default {
     toggleCollapseShow: function (classes) {
       this.collapseShow = classes;
     },
+    logout() {
+			AuthenticationService.logout();
+			return window.location.href = "http://localhost:6001/auth/login";
+		}
   },
   components: {
     NotificationDropdown,

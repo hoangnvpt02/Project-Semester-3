@@ -15,11 +15,11 @@ namespace NetCore_Backend.Controllers
             _orderRepository = orderRepository;
         }
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAll(string userId, int status = 0)
         {
             try
             {
-                return Ok(_orderRepository.GetAll());
+                return Ok(_orderRepository.GetAll(userId, status));
             }
             catch (Exception e)
             {
@@ -93,11 +93,11 @@ namespace NetCore_Backend.Controllers
         }
 
         [HttpGet("GetQuantityOrder")]
-        public IActionResult GetQuantityOrder()
+        public IActionResult GetQuantityOrder(string userId)
         {
             try
             {
-                return Ok(_orderRepository.GetQuantityOrder());
+                return Ok(_orderRepository.GetQuantityOrder(userId));
             }
             catch (Exception e)
             {
@@ -106,11 +106,11 @@ namespace NetCore_Backend.Controllers
         }
 
         [HttpGet("UpdateStatus/{id}/{status}")]
-        public IActionResult UpdateStatus(int id, int status = 0)
+        public IActionResult UpdateStatus(long id, int status = 0, string email = "Empty", string address = "Empty")
         {
             try
             {
-                _orderRepository.UpdateStatus(id, status);
+                _orderRepository.UpdateStatus(id, status, email, address);
                 return Ok();
             }
             catch (Exception e)
