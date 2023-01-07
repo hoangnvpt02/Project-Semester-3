@@ -295,6 +295,17 @@ namespace NetCore_Backend.Services.Impl
             return products.ToList();
         }
 
+        public void UpdatePrBid(ProductModel productModel)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == productModel.Id);
+            if (product != null && productModel.AspNetUsersId != null)
+            {
+                product.AspNetUsersId = productModel.AspNetUsersId;
+                _context.Update(product);
+                _context.SaveChanges();
+            }
+        }
+
         public List<ProductModel> GetAllProductByFeature()
         {
            var products = _context.Products.Where(p => p.IsFeature == 0).Select(p => new ProductModel()
