@@ -2,6 +2,7 @@
 using NetCore_Backend.Data;
 using Microsoft.CodeAnalysis;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Net;
 
 namespace NetCore_Backend.Services.Impl
 {
@@ -65,6 +66,10 @@ namespace NetCore_Backend.Services.Impl
                 Name = o.order1.product.Name,
                 PriceProduct = o.order1.product.Price,
                 FileDetailsId = o.order1.product.FileDetailsId,
+                FullName = o.user.UserName,
+                Email = o.user.Email,
+                Phone = o.user.PhoneNumber,
+                Address = o.user.Address,
             });
 
             if (status == 0)
