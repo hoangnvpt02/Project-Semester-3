@@ -67,7 +67,6 @@ namespace NetCore_Backend.Services.Impl
         {
 
             var orders = _context.Orders
-            .Where(order => order.AspNetUsersId == userId)
             .Where(order => order.IsActive == 0)
             .Join(_context.Products, order => order.ProductId, product => product.Id, (order, product) => new { order, product })
             .Join(_context.Users, o => o.order.AspNetUsersId, user => user.Id, (order1, user) => new { order1, user })
@@ -85,6 +84,7 @@ namespace NetCore_Backend.Services.Impl
                 Email = o.user.Email,
                 Phone = o.user.PhoneNumber,
                 Address = o.user.Address,
+                AspNetUsersId = o.order1.order.AspNetUsersId,
             });
 
             if (status == 0)
@@ -93,6 +93,11 @@ namespace NetCore_Backend.Services.Impl
             } else
             {
                 orders = orders.Where(order => order.Status > 0);
+            }
+
+            if (userId != "Admin")
+            {
+                orders = orders.Where(order => order.AspNetUsersId == userId);
             }
 
             return orders.ToList().ToArray();
