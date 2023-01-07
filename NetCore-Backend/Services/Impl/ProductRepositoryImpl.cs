@@ -301,6 +301,7 @@ namespace NetCore_Backend.Services.Impl
             if (product != null && productModel.AspNetUsersId != null)
             {
                 product.AspNetUsersId = productModel.AspNetUsersId;
+                product.PriceAution = productModel.PriceAution;
                 _context.Update(product);
                 _context.SaveChanges();
             }

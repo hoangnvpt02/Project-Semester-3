@@ -12,6 +12,7 @@ namespace NetCore_Backend.Data
         public string ? AspNetUsersId { get; set; }
         public Decimal Price { get; set; }
         public Decimal ? PriceSale { get; set; }
+        public Decimal? PriceAution { get; set; }
         public string Name { get; set; }
         public string Author { get; set; }
         public string ? ManufactureYear { get; set; }
