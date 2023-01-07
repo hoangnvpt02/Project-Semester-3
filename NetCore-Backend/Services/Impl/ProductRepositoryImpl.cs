@@ -62,6 +62,7 @@ namespace NetCore_Backend.Services.Impl
             _context.SaveChanges();
             return new ProductModel()
             {
+                Id = product.Id,
                 Address = product.Address,
                 Author = product.Author,
 
