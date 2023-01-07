@@ -10,3 +10,5 @@ F:\Aptech\Project_Sem3\Project-Semester-3\Vue-Fontend\obj\Debug\vue-fontend.espr
 F:\Aptech\Project_Sem3\Project-Semester-3\Vue-Fontend\obj\Debug\vue-fontend.esproj.CoreCompileInputs.cache
 D:\Project\Project-Semester-3\Vue-Fontend\obj\Debug\vue-fontend.esproj.SuggestedBindingRedirects.cache
 D:\Project\Project-Semester-3\Vue-Fontend\obj\Debug\vue-fontend.esproj.CoreCompileInputs.cache
+D:\Project3\Vue-Fontend\obj\Debug\vue-fontend.esproj.SuggestedBindingRedirects.cache
+D:\Project3\Vue-Fontend\obj\Debug\vue-fontend.esproj.CoreCompileInputs.cache

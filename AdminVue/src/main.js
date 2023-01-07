@@ -49,6 +49,7 @@ const routes = [
     path: "/admin",
     redirect: "/admin/product-manage",
     component: Admin,
+    meta: { requiresAuth: true },
     children: [
       {
         path: "/admin/dashboard",
@@ -138,6 +139,19 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  // const publicPages = ['/booking-detail/:id','/login', '/register', '/' ,'/booking', '/auth/login'];
+  // const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem('admin');
+  // trying to access a restricted page + not logged in
+  // redirect to login page
+  if (to.meta.requiresAuth && !loggedIn) {
+    next('/auth/login');
+  } else {
+    next();
+  }
 });
 
 createApp(App).use(router).mount("#app");

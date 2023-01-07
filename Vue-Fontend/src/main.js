@@ -12,6 +12,7 @@ import ProductAuction from "@/components/ClientPage/ProductAuction.vue";
 import Auction from "@/components/ClientPage/Auction.vue";
 import Login from "@/components/ClientPage/Login.vue";
 import Register from "@/components/ClientPage/Register.vue";
+import Profile from "@/components/ClientPage/Profile.vue";
 
 const routes = [
   {
@@ -60,6 +61,10 @@ const routes = [
   {
     path: "/register",
     component: Register,
+  },
+  {
+    path: "/profile",
+    component: Profile,
   },
   { path: "/:pathMatch(.*)*", redirect: "/home" },
 
