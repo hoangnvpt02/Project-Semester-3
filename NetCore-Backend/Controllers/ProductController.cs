@@ -80,7 +80,20 @@ namespace NetCore_Backend.Controllers
                 return BadRequest();
             }
         }
-        
+
+        [HttpGet("GetAllNoActive")]
+        public IActionResult GetAllNoActive(int start, int end, String? sortBy)
+        {
+            try
+            {
+                return Ok(_productRepository.GetAllNoActive(start, end, sortBy));
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPut]
         public IActionResult Update(ProductModel productModel)
         {

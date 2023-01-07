@@ -94,7 +94,7 @@ namespace NetCore_Backend.Services.Impl
         public List<ProductModel> GetAll(int start,int end,String sortBy)
         {
 
-            var products = _context.Products.Where(p => p.IsActive == 0).Where(p => p.AspNetUsersId == "aaa").Select(p => new ProductModel()
+            var products = _context.Products.Where(p => p.IsActive == 0).Select(p => new ProductModel()
             {
                 Id = p.Id,
                 CountryId = p.CountryId,
@@ -250,6 +250,49 @@ namespace NetCore_Backend.Services.Impl
                 return products;
             }
             return null;
+        }
+
+        public List<ProductModel> GetAllNoActive(int start, int end, string? sortBy)
+        {
+            var products = _context.Products.Select(p => new ProductModel()
+            {
+                Id = p.Id,
+                CountryId = p.CountryId,
+                AspNetUsersId = p.AspNetUsersId,
+                Address = p.Address,
+                Author = p.Author,
+                Name = p.Name,
+                Price = p.Price,
+                ManufactureYear = p.ManufactureYear,
+                Quanlity = p.Quanlity,
+                Description = p.Description,
+                FileDetailsId = p.FileDetailsId,
+                IsActive = p.IsActive,
+                IsFeature = p.IsFeature,
+                SalePercent = p.SalePercent,
+                PriceSale = p.PriceSale,
+                Created = p.Created,
+                Updated = p.Updated,
+            });
+
+            products.OrderByDescending(p => p.Created).ToList();
+            if (sortBy != null)
+            {
+                switch (sortBy)
+                {
+                    case "price":
+                        products = products.OrderByDescending(p => p.Price);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (start != 0 || end != 0)
+            {
+                products = products.Skip(start).Take(end);
+            }
+
+            return products.ToList();
         }
 
         public List<ProductModel> GetAllProductByFeature()

@@ -14,5 +14,6 @@ namespace NetCore_Backend.Services
         void Delete(long id);
 
         List<ProductModel> GetCateById(long id);
+        List<ProductModel> GetAllNoActive(int start, int end, String? sortBy);
     }
 }
