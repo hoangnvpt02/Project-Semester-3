@@ -19,7 +19,7 @@
                         <span class="font-weight-bold">{{ order.name.substr(0, 18) + "..." }}</span>
                     </div>
                     <div>
-                        <h5 class="text-grey" style="margin: 0px;">{{ formatMoney(order.totalPrice) }}</h5>
+                        <h5 class="text-grey" style="margin: 0px;">${{ formatMoney(order.totalPrice) }}</h5>
                     </div>
                     <div class="d-flex align-items-center" @click="deleteOrder(order.id)" style="cursor: pointer;">
                         <i class="fa fa-trash mb-1"></i>

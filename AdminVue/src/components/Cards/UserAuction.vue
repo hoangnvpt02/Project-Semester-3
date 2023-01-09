@@ -1,11 +1,11 @@
 <template>
 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded" :class="[color === 'light' ? 'bg-white' : 'bg-emerald-900 text-white']">
   <div class="rounded-t mb-0 px-4 py-3 border-0">
-    <button @click="addCar()" class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button"> Add Auction Product </button>
+    <button @click="fnAgree()" class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button"> Agree to bid price ( The winner is the one with the highest bid )</button>
   </div>
-    <div class=" w-full px-4 hidden" id="add-specialist">
+    <!-- <div class=" w-full px-4 hidden" id="add-specialist">
       <AddMedicine/>
-    </div>
+    </div> -->
     <h6 class=" px-4 text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase text-center">
       everyone participating in the auction
     </h6>
@@ -26,19 +26,15 @@
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
             {{ item.name }}
           </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+          <td class=" border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
             ${{ item.price  }}
           </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+          <!-- <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
             <button style ="width: 150px;" v-on:click="fnAgree(item.id)" class="text-center w-full lg:w-3/12 bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
               Agree to bid price
             </button>
-            <!-- <a :href="'/admin/cate-edit/' + item.id" class="text-center w-full lg:w-3/12 bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
-              Agree 
-            </a> -->
-          </td>
+          </td> -->
         </tr>
-
       </tbody>
     </table>
   <!-- <div class="block w-full overflow-x-auto" id="cars-list">
@@ -56,7 +52,6 @@
 <script>
  import { ref } from "vue"
 import MedicineService from "../../services/MedicineService";
-import AddMedicine from "@/components/Cards/AddMedicine.vue";
 import MedicineDropdown from "@/components/Dropdowns/MedicineDropdown.vue";
 import GalaryService from "../../services/GalaryService";
 import BidService from "../../services/BidService";
@@ -65,7 +60,7 @@ import base from "../../base.json";
 export default {
   data() {
     const medicines=ref([]);
-    const titles  = ref(['ID','NAME','Price','ACTIONS'])
+    const titles  = ref(['ID','Name Of Auction Participant','OFFER PRICE'])
 	  let galary
     let products
     let bids
@@ -83,7 +78,6 @@ export default {
   },
   components: {
     MedicineDropdown,
-    AddMedicine,
   },
   props: {
     color: {
@@ -96,34 +90,48 @@ export default {
   },
 
   methods: {
-    fnAgree(id) {
-      BidService.getByIdBid(id)
-      .then((response) => {
-          let productId = response.data.productId;
-          let userId = response.data.aspNetUsersId;
-          let price = response.data.price;
-          let data = {
-            id: productId,
-            aspNetUsersId: userId,
-            priceAuction : price
-          }
-          ProductService.UpdatePrBid(data).then(() => {
-              swal("Success!", " Successfully!", "success", {
-                button: false,
-                timer: 2000
-              });
-            })
-            .catch((res) => {
-              console.log(res.message)
-              swal("Error!", " Failed!", "error", {
-                button: false,
-                timer: 2000
-              });
-            });
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+    fnAgree() {
+      let winner = this.bids[0]
+      if (winner) {
+        swal({
+            title: "Winner is " +winner.name + " with offer price is $" + winner.price,
+            icon: "info",
+            buttons: [
+              'No, cancel it!',
+              'Yes, I am sure!'
+            ],
+            dangerMode: true,
+          }).then(function(isConfirm) {
+            if (isConfirm) {
+              let productId = winner.productId;
+              let userId = winner.aspNetUsersId;
+              let price = winner.price;
+              let data = {
+                id: productId,
+                aspNetUsersId: userId,
+                priceAuction : price
+              }
+              ProductService.UpdatePrBid(data).then(() => {
+                  swal("Success!", " Successfully!", "success", {
+                    button: false,
+                    timer: 2000
+                  });
+                })
+                .catch((res) => {
+                  console.log(res.message)
+                  swal("Error!", " Failed!", "error", {
+                    button: false,
+                    timer: 2000
+                  });
+                });
+          } 
+          })
+      } else {
+          swal("Error!", " Failed!", "error", {
+            button: false,
+            timer: 2000
+          });
+        }
     },
     getAll(idGa,idPd) {
 			BidService.getById(idGa,idPd)

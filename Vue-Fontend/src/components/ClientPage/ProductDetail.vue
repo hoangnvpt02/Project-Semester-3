@@ -21,22 +21,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1 animate-box">
-					<!-- <div class="owl-carousel owl-carousel-fullwidth product-carousel">
-						<div class="item">
-							<div class="active text-center">
-								<figure>
-									<img src="https://localhost:5001/api/Files/4" alt="user">
-								</figure>
-							</div>
-						</div>
-						<div class="item">
-							<div class="active text-center">
-								<figure>
-									<img src="https://localhost:5001/api/Files/4" alt="user">
-								</figure>
-							</div>
-						</div>
-					</div> -->
+					
 					<div class="row animate-box">
 						<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
 							<h2 style="color:#d1c286; padding:30px">{{ product.name }}</h2>
@@ -48,7 +33,7 @@
 							</div>
 						</div>
 							<p>
-								<a href="#" class="btn btn-primary btn-outline btn-lg" style="width:500px; border-radius: 5px;" @click="AddToCart(product)">Add to Cart</a>
+								<a  v-if = "product.priceAuction == null" href="#" class="btn btn-primary btn-outline btn-lg" style="width:500px; border-radius: 5px;" @click="AddToCart(product)">Add to Cart</a>
 								<!-- <a href="#" class="btn btn-primary btn-outline btn-lg">Compare</a> -->
 							</p>
 						</div>
@@ -69,22 +54,16 @@
 
 							<div class="fh5co-tab-content tab-content active" data-tab-content="1">
 								<div class="col-md-10 col-md-offset-1">
-									<p class="price" style="color:#d1c286; font-weight: bold;" v-if="product.salePercent >0">Sale: ${{ product.priceSale }}</p> 
-									<span v-else class="price">Price: ${{ product.price }}</span>
+									<span v-if = "product.priceAuction == null">
+										<p class="price" style="color:#d1c286; font-weight: bold;" v-if="product.salePercent >0">Sale: ${{ product.priceSale }}</p> 
+										<span v-else class="price">Price: ${{ product.price }}</span>
+									</span>
+									<span v-else>
+										<p class="price" style="color:#d1c286; font-weight: bold;"> The product is being auctioned </p> 
+									</span>
 
 									<h2>{{ product.name }}</h2>
 									<p>{{ product.description }}</p>
-
-									<!-- <div class="row">
-										<div class="col-md-6">
-											<h2 class="uppercase">Keep it simple</h2>
-											<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>
-										</div>
-										<div class="col-md-6">
-											<h2 class="uppercase">Less is more</h2>
-											<p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>
-										</div>
-									</div> -->
 
 								</div>
 							</div>
@@ -107,39 +86,7 @@
 								</div>
 							</div>
 
-							<div class="fh5co-tab-content tab-content" data-tab-content="3">
-								<div class="col-md-10 col-md-offset-1">
-									<h3>Happy Buyers</h3>
-									<div class="feed">
-										<div>
-											<blockquote>
-												<p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam officiis est.</p>
-											</blockquote>
-											<h3>&mdash; Louie Knight</h3>
-											<span class="rate">
-												<i class="icon-star2"></i>
-												<i class="icon-star2"></i>
-												<i class="icon-star2"></i>
-												<i class="icon-star2"></i>
-												<i class="icon-star2"></i>
-											</span>
-										</div>
-										<div>
-											<blockquote>
-												<p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam officiis est.</p>
-											</blockquote>
-											<h3>&mdash; Joefrey Gwapo</h3>
-											<span class="rate">
-												<i class="icon-star2"></i>
-												<i class="icon-star2"></i>
-												<i class="icon-star2"></i>
-												<i class="icon-star2"></i>
-												<i class="icon-star2"></i>
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
+						
 						</div>
 
 					</div>

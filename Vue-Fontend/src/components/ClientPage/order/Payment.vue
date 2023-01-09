@@ -10,20 +10,18 @@
                     <div class="d-flex flex-column align-items-center product-details"><span class="font-weight-bold">{{ order.name }}</span>
                     </div>
                     <div>
-                        <h5 class="text-grey" style="margin: 0px; position: static;">{{ formatMoney(order.totalPrice) }}</h5>
+                        <h5 class="text-grey" style="margin: 0px; position: static;">${{ formatMoney(order.totalPrice) }}</h5>
                     </div>
                 </div>
                 <div>
                     <div class='total col-md-12'>
                         <span style='float:left;'>
-                            <div class='thin dense'>VAT 10%</div>
                             <div class='thin dense'>Delivery</div>
                             TOTAL
                         </span>
                         <span style='float:right; text-align:right;'>
-                            <div class='thin dense'>$68.75</div>
-                            <div class='thin dense'>$4.95</div>
-                            {{ total_money }}
+                            <div class='thin dense'>$FREE</div>
+                            {{ formatMoney(23424324) }}
                         </span>
                     </div>
                 </div>

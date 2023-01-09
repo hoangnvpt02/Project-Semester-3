@@ -62,9 +62,12 @@
 						<div class="desc">
 							<h3><a :href="'/detail/' + pd.id">{{ pd.name }}</a></h3>
 							<p class="price" >Starting Price:<span style="color:#d1c286;"> ${{ pd.price }} </span> </p>
+							<button @click="maxPrice(this.$route.params.id,pd.id)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">See Hightest Price Now
+							</button>
+							<!-- <p v-if="priceMax" class="price">Highest Price Now:<span style="color:#d1c286;"> ${{ priceMax }} </span> </p> -->
 							<p v-if="pd.aspNetUsersId == userIdLogin" class="price" style="color:#d1c286; font-weight: bolder;">you have won the bid with price ${{ pd.priceAuction }}</p>
 							<button v-if="pd.aspNetUsersId == userIdLogin"  @click="AddToCart(pd)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">Add to Cart</button>
-							<button v-else @click="auction(pd.id, pd.price)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">Auction</button>
+							<button v-else v-if="pd.aspNetUsersId == null" @click="auction(pd.id, pd.price)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">Auction</button>
 						</div>
 					</div>
 				</div>
@@ -111,15 +114,16 @@ import GalaryService from '@/services/GalaryService';
 import BidService from '@/services/BidService';
 import swal from 'sweetalert';
 import OrderService from '@/services/OrderService';
-
 export default {
 	data() {
 	let products
+	let priceMax = 0
 	let categories
 	let baseUrl=''
 	let galary
 	let userIdLogin= null
 	return {
+		priceMax,
 		userIdLogin,
 		galary,
 		products,
@@ -131,9 +135,31 @@ export default {
 	}
 	},
 	methods: {
+		maxPrice(idGa,idPd) {
+			BidService.getById(idGa,idPd)
+			.then((response) => {
+				let bid = response.data[0];
+				if(bid) {
+					this.priceMax = bid.price
+				}
+				swal("The current highest bid is $" +this.priceMax, {
+					button: false,
+					timer: 3000,
+				});
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+		},
 		auction(id, price) {
 			swal({
-			content: "input",
+				content: {
+				element: "input",
+				attributes: {
+					placeholder: "Type your offer price",
+					type: "number",
+				},
+    },
 			})
 			.then((response) => { 
 				if (response <= price) {
@@ -215,6 +241,12 @@ export default {
 		this.getProductByGalary(this.$route.params.id)
 		this.getAllGalary()
 	},
+	// mounted() { 
+	// 	setTimeout(function(){ 
+	// 			const elem = document.getElementById('max_price');
+	// 			elem.click(); 
+	// 	}, 200);
+	// },
   components: {
     Header,
     Footer

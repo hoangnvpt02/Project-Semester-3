@@ -11,8 +11,8 @@
     </h6>
   <div class="block w-full overflow-x-auto" id="cars-list">
     <div class="flex flex-wrap p-4" >
-        <div class="w-full lg:w-4/12 px-4 py-4"  v-for="item in products">
-          <img :src="baseUrl + item.fileDetailsId" style="height:200px" alt="Image artwork">
+        <div class="w-full lg:w-3/12 px-4 py-4"  v-for="item in products">
+          <img :src="baseUrl + item.fileDetailsId" style="height:200px; width: 100%;" alt="Image artwork">
           <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase text-center">{{item.name}}</h3>
           <p class="text-center"><a :href="'/admin/user-product-auction/' +$route.params.id+ '/' + item.id" class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">View More</a></p>
         </div>

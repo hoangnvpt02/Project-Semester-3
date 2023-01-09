@@ -30,7 +30,7 @@ namespace NetCore_Backend.Services.Impl
                 {
                     order.Price = (decimal)product.PriceSale;
                 }
-                else if (product.PriceAuction != null)
+                if (product.PriceAuction > 0)
                 {
                     order.Price = (decimal)product.PriceAuction;
                 }
