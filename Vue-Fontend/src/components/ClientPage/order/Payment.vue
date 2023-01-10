@@ -21,7 +21,7 @@
                         </span>
                         <span style='float:right; text-align:right;'>
                             <div class='thin dense'>$FREE</div>
-                            {{ formatMoney(23424324) }}
+                            ${{ formatMoney(calculateTotalPrice) }}
                         </span>
                     </div>
                 </div>
@@ -108,6 +108,15 @@ export default {
     created() {
         this.baseUrl = this.base.baseUrl + 'api/files/'
     },
+    computed: { 
+        calculateTotalPrice() {
+            let total_price = 0;
+            this.list_product_payment_processing.forEach(element => {
+                total_price += element.totalPrice;
+            });
+            return total_price;
+        }
+        }
 }
 </script>
 

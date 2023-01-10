@@ -67,7 +67,7 @@
 							<span class="sale">Featured</span>
 							<div class="inner">
 								<p>
-									<router-link :to="{ name: 'detail', params: { id: pdfeature.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link>
+									<!-- <a  @click="AddToCart(pdfeature)" class="icon"  href="#"><i class="icon-shopping-cart"></i></a> -->
 									<router-link :to="{ name: 'detail', params: { id: pdfeature.id } }" class="icon"><i class="icon-eye"></i></router-link>
 								</p>
 							</div>
@@ -99,7 +99,7 @@
 							<span class="sale">Sale {{ pdsale.salePercent}}%</span>
 							<div class="inner">
 								<p>
-									<router-link :to="{ name: 'detail', params: { id: pdsale.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link>
+									<!-- <router-link :to="{ name: 'detail', params: { id: pdsale.id } }" class="icon"><i class="icon-shopping-cart"></i></router-link> -->
 									<router-link :to="{ name: 'detail', params: { id: pdsale.id } }" class="icon"><i class="icon-eye"></i></router-link>
 								</p>
 							</div>
@@ -135,7 +135,7 @@
 									</figure>
 									<span>Jean Doe, via <a class="twitter">Twitter</a></span>
 									<blockquote>
-										<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+										<p>&ldquo;I really like this business model&rdquo;</p>
 									</blockquote>
 								</div>
 							</div>
@@ -152,7 +152,7 @@
 									</figure>
 									<span>Athony, via <a class="twitter">Twitter</a></span>
 									<blockquote>
-										<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+										<p>&ldquo;There are so many beautiful works&rdquo;</p>
 									</blockquote>
 								</div>
 							</div>
@@ -169,7 +169,7 @@
 									</figure>
 									<span>Peter, via <a class="twitter">Twitter</a></span>
 									<blockquote>
-										<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+										<p>&ldquo;Prices are very reasonable. I'm very satisfied&rdquo;</p>
 									</blockquote>
 								</div>
 							</div>
@@ -179,100 +179,13 @@
 			</div>
 		</div>
 	</div>
-
   <div id="fh5co-counter" class="fh5co-bg fh5co-counter" :style="{ backgroundImage: `url(${artgallery})` }">
-		<div class="container">
-			<div class="row">
-				<div class="display-t">
-					<div class="display-tc">
-						<div class="col-md-3 col-sm-6 animate-box">
-							<div class="feature-center">
-								<span class="icon">
-									<i class="icon-eye"></i>
-								</span>
-
-								<span class="counter js-counter" data-from="0" data-to="22070" data-speed="5000" data-refresh-interval="50">1</span>
-								<span class="counter-label">Creativity Fuel</span>
-
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6 animate-box">
-							<div class="feature-center">
-								<span class="icon">
-									<i class="icon-shopping-cart"></i>
-								</span>
-
-								<span class="counter js-counter" data-from="0" data-to="450" data-speed="5000" data-refresh-interval="50">1</span>
-								<span class="counter-label">Happy Clients</span>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6 animate-box">
-							<div class="feature-center">
-								<span class="icon">
-									<i class="icon-shop"></i>
-								</span>
-								<span class="counter js-counter" data-from="0" data-to="700" data-speed="5000" data-refresh-interval="50">1</span>
-								<span class="counter-label">All Products</span>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6 animate-box">
-							<div class="feature-center">
-								<span class="icon">
-									<i class="icon-clock"></i>
-								</span>
-
-								<span class="counter js-counter" data-from="0" data-to="5605" data-speed="5000" data-refresh-interval="50">1</span>
-								<span class="counter-label">Hours Spent</span>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
-
-  <div id="fh5co-started">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Newsletter</h2>
-					<p>Just stay tune for our latest Product. Now you can subscribe</p>
-				</div>
-			</div>
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2">
-					<form class="form-inline">
-						<div class="col-md-6 col-sm-6">
-							<div class="form-group">
-								<label for="email" class="sr-only">Email</label>
-								<input type="email" class="form-control" id="email" placeholder="Email">
-							</div>
-						</div>
-						<div class="col-md-6 col-sm-6">
-							<button type="submit" class="btn btn-default btn-block">Subscribe</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
   <Footer></Footer>
   </div>
 </template>
 
 <script>
-// import modernizr from'@/assets/js/modernizr-2.6.2.min';
-// import jquery from'@/assets/js/jquery.min.js';
-// import easing from'@/assets/js/jquery.easing.1.3.js';
-// import bootstrap from'@/assets/js/bootstrap.min.js';
-// import waypoints from'@/assets/js/jquery.waypoints.min.js';
-// import carousel from'@/assets/js/owl.carousel.min.js';
-// import countTo from'@/assets/js/jquery.countTo.js';
-// import flexslider from'@/assets/js/jquery.flexslider-min.js';
-// import mainjs from'@/assets/js/main.js';
-
 import Header from './Header.vue'
 import Footer from './Footer.vue'
 import artgallery from '../../assets/images/artgallery.jpg'
@@ -287,7 +200,7 @@ import base from "@/../base.json"
 
 export default {
   data() {
-		let productFeatures
+		let productFeatures =[]
 		let productSales =[]
 		let categories
 		let baseUrl=''
@@ -307,6 +220,17 @@ export default {
     }
   },
 	methods: {
+		AddToCart(product) {
+			OrderService.create({
+				productId: product.id,
+				aspNetUsersId: this.user.id,
+				price: 10,
+				status: 0,
+				isActive: 0,
+			});
+			OrderService.GetQuantityOrder(this.user.id);
+
+		},
 		getAllByFeature() {
 			ProductService.getAllByFeature()
 			.then((response) => {

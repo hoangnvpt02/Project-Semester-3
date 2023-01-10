@@ -46,30 +46,7 @@
 
 </div>
 	</div>
-	<div id="fh5co-started">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Newsletter</h2>
-					<p>Just stay tune for our latest Product. Now you can subscribe</p>
-				</div>
-			</div>
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2">
-					<form class="form-inline">
-						<div class="col-md-6 col-sm-6">
-							<div class="form-group">
-								<label for="email" class="sr-only">Email</label>
-								<input type="email" class="form-control" id="email" placeholder="Email">
-							</div>
-						</div>
-						<div class="col-md-6 col-sm-6">
-							<button type="submit" class="btn btn-default btn-block">Subscribe</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+	<div id="fh5co-counter" class="fh5co-bg fh5co-counter" :style="{ backgroundImage: `url(${artgallery})` }">
 	</div>
     <Footer></Footer>
     
@@ -82,6 +59,8 @@ import ProductService from '@/services/ProductService';
 import CategoryService from '@/services/CategoryService';
 import BannerAuction from '../../assets/images/BannerAuction.jpg'
 import GalaryService from '@/services/GalaryService';
+import artgallery from '../../assets/images/artgallery.jpg'
+
 export default {
 	data() {
 	const products=[]
@@ -89,6 +68,7 @@ export default {
 	let galary
 	return {
 		galary,
+		artgallery,
 		products,
 		categories,
     BannerAuction

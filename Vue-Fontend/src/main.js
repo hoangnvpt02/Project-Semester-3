@@ -53,6 +53,8 @@ const routes = [
   {
     path: "/auction",
     component: Auction,
+    // meta: { requiresAuth: true },
+
   },
   {
     path: "/login",
@@ -73,6 +75,17 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+
+  const loggedIn = localStorage.getItem('admin');
+
+  if (to.meta.requiresAuth && !loggedIn) {
+    next('/login');
+  } else {
+    next();
+  }
 });
 // createApp(App).mount('#app')
 createApp(App).use(router).mount("#app");

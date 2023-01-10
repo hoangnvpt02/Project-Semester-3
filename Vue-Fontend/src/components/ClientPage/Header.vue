@@ -18,7 +18,7 @@
 						<li><a href="/auction">Auction</a></li>
 						<li><a href="/about">About</a></li>
 						<li class="has-dropdown">
-							<a href="/about">Services</a>
+							<!-- <a href="/about">Services</a> -->
 							<ul class="dropdown">
 								<li><a href="#">Web Design</a></li>
 								<li><a href="#">eCommerce</a></li>

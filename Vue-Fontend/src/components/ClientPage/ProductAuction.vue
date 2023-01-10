@@ -65,36 +65,11 @@
 							<button @click="maxPrice(this.$route.params.id,pd.id)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">See Hightest Price Now
 							</button>
 							<!-- <p v-if="priceMax" class="price">Highest Price Now:<span style="color:#d1c286;"> ${{ priceMax }} </span> </p> -->
-							<p v-if="pd.aspNetUsersId == userIdLogin" class="price" style="color:#d1c286; font-weight: bolder;">you have won the bid with price ${{ pd.priceAuction }}</p>
-							<button v-if="pd.aspNetUsersId == userIdLogin"  @click="AddToCart(pd)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">Add to Cart</button>
-							<button v-else v-if="pd.aspNetUsersId == null" @click="auction(pd.id, pd.price)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">Auction</button>
+							<p v-if="pd.aspNetUsersId !=null && pd.aspNetUsersId == userIdLogin" class="price" style="color:#d1c286; font-weight: bolder;">you have won the bid with price ${{ pd.priceAuction }}</p>
+							<button v-if="pd.aspNetUsersId !=null && pd.aspNetUsersId == userIdLogin"  @click="AddToCart(pd)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">Add to Cart</button>
+							<button v-else v-if="user && pd.aspNetUsersId == null" @click="auction(pd.id, pd.price)" class="btn" style="background-color:#d1c286; color:white; border-radius: 5px;">Auction</button>
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="fh5co-started">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Newsletter</h2>
-					<p>Just stay tune for our latest Product. Now you can subscribe</p>
-				</div>
-			</div>
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2">
-					<form class="form-inline">
-						<div class="col-md-6 col-sm-6">
-							<div class="form-group">
-								<label for="email" class="sr-only">Email</label>
-								<input type="email" class="form-control" id="email" placeholder="Email">
-							</div>
-						</div>
-						<div class="col-md-6 col-sm-6">
-							<button type="submit" class="btn btn-default btn-block">Subscribe</button>
-						</div>
-					</form>
 				</div>
 			</div>
 		</div>

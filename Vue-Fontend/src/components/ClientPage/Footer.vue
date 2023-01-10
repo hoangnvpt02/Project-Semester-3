@@ -6,34 +6,23 @@
 				<div class="col-md-4 fh5co-widget">
 					<h3 style="color:#d1c286">ART GALARY</h3>
 					<p>Enjoy artworks at here</p>
+					<p>08 Ton That Thuyet, Cau Giay, HaNoi</p>
+					<li class="email"><a href="artonline@shop.com">artonline@shop.com</a></li>
+					<li class="phone"><a href="tel://1234567920">Phone: + 1235 2355 98</a></li>
+
 				</div>
-				<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+				<div class="col-md-4 col-sm-4 col-xs-6 col-md-push-1">
 					<ul class="fh5co-footer-links">
-						<li><a href="#">About</a></li>
-						<li><a href="#">Help</a></li>
-						<li><a href="#">Contact</a></li>
-						<li><a href="#">Terms</a></li>
-						<li><a href="#">Meetups</a></li>
+						<li><a href="/home">Home</a></li>
+						<li><a href="/about">About</a></li>
+
 					</ul>
 				</div>
 
-				<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+				<div class="col-md-4 col-sm-4 col-xs-6 col-md-push-1">
 					<ul class="fh5co-footer-links">
-						<li><a href="#">Shop</a></li>
-						<li><a href="#">Privacy</a></li>
-						<li><a href="#">Testimonials</a></li>
-						<li><a href="#">Handbook</a></li>
-						<li><a href="#">Held Desk</a></li>
-					</ul>
-				</div>
-
-				<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
-					<ul class="fh5co-footer-links">
-						<li><a href="#">Find Designers</a></li>
-						<li><a href="#">Find Developers</a></li>
-						<li><a href="#">Teams</a></li>
-						<li><a href="#">Advertise</a></li>
-						<li><a href="#">API</a></li>
+						<li><a href="/contact">Contact</a></li>
+						<li><a href="/auction">Auction</a></li>
 					</ul>
 				</div>
 			</div>
